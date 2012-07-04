@@ -7,7 +7,7 @@ Project is licensed under [Apache License 2.0](http://www.apache.org/licenses/LI
 -----
 
 ## Instalation
-As simple as going to your project's properties and include the QuickUtils jar library.
+As simple as going to your project's properties and include the `QuickUtils.jar` library.
 
  ![](http://developer.android.com/images/developing/adt-props-libRef.png)
 
@@ -23,10 +23,7 @@ CesarUtils.setTAG("DESIRED_TAG");
 AndroidManifest.xml
 -------------------
 
-If you intend to use the vibration util don't forget to add the vibrate permission.
-
-
-Require the following permissions, if you haven't already, in your `<manifest>`:
+If you intend to use the vibration util don't forget to add the vibrate permission, if you haven't already, in your `<manifest>`:
 
 ```xml
 <uses-permission android:name="android.permission.VIBRATE" />   
