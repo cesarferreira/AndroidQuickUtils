@@ -1,8 +1,8 @@
-## Overview
+## Synopsis
 
-CesarUtils is a simple API for the utils and small snippets of code that you can never recall.
+This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework, a simple API for the utils and small snippets of code that you can never recall.
+ helps you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that's involved when writing Android apps.
 
-Project is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 -----
 
@@ -17,7 +17,7 @@ As simple as going to your project's properties and include the `QuickUtils.jar`
 Set the default TAG for logcat debug purposes
 
 ```java
-CesarUtils.setTAG("DESIRED_TAG");
+QuickUtils.setTAG("DESIRED_TAG");
 ```
 
 AndroidManifest.xml
@@ -32,7 +32,7 @@ If you intend to use the vibration util don't forget to add the vibrate permissi
 Import
 ------
 ```java
-import com.cesar.android;
+import com.Quick.android;
 ```
 
 
@@ -40,7 +40,7 @@ import com.cesar.android;
 Really simple usage, you just need to specify the category and the method you want to use.
 
 ```java
-CesarUtils.__category__.__method__
+QuickUtils.__category__.__method__
 ```
 -------------------
 ### LOG <sub><sup>`category`</sup></sub>
@@ -50,38 +50,38 @@ Advantages:
   you don't need to set the TAG varible in every class of your project
 
 ```java
-CesarUtils.log.__method__
+QuickUtils.log.__method__
 ```
 
 
 ##### Error Log `Log.e("TAG","ERROR DESCRIPTION")`
 
 ```java
-CesarUtils.log.e("error description");
+QuickUtils.log.e("error description");
 ```
 
 ##### Verbose Log `Log.v("TAG","VERBOSE DESCRIPTION")`
 
 ```java
-CesarUtils.log.v("verbose description");
+QuickUtils.log.v("verbose description");
 ```
 
 ##### Information Log `Log.i("information description")`
 
 ```java
-CesarUtils.log.i("TAG","INFORMATION DESCRIPTION");
+QuickUtils.log.i("TAG","INFORMATION DESCRIPTION");
 ```
 
 ##### Debug Log `Log.d("TAG","DEBUG DESCRIPTION")`
 
 ```java
-CesarUtils.log.d("debug description");
+QuickUtils.log.d("debug description");
 ```
 
 ##### Debug Log `Log.d("TAG","DEBUG DESCRIPTION", Trowable t)`
 
 ```java
-CesarUtils.log.d("debug description", Throwable t);
+QuickUtils.log.d("debug description", Throwable t);
 ```
 
 ## Examples
@@ -89,22 +89,22 @@ CesarUtils.log.d("debug description", Throwable t);
 
 ```java
 // SET ENVIRONMENT
-CesarUtils.setDebugMode(CesarUtils.DEVELOPER_MODE);
+QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE);
 
 // LOGGING
-CesarUtils.log.e("error");
+QuickUtils.log.e("error");
 
-CesarUtils.log.v("verbose");
-CesarUtils.log.i("info");
+QuickUtils.log.v("verbose");
+QuickUtils.log.i("info");
 
-CesarUtils.log.d("debug");
-CesarUtils.log.d("debug", new Throwable("Throwable Error object"));
+QuickUtils.log.d("debug");
+QuickUtils.log.d("debug", new Throwable("Throwable Error object"));
 
 // MISC
-CesarUtils.misc.getCurrentTime();
+QuickUtils.misc.getCurrentTime();
 
 // SDCARD
-CesarUtils.sdcard.isSDCardAvailable();
+QuickUtils.sdcard.isSDCardAvailable();
 ```
 
 ## Download
@@ -115,5 +115,11 @@ QuickUtils latest version [here](TestReadme.java)
 QuickUtils v0.1 [download](java-classmate/blob/master/src/test/java/com/fasterxml/classmate/TestReadme.java)
 
 
-## Notes
-Feel free to fork this project or suggest features via [email](mailto:cesar.manuel.ferreira@gmail.com)
+## Contributing
+Feel like giving back? We'll happily take contributions via GitHub. For questions, please turn to [QuickUtils developers](mailto:cesar.manuel.ferreira@gmail.com)
+
+## License
+Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
+
+## Authors
+ * César Ferreira (cesar.manuel.ferreira@gmail.com)
