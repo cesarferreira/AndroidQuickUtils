@@ -58,9 +58,10 @@ Really simple usage, you just need to specify the category and the method you wa
 QuickUtils.__category__.__method__
 ```
 -------------------
+
 ### LOG <sub><sup>`category`</sup></sub>
 
-Wit this methods you don't need to set the TAG variable in every class of your project and you can disable the logs everywhere without deleting/commenting the log lines by setting the debug mode to PRODUCTION [howto] (https://github.com/cesarferreira/AndroidQuickUtils#debug-mode).
+With this methods you don't need to set the TAG variable in every class of your project and you can disable the logs everywhere without deleting/commenting the log lines by setting the debug mode to PRODUCTION (explained in the previous section).
 
 ```java
 QuickUtils.log.__method__
@@ -79,10 +80,10 @@ QuickUtils.log.e("error description");
 QuickUtils.log.v("verbose description");
 ```
 
-##### Information Log `Log.i("information description")`
+##### Information Log `Log.i("TAG","INFORMATION DESCRIPTION")`
 
 ```java
-QuickUtils.log.i("TAG","INFORMATION DESCRIPTION");
+QuickUtils.log.i("information description");
 ```
 
 ##### Debug Log `Log.d("TAG","DEBUG DESCRIPTION")`
@@ -95,6 +96,67 @@ QuickUtils.log.d("debug description");
 
 ```java
 QuickUtils.log.d("debug description", Throwable t);
+```
+
+------------
+
+### MISC <sub><sup>`category`</sup></sub>
+
+With this methods you don't need to set....
+
+```java
+QuickUtils.misc.__method__
+```
+
+
+##### Get the current time in miliseconds `long`
+
+```java
+QuickUtils.misc.getCurrentTime();
+```
+
+##### Sleep `void`
+Causes the thread which sent this message to sleep for the given interval of time (given in milliseconds). The precision is not guaranteed - the Thread may sleep more or less than requested.
+
+
+```java
+QuickUtils.misc.sleep(durationInSeconds);
+```
+
+##### Toast method with short duration `void`
+
+```java
+QuickUtils.misc.toast(context, "This is a short toast");
+```
+
+##### Toast with non specified duration `void`
+Either `Toast.LENGTH_SHORT` or `Toast.LENGTH_LONG`
+
+```java
+QuickUtils.misc.toast(context, "This is a short toast", Toast.LENGTH_LONG);
+```
+------------
+
+### SDCARD <sub><sup>`category`</sup></sub>
+
+SDCard Utils.
+
+```java
+QuickUtils.sdcard.__method__
+```
+
+##### Check if the SD Card is Available `boolean`
+True if the sd card is available and false if it is not
+
+```java
+QuickUtils.sdcard.isSDCardAvailable();
+```
+
+##### Check if the SD Card is Writable `boolean`
+True if the sd card is writable and false if it is not
+
+```java
+QuickUtils.sdcard.isSDCardWritable();
 ```
 
 ## Examples
@@ -116,8 +178,14 @@ QuickUtils.log.d("debug", new Throwable("Throwable Error object"));
 // MISC
 QuickUtils.misc.getCurrentTime();
 
+QuickUtils.misc.sleep(durationInSeconds);
+
+QuickUtils.misc.toast(this, "This is a short toast");
+QuickUtils.misc.toast(this, "This is a short toast", durationInSeconds);
+
 // SDCARD
 QuickUtils.sdcard.isSDCardAvailable();
+QuickUtils.sdcard.isSDCardWritable();
 ```
 
 ## Download
