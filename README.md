@@ -167,13 +167,13 @@ QuickUtils.sdcard.isSDCardWritable();
 QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE);
 
 // LOGGING
-QuickUtils.log.e("error");
+QuickUtils.log.e("error description");
 
-QuickUtils.log.v("verbose");
-QuickUtils.log.i("info");
+QuickUtils.log.v("verbose description");
+QuickUtils.log.i("information description");
 
-QuickUtils.log.d("debug");
-QuickUtils.log.d("debug", new Throwable("Throwable Error object"));
+QuickUtils.log.d("debug description");
+QuickUtils.log.d("debug description", new Throwable("Throwable Error object"));
 
 // MISC
 QuickUtils.misc.getCurrentTime();
