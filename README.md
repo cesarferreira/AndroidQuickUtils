@@ -1,7 +1,7 @@
 ## Synopsis
 
-This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework, a simple API for the utils and small snippets of code that you can never recall.
- helps you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that's involved when writing Android apps.
+This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework.
+Intended to help you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that's involved when writing Android apps.
 
 
 -----
@@ -20,6 +20,21 @@ Set the default TAG for logcat debug purposes
 QuickUtils.setTAG("DESIRED_TAG");
 ```
 
+
+### Debug mode
+
+To enable the log outputs (This is the default behavior of the library so you don't need to set this up).
+
+```java
+QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE);
+```
+
+When the application is ready to go and you want to disable the log outputs.
+
+```java
+QuickUtils.setDebugMode(QuickUtils.PRODUCTION_MODE);
+```
+
 AndroidManifest.xml
 -------------------
 
@@ -32,7 +47,7 @@ If you intend to use the vibration util don't forget to add the vibrate permissi
 Import
 ------
 ```java
-import com.Quick.android;
+import com.cesar.android;
 ```
 
 
@@ -44,10 +59,8 @@ QuickUtils.__category__.__method__
 ```
 -------------------
 ### LOG <sub><sup>`category`</sup></sub>
-For Log methods.
 
-Advantages: 
-  you don't need to set the TAG varible in every class of your project
+Wit this methods you don't need to set the TAG variable in every class of your project and you can disable the logs everywhere without deleting/commenting the log lines by setting the debug mode to PRODUCTION [howto] (https://github.com/cesarferreira/AndroidQuickUtils#debug-mode).
 
 ```java
 QuickUtils.log.__method__
