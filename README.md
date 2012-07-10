@@ -9,7 +9,7 @@ Intended to help you getting your Android applications off the ground quickly, b
 ## Instalation
 As simple as going to your project's properties and include the `QuickUtils.jar` library.
 
- ![](http://developer.android.com/images/developing/adt-props-libRef.png)
+ ![](https://dl.dropbox.com/u/86831/cesarferreira/goanswer.png)
 
 
 
