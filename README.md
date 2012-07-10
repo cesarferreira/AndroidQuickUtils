@@ -190,11 +190,10 @@ QuickUtils.sdcard.isSDCardWritable();
 
 ## Download
 
-QuickUtils latest version [here](blob/master/bin/quickutils.jar)
-https://github.com/cesarferreira/AndroidQuickUtils/blob/master/bin/quickutils.jar
+QuickUtils latest version [here](https://github.com/cesarferreira/AndroidQuickUtils/blob/master/bin/)
 
 ---------------
-QuickUtils v0.1 [download](java-classmate/blob/master/src/test/java/com/fasterxml/classmate/bin/quickutils.jar)
+QuickUtils v0.1 [download](https://github.com/cesarferreira/AndroidQuickUtils/blob/master/bin/)
 
 
 
