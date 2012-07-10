@@ -193,7 +193,8 @@ QuickUtils.sdcard.isSDCardWritable();
 QuickUtils latest version [here](TestReadme.java)
 
 ---------------
-QuickUtils v0.1 [download](java-classmate/blob/master/src/test/java/com/fasterxml/classmate/TestReadme.java)
+QuickUtils v0.1 [download](java-classmate/blob/master/src/test/java/com/fasterxml/classmate/bin/quickutils.jar)
+
 
 
 ## Contributing
