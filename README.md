@@ -188,13 +188,6 @@ QuickUtils.sdcard.isSDCardAvailable();
 QuickUtils.sdcard.isSDCardWritable();
 ```
 
-## Download
-
-QuickUtils latest version [here](https://github.com/cesarferreira/AndroidQuickUtils/blob/master/bin/)
-
----------------
-QuickUtils v0.1 [download](https://github.com/cesarferreira/AndroidQuickUtils/blob/master/bin/)
-
 
 
 ## Contributing
