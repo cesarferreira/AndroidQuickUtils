@@ -146,7 +146,7 @@ public abstract class QuickUtils {
 		 * @return true if has connection to the Internet and false if it
 		 *         doesn't
 		 */
-		public boolean hasConnectivity(Context context) {
+		public static boolean hasInternetConnection(Context context) {
 			ConnectivityManager cm = (ConnectivityManager) context
 					.getSystemService(Context.CONNECTIVITY_SERVICE);
 			if (cm == null)
@@ -186,7 +186,7 @@ public abstract class QuickUtils {
 		 *            duration of the vibration in miliseconds
 		 * 
 		 */
-		public void vibrate(Context context, int duration) {
+		public static void vibrate(Context context, int duration) {
 			Vibrator v = (Vibrator) context
 					.getSystemService(Context.VIBRATOR_SERVICE);
 			v.vibrate(duration);
@@ -371,7 +371,6 @@ public abstract class QuickUtils {
 			if (!file.exists()) {
 				throw new RuntimeException("File not found");
 			}
-			Log.e("Testing", "Starting to read");
 			BufferedReader reader = null;
 			try {
 				reader = new BufferedReader(new FileReader(file));
@@ -387,7 +386,7 @@ public abstract class QuickUtils {
 					try {
 						reader.close();
 					} catch (IOException e) {
-						e.printStackTrace();
+						QuickUtils.log.d("IO Exception:", e);
 					}
 				}
 			}
