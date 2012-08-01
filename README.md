@@ -239,7 +239,7 @@ QuickUtils.setDebugMode(QuickUtils.PRODUCTION_MODE);
 AndroidManifest.xml
 -------------------
 
-If you intend to use the vibration util don't forget to add the vibrate permission, if you haven't already, in your `<manifest>`:
+If you intend to use the vibration util don't forget to add the vibration permission, if you haven't already, in your `<manifest>`:
 
 ```xml
 <uses-permission android:name="android.permission.VIBRATE" />   
@@ -252,9 +252,17 @@ import com.cesar.android;
 ```
 
 
-
 ## Contributing
-Feel like giving back? We'll happily take contributions via GitHub. For questions, please turn to [QuickUtils developers](mailto:cesar.manuel.ferreira@gmail.com)
+
+Want to contribute? Great! 
+
+1. Fork it.
+2. Create a branch (`git checkout -b my_branch`)
+3. Commit your changes (`git commit -am "Added changes"`)
+4. Push to the branch (`git push origin my_branch`)
+5. Create an [Issue][1] with a link to your branch
+6. Enjoy a refreshing Diet Coke and wait
+
 
 ## License
 Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
