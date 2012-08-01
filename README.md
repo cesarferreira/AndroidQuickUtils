@@ -1,49 +1,14 @@
 ## Synopsis
 
-This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework.
+<div style="float: left"><img src="http://cesarferreira.com/wp-content/uploads/2012/07/dribbble.png"  style="width:200px" /></div>This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework.
 Intended to help you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that's involved when writing Android apps.
+
+
 
 
 -----
 
 
-
-## Setup the environment
-Set the default TAG for logcat debug purposes
-
-```java
-QuickUtils.setTAG("DESIRED_TAG");
-```
-
-
-### Debug mode
-
-To enable the log outputs (This is the default behavior of the library so you don't need to set this up).
-
-```java
-QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE);
-```
-
-When the application is ready to go and you want to disable the log outputs.
-
-```java
-QuickUtils.setDebugMode(QuickUtils.PRODUCTION_MODE);
-```
-
-AndroidManifest.xml
--------------------
-
-If you intend to use the vibration util don't forget to add the vibrate permission, if you haven't already, in your `<manifest>`:
-
-```xml
-<uses-permission android:name="android.permission.VIBRATE" />   
-```
-
-Import
-------
-```java
-import com.cesar.android;
-```
 
 
 ## Usage
@@ -248,6 +213,43 @@ As simple as going to your project's properties and include the `QuickUtils.jar`
 
  ![](https://dl.dropbox.com/u/86831/cesarferreira/goanswer.png)
 
+
+## Setting up the environment
+Set the default TAG for logcat debug purposes
+
+```java
+QuickUtils.setTAG("DESIRED_TAG");
+```
+
+
+### Debug mode
+
+To enable the log outputs (This is the default behavior of the library so you don't need to set this up).
+
+```java
+QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE);
+```
+
+When the application is ready to go and you want to disable the log outputs.
+
+```java
+QuickUtils.setDebugMode(QuickUtils.PRODUCTION_MODE);
+```
+
+AndroidManifest.xml
+-------------------
+
+If you intend to use the vibration util don't forget to add the vibrate permission, if you haven't already, in your `<manifest>`:
+
+```xml
+<uses-permission android:name="android.permission.VIBRATE" />   
+```
+
+Import
+------
+```java
+import com.cesar.android;
+```
 
 
 
