@@ -9,6 +9,9 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
 import android.os.Environment;
 import android.os.Vibrator;
 import android.util.Log;
@@ -136,6 +139,42 @@ public abstract class QuickUtils {
 	public static class misc {
 
 		/**
+		 * Checks if the app has connectivity to the Internet
+		 * 
+		 * @param context
+		 *            application context
+		 * @return true if has connection to the Internet and false if it
+		 *         doesn't
+		 */
+		public boolean hasConnectivity(Context context) {
+			ConnectivityManager cm = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			if (cm == null)
+				return false;
+			NetworkInfo info = cm.getActiveNetworkInfo();
+
+			// 3G
+			State mobile = cm.getNetworkInfo(0).getState();
+
+			// wifi
+			State wifi = cm.getNetworkInfo(1).getState();
+
+			if (info == null)
+				return false;
+
+			if (mobile == NetworkInfo.State.CONNECTED
+					|| mobile == NetworkInfo.State.CONNECTING) {
+
+				return info.isConnectedOrConnecting();
+			} else if (wifi == NetworkInfo.State.CONNECTED
+					|| wifi == NetworkInfo.State.CONNECTING) {
+
+				return info.isConnectedOrConnecting();
+			}
+			return info.isConnectedOrConnecting();
+		}
+
+		/**
 		 * Make the smartphone vibrate for a giving time.you need to put the
 		 * vibration permission in the manifest as follows: <uses-permission
 		 * android:name="android.permission.VIBRATE"/>
@@ -187,23 +226,24 @@ public abstract class QuickUtils {
 		/**
 		 * Sleep
 		 * 
-		 * @param seconds
+		 * @param milliseconds
 		 *            seconds that the app will sleep
 		 */
-		public static void sleep(int seconds) {
+		public static void sleep(int milliseconds) {
 
 			try {
-				QuickUtils.log.i("delaying for " + seconds + " seconds");
-				Thread.sleep(seconds * 1000);
+				QuickUtils.log.i("delaying for " + milliseconds / 1000
+						+ " seconds");
+				Thread.sleep(milliseconds);
 			} catch (InterruptedException e) {
 				QuickUtils.log.e(e.getLocalizedMessage().toString());
 			}
 		}
 
 		/**
-		 * get Current time in miliseconds
+		 * get Current time in milliseconds
 		 * 
-		 * @return current time in miliseconds
+		 * @return current time in milliseconds
 		 */
 		public static long getCurrentTimeInMiliseconds() {
 			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance()
@@ -220,6 +260,27 @@ public abstract class QuickUtils {
 			return c.get(Calendar.SECOND);
 		}
 
+	}
+
+	/**
+	 * Math library
+	 * 
+	 * @author cesar
+	 * 
+	 */
+	public static class math {
+
+		/**
+		 * Check if a number is Odd
+		 * 
+		 * @param num
+		 *            int number
+		 * @return true if the num is odd and false if it's even
+		 */
+		public static boolean isOdd(int num) {
+			return !(num % 2 == 0);
+		}
+
 		/**
 		 * Returns a random number between MIN inclusive and MAX exclusive.
 		 * 
@@ -233,6 +294,7 @@ public abstract class QuickUtils {
 			Random r = new Random();
 			return r.nextInt(max - min + 1) + min;
 		}
+
 	}
 
 	/**
