@@ -7,7 +7,7 @@ Intended to help you getting your Android applications off the ground quickly, b
 -----
 
 ## Instalation
-As simple as going to your project's properties and include the `QuickUtils.jar` library.
+As simple as going to your project's properties and include the `QuickUtils.jar` library or add the QuickUtils project as a library as shown below.
 
  ![](https://dl.dropbox.com/u/86831/cesarferreira/goanswer.png)
 
@@ -115,10 +115,24 @@ QuickUtils.misc.__method__
 ```
 
 
-##### Get the current time in miliseconds `long`
+##### Checks if the app has connectivity to the Internet `boolean`
+True if has connection to the Internet and false if it doesn't.
 
 ```java
-QuickUtils.misc.getCurrentTime();
+QuickUtils.misc.hasInternetConnection(Context context);
+```
+
+
+##### Get the current time in milliseconds `long`
+
+```java
+QuickUtils.misc.getCurrentTimeInMiliseconds();
+```
+
+##### Get the current time in seconds `long`
+
+```java
+QuickUtils.misc.getCurrentTimeInSeconds();
 ```
 
 ##### Sleep `void`
@@ -126,7 +140,7 @@ Causes the thread which sent this message to sleep for the given interval of tim
 
 
 ```java
-QuickUtils.misc.sleep(durationInSeconds);
+QuickUtils.misc.sleep(durationInMilliseconds);
 ```
 
 ##### Toast method with short duration `void`
@@ -141,6 +155,33 @@ Either `Toast.LENGTH_SHORT` or `Toast.LENGTH_LONG`
 ```java
 QuickUtils.misc.toast(context, "This is a short toast", Toast.LENGTH_LONG);
 ```
+------------
+
+### MATH <sub><sup>`category`</sup></sub>
+
+Math Utils.
+
+```java
+QuickUtils.math.__method__
+```
+
+
+##### Returns a random number between MIN inclusive and MAX exclusive. `int`
+A random int between MIN inclusive and MAX exclusive.
+
+```java
+QuickUtils.sdcard.isOdd(int num);
+```
+
+##### Check if a number is Odd. `boolean`
+True if the num is odd and false if it's even
+
+```java
+QuickUtils.sdcard.getRandomNumber(int min, int max);
+```
+
+
+
 ------------
 
 ### SDCARD <sub><sup>`category`</sup></sub>
@@ -184,7 +225,7 @@ QuickUtils.log.d("debug description", new Throwable("Throwable Error object"));
 // MISC
 QuickUtils.misc.getCurrentTime();
 
-QuickUtils.misc.sleep(durationInSeconds);
+QuickUtils.misc.sleep(durationInMiliseconds);
 
 QuickUtils.misc.toast(this, "This is a short toast");
 QuickUtils.misc.toast(this, "This is a short toast", durationInSeconds);
