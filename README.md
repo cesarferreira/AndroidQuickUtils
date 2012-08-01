@@ -12,24 +12,32 @@ Intended to help you getting your Android applications off the ground quickly, b
 
 ## Changelog
 
-### 0.2
+### 0.2 `2012/08/01`
 - Checks if the app has connectivity to the Internet
 - `getCurrentTime()` is now divided into `getCurrentTimeInSeconds()` and `getCurrentTimeInMilliseconds()`
 - public static long getCurrentTimeInSeconds()
 - `sleep` method now accepts milliseconds instead of seconds
+- `log` now has a warning method
 - Updated SDK version to 4.0.3
 - Added `math` category
 - Get a random number between a given range
 - Check if a number is odd
 
-### 0.1
+### 0.1 `2012/07/10`
 - Added `log` category
 - Added error log method
 - Added information log method
 - Added verbose log method
-- Added  log method
-- Added error log method
-- Added error log method
+- Added debug log method
+- Added `sdcard` category
+- Added isSDCardAvailable method
+- Added isSDCardWritable method
+- Added `misc` category
+- Added vibrate method
+- Added sleep method
+- Added toast method with custom lenght time
+- Added get current time in miliseconds method
+
 
 
 -----
