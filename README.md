@@ -6,11 +6,6 @@ Intended to help you getting your Android applications off the ground quickly, b
 
 -----
 
-## Instalation
-As simple as going to your project's properties and include the `QuickUtils.jar` library or add the QuickUtils project as a library as shown below.
-
- ![](https://dl.dropbox.com/u/86831/cesarferreira/goanswer.png)
-
 
 
 ## Setup the environment
@@ -59,7 +54,7 @@ QuickUtils.__category__.__method__
 ```
 -------------------
 
-### LOG <sub><sup>`category`</sup></sub>
+## LOG <sub><sup>`category`</sup></sub>
 
 With this methods you don't need to set the TAG variable in every class of your project and you can disable the logs everywhere without deleting/commenting the log lines by setting the debug mode to PRODUCTION (explained in the previous section).
 
@@ -106,7 +101,7 @@ QuickUtils.log.d("debug description", Throwable t);
 
 ------------
 
-### MISC <sub><sup>`category`</sup></sub>
+## MISC <sub><sup>`category`</sup></sub>
 
 With this methods you don't need to set....
 
@@ -157,7 +152,7 @@ QuickUtils.misc.toast(context, "This is a short toast", Toast.LENGTH_LONG);
 ```
 ------------
 
-### MATH <sub><sup>`category`</sup></sub>
+## MATH <sub><sup>`category`</sup></sub>
 
 Math Utils.
 
@@ -184,7 +179,7 @@ QuickUtils.sdcard.getRandomNumber(int min, int max);
 
 ------------
 
-### SDCARD <sub><sup>`category`</sup></sub>
+## SDCARD <sub><sup>`category`</sup></sub>
 
 SDCard Utils.
 
@@ -210,33 +205,50 @@ QuickUtils.sdcard.isSDCardWritable();
 
 
 ```java
-// SET ENVIRONMENT
-QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE);
+@Override
+ public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-// LOGGING
-QuickUtils.log.e("error description");
+		// SET ENVIRONMENT
+		QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE); // can be omited
 
-QuickUtils.log.v("verbose description");
-QuickUtils.log.i("information description");
+		try {
+			QuickUtils.log.w("This is dangerous code");
 
-QuickUtils.log.d("debug description");
-QuickUtils.log.d("debug description", new Throwable("Throwable Error object"));
+			// do DANGEROUS STUFF
+			// ...
+			// ...
 
-// MISC
-QuickUtils.misc.getCurrentTime();
+			QuickUtils.misc.toast(this,
+					"The result of your dangerous calculations is: " + number);
 
-QuickUtils.misc.sleep(durationInMiliseconds);
+		} catch (Exception exception) {
+			QuickUtils.log.d("Exception thrown", exception);
+		}
 
-QuickUtils.misc.toast(this, "This is a short toast");
-QuickUtils.misc.toast(this, "This is a short toast", durationInSeconds);
+		// Check if you can write on your sdcard
+		if (QuickUtils.sdcard.isSDCardAvailable()
+				&& QuickUtils.sdcard.isSDCardWritable()) {
 
-// SDCARD
-QuickUtils.sdcard.isSDCardAvailable();
-QuickUtils.sdcard.isSDCardWritable();
+			// you can write safely on your sdcard
+			// ...
+			// ...
+		}
+
+	}
 ```
 
 ## Downloads
 All the versions can be found [here](https://github.com/cesarferreira/AndroidQuickUtils/tags)
+
+
+## Instalation
+As simple as going to your project's properties and include the `QuickUtils.jar` library or add the QuickUtils project as a library as shown below.
+
+ ![](https://dl.dropbox.com/u/86831/cesarferreira/goanswer.png)
+
+
 
 
 ## Contributing
