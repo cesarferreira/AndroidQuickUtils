@@ -163,14 +163,14 @@ QuickUtils.math.__method__
 A random int between MIN inclusive and MAX exclusive.
 
 ```java
-QuickUtils.sdcard.isOdd(int num);
+QuickUtils.sdcard.getRandomNumber(int min, int max);
 ```
 
 ### Check if a number is Odd. `boolean`
 True if the num is odd and false if it's even
 
 ```java
-QuickUtils.sdcard.getRandomNumber(int min, int max);
+QuickUtils.sdcard.isOdd(int num);
 ```
 
 
