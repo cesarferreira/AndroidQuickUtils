@@ -68,31 +68,37 @@ QuickUtils.log.__method__
 ```
 
 
-##### Error Log `Log.e("TAG","ERROR DESCRIPTION")`
+##### Error Log 
 
 ```java
 QuickUtils.log.e("error description");
 ```
 
-##### Verbose Log `Log.v("TAG","VERBOSE DESCRIPTION")`
+##### Verbose Log 
 
 ```java
 QuickUtils.log.v("verbose description");
 ```
 
-##### Information Log `Log.i("TAG","INFORMATION DESCRIPTION")`
+##### Information Log 
 
 ```java
 QuickUtils.log.i("information description");
 ```
 
-##### Debug Log `Log.d("TAG","DEBUG DESCRIPTION")`
+##### Warning Log 
+
+```java
+QuickUtils.log.w("warning description");
+```
+
+##### Debug Log 
 
 ```java
 QuickUtils.log.d("debug description");
 ```
 
-##### Debug Log `Log.d("TAG","DEBUG DESCRIPTION", Trowable t)`
+##### Debug Log `throwable`
 
 ```java
 QuickUtils.log.d("debug description", Throwable t);
