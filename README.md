@@ -12,7 +12,7 @@ Intended to help you getting your Android applications off the ground quickly, b
 
 ## Changelog
 
-### 0.2 `2012/08/01`
+### 0.2 <sub><sup>`2012/08/01`</sup></sub>
 - Checks if the app has connectivity to the Internet
 - `getCurrentTime()` is now divided into `getCurrentTimeInSeconds()` and `getCurrentTimeInMilliseconds()`
 - public static long getCurrentTimeInSeconds()
@@ -23,7 +23,7 @@ Intended to help you getting your Android applications off the ground quickly, b
 - Get a random number between a given range
 - Check if a number is odd
 
-### 0.1 `2012/07/10`
+### 0.1 <sub><sup>`2012/07/10`</sup></sub>
 - Added `log` category
 - Added error log method
 - Added information log method
