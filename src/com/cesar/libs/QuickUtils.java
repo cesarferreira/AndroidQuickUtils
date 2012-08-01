@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 
 public abstract class QuickUtils {
 
-	private static String TAG = "DESIRED TAG";
+	private static String TAG = "DESIRED_TAG";
 
 	public static final boolean DEVELOPER_MODE = true;
 	public static final boolean PRODUCTION_MODE = false;
@@ -86,8 +87,7 @@ public abstract class QuickUtils {
 				Log.v(TAG, message);
 			}
 		}
-		
-		
+
 		/**
 		 * Send a WARNING log message.
 		 * 
@@ -194,7 +194,6 @@ public abstract class QuickUtils {
 
 			try {
 				QuickUtils.log.i("delaying for " + seconds + " seconds");
-
 				Thread.sleep(seconds * 1000);
 			} catch (InterruptedException e) {
 				QuickUtils.log.e(e.getLocalizedMessage().toString());
@@ -206,9 +205,33 @@ public abstract class QuickUtils {
 		 * 
 		 * @return current time in miliseconds
 		 */
-		public static long getCurrentTime() {
+		public static long getCurrentTimeInMiliseconds() {
 			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance()
 					.getTimeInMillis());
+		}
+
+		/**
+		 * get Current time in seconds
+		 * 
+		 * @return current time in seconds
+		 */
+		public static long getCurrentTimeInSeconds() {
+			Calendar c = Calendar.getInstance();
+			return c.get(Calendar.SECOND);
+		}
+
+		/**
+		 * Returns a random number between MIN inclusive and MAX exclusive.
+		 * 
+		 * @param min
+		 *            value inclusive
+		 * @param max
+		 *            value exclusive
+		 * @return an int between MIN inclusive and MAX exclusive.
+		 */
+		public static int getRandomNumber(int min, int max) {
+			Random r = new Random();
+			return r.nextInt(max - min + 1) + min;
 		}
 	}
 
