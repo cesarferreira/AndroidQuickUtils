@@ -12,7 +12,7 @@ Intended to help you getting your Android applications off the ground quickly, b
 
 ## Changelog
 
-### 0.2 <sub><sup>`2012/08/01`</sup></sub>
+### 0.2 <sub><sup>`2012/08/02`</sup></sub>
 - Checks if the app has connectivity to the Internet
 - `getCurrentTime()` is now divided into `getCurrentTimeInSeconds()` and `getCurrentTimeInMilliseconds()`
 - public static long getCurrentTimeInSeconds()
