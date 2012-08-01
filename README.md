@@ -28,37 +28,37 @@ QuickUtils.log.__method__
 ```
 
 
-##### Error Log 
+### Error Log 
 
 ```java
 QuickUtils.log.e("error description");
 ```
 
-##### Verbose Log 
+### Verbose Log 
 
 ```java
 QuickUtils.log.v("verbose description");
 ```
 
-##### Information Log 
+### Information Log 
 
 ```java
 QuickUtils.log.i("information description");
 ```
 
-##### Warning Log 
+### Warning Log 
 
 ```java
 QuickUtils.log.w("warning description");
 ```
 
-##### Debug Log 
+### Debug Log 
 
 ```java
 QuickUtils.log.d("debug description");
 ```
 
-##### Debug Log `throwable`
+### Debug Log `throwable`
 
 ```java
 QuickUtils.log.d("debug description", Throwable t);
@@ -75,7 +75,7 @@ QuickUtils.misc.__method__
 ```
 
 
-##### Checks if the app has connectivity to the Internet `boolean`
+### Checks if the app has connectivity to the Internet `boolean`
 True if has connection to the Internet and false if it doesn't.
 
 ```java
@@ -83,19 +83,19 @@ QuickUtils.misc.hasInternetConnection(Context context);
 ```
 
 
-##### Get the current time in milliseconds `long`
+### Get the current time in milliseconds `long`
 
 ```java
 QuickUtils.misc.getCurrentTimeInMiliseconds();
 ```
 
-##### Get the current time in seconds `long`
+### Get the current time in seconds `long`
 
 ```java
 QuickUtils.misc.getCurrentTimeInSeconds();
 ```
 
-##### Sleep `void`
+### Sleep `void`
 Causes the thread which sent this message to sleep for the given interval of time (given in milliseconds). The precision is not guaranteed - the Thread may sleep more or less than requested.
 
 
@@ -103,13 +103,13 @@ Causes the thread which sent this message to sleep for the given interval of tim
 QuickUtils.misc.sleep(durationInMilliseconds);
 ```
 
-##### Toast method with short duration `void`
+### Toast method with short duration `void`
 
 ```java
 QuickUtils.misc.toast(context, "This is a short toast");
 ```
 
-##### Toast with non specified duration `void`
+### Toast with non specified duration `void`
 Either `Toast.LENGTH_SHORT` or `Toast.LENGTH_LONG`
 
 ```java
@@ -125,15 +125,14 @@ Math Utils.
 QuickUtils.math.__method__
 ```
 
-
-##### Returns a random number between MIN inclusive and MAX exclusive. `int`
+### Returns a random number between MIN inclusive and MAX exclusive. `int`
 A random int between MIN inclusive and MAX exclusive.
 
 ```java
 QuickUtils.sdcard.isOdd(int num);
 ```
 
-##### Check if a number is Odd. `boolean`
+### Check if a number is Odd. `boolean`
 True if the num is odd and false if it's even
 
 ```java
@@ -152,14 +151,14 @@ SDCard Utils.
 QuickUtils.sdcard.__method__
 ```
 
-##### Check if the SD Card is Available `boolean`
+### Check if the SD Card is Available `boolean`
 True if the sd card is available and false if it is not
 
 ```java
 QuickUtils.sdcard.isSDCardAvailable();
 ```
 
-##### Check if the SD Card is Writable `boolean`
+### Check if the SD Card is Writable `boolean`
 True if the sd card is writable and false if it is not
 
 ```java
@@ -260,7 +259,7 @@ Want to contribute? Great!
 2. Create a branch (`git checkout -b my_branch`)
 3. Commit your changes (`git commit -am "Added changes"`)
 4. Push to the branch (`git push origin my_branch`)
-5. Create an [Issue][1] with a link to your branch
+5. Create an [Issue](https://github.com/cesarferreira/AndroidQuickUtils/issues) with a link to your branch
 6. Enjoy a refreshing Diet Coke and wait
 
 
