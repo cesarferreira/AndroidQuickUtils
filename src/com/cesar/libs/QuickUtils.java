@@ -24,10 +24,23 @@ public abstract class QuickUtils {
 
 	private static String TAG = "DESIRED_TAG";
 
+	/**
+	 * Developer mode for Debugging purposes
+	 */
 	public static final boolean DEVELOPER_MODE = true;
+
+	/**
+	 * Production mode for Debugging purposes
+	 */
 	public static final boolean PRODUCTION_MODE = false;
 
 	private static boolean DEBUG_MODE = QuickUtils.DEVELOPER_MODE;
+
+	/**
+	 * private constructor
+	 */
+	private QuickUtils() {
+	}
 
 	/**
 	 * Set debug mode (default: QuickUtils.DEBUG_MODE). Set
@@ -59,7 +72,13 @@ public abstract class QuickUtils {
 	public static class log {
 
 		/**
-		 * Send an ERROR log message
+		 * private constructor
+		 */
+		private log() {
+		}
+
+		/**
+		 * Sends an ERROR log message
 		 * 
 		 * @param message
 		 *            The message you would like logged.
@@ -71,7 +90,7 @@ public abstract class QuickUtils {
 		}
 
 		/**
-		 * Send an INFO log message.
+		 * Sends an INFO log message.
 		 * 
 		 * @param message
 		 *            The message you would like logged.
@@ -83,7 +102,7 @@ public abstract class QuickUtils {
 		}
 
 		/**
-		 * Send a VERBBOSE log message.
+		 * Sends a VERBBOSE log message.
 		 * 
 		 * @param message
 		 *            The message you would like logged.
@@ -95,7 +114,7 @@ public abstract class QuickUtils {
 		}
 
 		/**
-		 * Send a WARNING log message.
+		 * Sends a WARNING log message.
 		 * 
 		 * @param message
 		 *            The message you would like logged.
@@ -107,7 +126,7 @@ public abstract class QuickUtils {
 		}
 
 		/**
-		 * Send a DEBUG log message.
+		 * Sends a DEBUG log message.
 		 * 
 		 * @param message
 		 *            The message you would like logged.
@@ -119,7 +138,7 @@ public abstract class QuickUtils {
 		}
 
 		/**
-		 * Send a DEBUG log message and log the exception.
+		 * Sends a DEBUG log message and log the exception.
 		 * 
 		 * @param message
 		 *            The message you would like logged.
@@ -141,6 +160,13 @@ public abstract class QuickUtils {
 	 */
 	public static class misc {
 
+		
+		/**
+		 * private constructor
+		 */
+		private misc() {
+		}
+		
 		/**
 		 * Checks if the app has connectivity to the Internet
 		 * 
@@ -267,6 +293,12 @@ public abstract class QuickUtils {
 	 */
 	public static class math {
 
+		/**
+		 * private constructor
+		 */
+		private math() {
+		}
+		
 		/**
 		 * Check if a number is Odd
 		 * 
