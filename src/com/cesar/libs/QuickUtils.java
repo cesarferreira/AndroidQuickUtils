@@ -2,8 +2,11 @@ package com.cesar.libs;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -147,8 +150,7 @@ public abstract class QuickUtils {
 		 *         doesn't
 		 */
 		public static boolean hasInternetConnection(Context context) {
-			ConnectivityManager cm = (ConnectivityManager) context
-					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 			if (cm == null)
 				return false;
 			NetworkInfo info = cm.getActiveNetworkInfo();
@@ -162,12 +164,10 @@ public abstract class QuickUtils {
 			if (info == null)
 				return false;
 
-			if (mobile == NetworkInfo.State.CONNECTED
-					|| mobile == NetworkInfo.State.CONNECTING) {
+			if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
-			} else if (wifi == NetworkInfo.State.CONNECTED
-					|| wifi == NetworkInfo.State.CONNECTING) {
+			} else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
 			}
@@ -187,8 +187,7 @@ public abstract class QuickUtils {
 		 * 
 		 */
 		public static void vibrate(Context context, int duration) {
-			Vibrator v = (Vibrator) context
-					.getSystemService(Context.VIBRATOR_SERVICE);
+			Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 			v.vibrate(duration);
 		}
 
@@ -232,8 +231,7 @@ public abstract class QuickUtils {
 		public static void sleep(int milliseconds) {
 
 			try {
-				QuickUtils.log.i("delaying for " + milliseconds / 1000
-						+ " seconds");
+				QuickUtils.log.i("delaying for " + milliseconds / 1000 + " seconds");
 				Thread.sleep(milliseconds);
 			} catch (InterruptedException e) {
 				QuickUtils.log.e(e.getLocalizedMessage().toString());
@@ -246,8 +244,7 @@ public abstract class QuickUtils {
 		 * @return current time in milliseconds
 		 */
 		public static long getCurrentTimeInMiliseconds() {
-			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance()
-					.getTimeInMillis());
+			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance().getTimeInMillis());
 		}
 
 		/**
@@ -387,6 +384,41 @@ public abstract class QuickUtils {
 						reader.close();
 					} catch (IOException e) {
 						QuickUtils.log.d("IO Exception:", e);
+					}
+				}
+			}
+		}
+
+		/**
+		 * Creates the specified <code>toFile</code> as a byte for byte copy of
+		 * the <code>fromFile</code>. If <code>toFile</code> already exists,
+		 * then it will be replaced with a copy of <code>fromFile</code>. The
+		 * name and path of <code>toFile</code> will be that of
+		 * <code>toFile</code>.<br/>
+		 * <br/>
+		 * <i> Note: <code>fromFile</code> and <code>toFile</code> will be
+		 * closed by this function.</i>
+		 * 
+		 * @param fromFile
+		 *            - FileInputStream for the file to copy from.
+		 * @param toFile
+		 *            - FileInputStream for the file to copy to.
+		 */
+		public static void copyFile(FileInputStream fromFile, FileOutputStream toFile) throws IOException {
+			FileChannel fromChannel = null;
+			FileChannel toChannel = null;
+			try {
+				fromChannel = fromFile.getChannel();
+				toChannel = toFile.getChannel();
+				fromChannel.transferTo(0, fromChannel.size(), toChannel);
+			} finally {
+				try {
+					if (fromChannel != null) {
+						fromChannel.close();
+					}
+				} finally {
+					if (toChannel != null) {
+						toChannel.close();
 					}
 				}
 			}
