@@ -160,13 +160,12 @@ public abstract class QuickUtils {
 	 */
 	public static class misc {
 
-		
 		/**
 		 * private constructor
 		 */
 		private misc() {
 		}
-		
+
 		/**
 		 * Checks if the app has connectivity to the Internet
 		 * 
@@ -298,7 +297,7 @@ public abstract class QuickUtils {
 		 */
 		private math() {
 		}
-		
+
 		/**
 		 * Check if a number is Odd
 		 * 
@@ -454,6 +453,15 @@ public abstract class QuickUtils {
 					}
 				}
 			}
+		}
+
+		/**
+		 * Get the SDCard Path
+		 * 
+		 * @return the complete path to the SDCard
+		 */
+		public static String getSDCardPath() {
+			return Environment.getExternalStorageDirectory().toString();
 		}
 	}
 
