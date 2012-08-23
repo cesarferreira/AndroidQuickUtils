@@ -9,6 +9,7 @@ style="width:200px" /></div>
 This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework.
 Intended to help you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that's involved when writing Android apps.
 
+For a fast overview of the capabilites of the library, check this [javadoc](http://cesarferreira.github.com/AndroidQuickUtils/)
 
 ## Changelog
 
