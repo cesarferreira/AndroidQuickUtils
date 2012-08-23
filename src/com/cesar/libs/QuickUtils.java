@@ -433,7 +433,7 @@ public abstract class QuickUtils {
 		 * @param fromFile
 		 *            - FileInputStream for the file to copy from.
 		 * @param toFile
-		 *            - FileInputStream for the file to copy to.
+		 *            - FileOutpubStream for the file to copy to.
 		 */
 		public static void copyFile(FileInputStream fromFile, FileOutputStream toFile) throws IOException {
 			FileChannel fromChannel = null;
@@ -456,12 +456,40 @@ public abstract class QuickUtils {
 		}
 
 		/**
+		 * Creates the specified <code>toFile</code> as a byte for byte copy of
+		 * the <code>fromFile</code>. If <code>toFile</code> already exists,
+		 * then it will be replaced with a copy of <code>fromFile</code>. The
+		 * name and path of <code>toFile</code> will be that of
+		 * <code>toFile</code>.<br/>
+		 * <br/>
+		 * <i> Note: <code>fromFile</code> and <code>toFile</code> will be
+		 * closed by this function.</i>
+		 * 
+		 * @param fromFile
+		 *            - File to copy from.
+		 * @param toFile
+		 *            - File to copy to.
+		 */
+		public static void copyFile(File fromFile, File toFile) throws IOException {
+			copyFile(new FileInputStream(fromFile), new FileOutputStream(toFile));
+		}
+
+		/**
 		 * Get the SDCard Path
 		 * 
 		 * @return the complete path to the SDCard
 		 */
 		public static String getSDCardPath() {
-			return Environment.getExternalStorageDirectory().toString();
+			return Environment.getExternalStorageDirectory().toString()+"/";
+		}
+
+		/**
+		 * Get the SDCard Path as a File
+		 * 
+		 * @return the complete path to the SDCard
+		 */
+		public static File getSDCardPathFile() {
+			return Environment.getExternalStorageDirectory();
 		}
 	}
 
