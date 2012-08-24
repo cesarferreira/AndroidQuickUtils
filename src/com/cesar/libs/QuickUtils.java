@@ -24,6 +24,12 @@ public abstract class QuickUtils {
 
 	private static String TAG = "DESIRED_TAG";
 
+	private static final int VERBOSE = android.util.Log.VERBOSE;
+	private static final int DEBUG = android.util.Log.DEBUG;
+	private static final int INFO = android.util.Log.INFO;
+	private static final int WARN = android.util.Log.WARN;
+	private static final int ERROR = android.util.Log.ERROR;
+
 	/**
 	 * Developer mode for Debugging purposes
 	 */
@@ -83,10 +89,20 @@ public abstract class QuickUtils {
 		 * @param message
 		 *            The message you would like logged.
 		 */
-		public static void e(String message) {
-			if (DEBUG_MODE) {
-				Log.e(TAG, message);
-			}
+		public static int e(String message) {
+			return logger(QuickUtils.ERROR, message);
+		}
+
+		/**
+		 * Sends an ERROR log message
+		 * 
+		 * @param message
+		 *            The message you would like logged.
+		 * @param throwable
+		 *            An exception to log
+		 */
+		public static int e(String message, Throwable throwable) {
+			return logger(QuickUtils.ERROR, message, throwable);
 		}
 
 		/**
@@ -94,11 +110,22 @@ public abstract class QuickUtils {
 		 * 
 		 * @param message
 		 *            The message you would like logged.
+		 * @return
 		 */
-		public static void i(String message) {
-			if (DEBUG_MODE) {
-				Log.i(TAG, message);
-			}
+		public static int i(String message) {
+			return logger(QuickUtils.INFO, message);
+		}
+
+		/**
+		 * Sends an INFO log message.
+		 * 
+		 * @param message
+		 *            The message you would like logged.
+		 * @param throwable
+		 *            An exception to log
+		 */
+		public static int i(String message, Throwable throwable) {
+			return logger(QuickUtils.INFO, message, throwable);
 		}
 
 		/**
@@ -107,10 +134,20 @@ public abstract class QuickUtils {
 		 * @param message
 		 *            The message you would like logged.
 		 */
-		public static void v(String message) {
-			if (DEBUG_MODE) {
-				Log.v(TAG, message);
-			}
+		public static int v(String message) {
+			return logger(QuickUtils.VERBOSE, message);
+		}
+
+		/**
+		 * Sends a VERBBOSE log message.
+		 * 
+		 * @param message
+		 *            The message you would like logged.
+		 * @param throwable
+		 *            An exception to log
+		 */
+		public static int v(String message, Throwable throwable) {
+			return logger(QuickUtils.VERBOSE, message, throwable);
 		}
 
 		/**
@@ -119,10 +156,20 @@ public abstract class QuickUtils {
 		 * @param message
 		 *            The message you would like logged.
 		 */
-		public static void w(String message) {
-			if (DEBUG_MODE) {
-				Log.w(TAG, message);
-			}
+		public static int w(String message) {
+			return logger(QuickUtils.WARN, message);
+		}
+
+		/**
+		 * Sends a WARNING log message.
+		 * 
+		 * @param message
+		 *            The message you would like logged.
+		 * @param throwable
+		 *            An exception to log
+		 */
+		public static int w(String message, Throwable throwable) {
+			return logger(QuickUtils.WARN, message, throwable);
 		}
 
 		/**
@@ -131,10 +178,8 @@ public abstract class QuickUtils {
 		 * @param message
 		 *            The message you would like logged.
 		 */
-		public static void d(String message) {
-			if (DEBUG_MODE) {
-				Log.d(TAG, message);
-			}
+		public static int d(String message) {
+			return logger(QuickUtils.DEBUG, message);
 		}
 
 		/**
@@ -142,13 +187,78 @@ public abstract class QuickUtils {
 		 * 
 		 * @param message
 		 *            The message you would like logged.
-		 * @param trowable
+		 * @param throwable
 		 *            An exception to log
 		 */
-		public static void d(String message, Throwable trowable) {
+		public static int d(String message, Throwable throwable) {
+			return logger(QuickUtils.DEBUG, message, throwable);
+
+		}
+
+		/**
+		 * Private Logger function to handle Log calls
+		 * 
+		 * @param level
+		 *            level of the log message
+		 * @param message
+		 *            log output
+		 * @param throwable
+		 * @return
+		 */
+		private static int logger(int level, String message, Throwable throwable) {
+
 			if (DEBUG_MODE) {
-				Log.d(TAG, message, trowable);
+				switch (level) {
+
+				case QuickUtils.DEBUG:
+					return Log.d(TAG, message, throwable);
+				case QuickUtils.VERBOSE:
+					return Log.v(TAG, message, throwable);
+				case QuickUtils.INFO:
+					return Log.i(TAG, message, throwable);
+				case QuickUtils.WARN:
+					return Log.w(TAG, message, throwable);
+				case QuickUtils.ERROR:
+					return Log.e(TAG, message, throwable);
+				default:
+					break;
+				}
 			}
+
+			return -1;
+		}
+
+		/**
+		 * Private Logger function to handle Log calls
+		 * 
+		 * @param level
+		 *            level of the log message
+		 * @param message
+		 *            log output
+		 * @param throwable
+		 * @return
+		 */
+		private static int logger(int level, String message) {
+
+			if (DEBUG_MODE) {
+				switch (level) {
+
+				case QuickUtils.DEBUG:
+					return Log.d(TAG, message);
+				case QuickUtils.VERBOSE:
+					return Log.v(TAG, message);
+				case QuickUtils.INFO:
+					return Log.i(TAG, message);
+				case QuickUtils.WARN:
+					return Log.w(TAG, message);
+				case QuickUtils.ERROR:
+					return Log.e(TAG, message);
+				default:
+					break;
+				}
+			}
+
+			return -1;
 		}
 	}
 
@@ -259,7 +369,7 @@ public abstract class QuickUtils {
 				QuickUtils.log.i("delaying for " + milliseconds / 1000 + " seconds");
 				Thread.sleep(milliseconds);
 			} catch (InterruptedException e) {
-				QuickUtils.log.e(e.getLocalizedMessage().toString());
+				QuickUtils.log.e("Interrupted exception", e);
 			}
 		}
 
@@ -331,7 +441,28 @@ public abstract class QuickUtils {
 	 * @author cesar
 	 * 
 	 */
-	public static class sdcard {
+	public static class date {
+		/**
+		 * private constructor
+		 */
+		private date() {
+		}
+	}
+
+	/**
+	 * File Utils
+	 * 
+	 * @author cesar
+	 * 
+	 */
+	public static class files {
+
+		/**
+		 * private constructor
+		 */
+		private files() {
+		}
+
 		/**
 		 * Check if the SD Card is Available
 		 * 
@@ -480,7 +611,7 @@ public abstract class QuickUtils {
 		 * @return the complete path to the SDCard
 		 */
 		public static String getSDCardPath() {
-			return Environment.getExternalStorageDirectory().toString()+"/";
+			return Environment.getExternalStorageDirectory().toString() + "/";
 		}
 
 		/**
@@ -492,5 +623,4 @@ public abstract class QuickUtils {
 			return Environment.getExternalStorageDirectory();
 		}
 	}
-
 }
