@@ -18,6 +18,8 @@ Intended to help you getting your Android applications off the ground quickly, b
 - Added `copyFile(fromFile, toFile)` to the `sdcard` category
 - Added `copyFile(fromFileInputStream, toFileOutputStream)` to the `sdcard` category
 - Added `getSDCardPath` to the `sdcard`category
+- Added `web` category 
+- `hasInternetConnection()` moved from `misc` to `web` category
 
 ### 0.2 <sub><sup>`2012/08/02`</sup></sub>
 - Checks if the app has connectivity to the Internet
@@ -116,14 +118,6 @@ QuickUtils.misc.__method__
 ```
 
 
-### Checks if the app has connectivity to the Internet `boolean`
-True if has connection to the Internet and false if it doesn't.
-
-```java
-QuickUtils.misc.hasInternetConnection(Context context);
-```
-
-
 ### Get the current time in milliseconds `long`
 
 ```java
@@ -166,7 +160,7 @@ Math Utils.
 QuickUtils.math.__method__
 ```
 
-### Returns a random number between MIN inclusive and MAX exclusive. `int`
+### Returns a random number `int`
 A random int between MIN inclusive and MAX exclusive.
 
 ```java
@@ -180,7 +174,30 @@ True if the num is odd and false if it's even
 QuickUtils.sdcard.isOdd(int num);
 ```
 
+### Check if a number is Even. `boolean`
+True if the num is even and false if it's odd
 
+```java
+QuickUtils.sdcard.isEven(int num);
+```
+
+------------
+
+## WEB <sub><sup>`category`</sup></sub>
+
+Web Utils.
+
+```java
+QuickUtils.web.__method__
+```
+
+
+### Checks if the app has connectivity to the Internet `boolean`
+True if has connection to the Internet and false if it doesn't.
+
+```java
+QuickUtils.misc.hasInternetConnection(Context context);
+```
 
 ------------
 
