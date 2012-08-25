@@ -77,10 +77,18 @@ QuickUtils.log.__method__
 QuickUtils.log.e("error description");
 ```
 
+```java
+QuickUtils.log.e("error description", throwable);
+```
+
 ### Verbose Log 
 
 ```java
 QuickUtils.log.v("verbose description");
+```
+
+```java
+QuickUtils.log.v("verbose description", throwable);
 ```
 
 ### Information Log 
@@ -88,11 +96,17 @@ QuickUtils.log.v("verbose description");
 ```java
 QuickUtils.log.i("information description");
 ```
+```java
+QuickUtils.log.i("information description", throwable);
+```
 
 ### Warning Log 
 
 ```java
 QuickUtils.log.w("warning description");
+```
+```java
+QuickUtils.log.w("warning description", throwable);
 ```
 
 ### Debug Log 
@@ -101,10 +115,8 @@ QuickUtils.log.w("warning description");
 QuickUtils.log.d("debug description");
 ```
 
-### Debug Log `throwable`
-
 ```java
-QuickUtils.log.d("debug description", Throwable t);
+QuickUtils.log.d("debug description", throwable);
 ```
 
 ------------
