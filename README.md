@@ -9,9 +9,15 @@ style="width:200px" /></div>
 This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework.
 Intended to help you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that's involved when writing Android apps.
 
-For a fast overview of the capabilites of the library, check this [javadoc](http://cesarferreira.github.com/AndroidQuickUtils/)
 
 ## Changelog
+
+### 0.3 <sub><sup>`2012/08/27`</sup></sub>
+- Added Javadocs to the project
+- All the `log` methods now can handle `Throwable` objects, thanks @joelrodrigues for the suggestion
+- Added `copyFile(fromFile, toFile)` to the `sdcard` category
+- Added `copyFile(fromFileInputStream, toFileOutputStream)` to the `sdcard` category
+- Added `getSDCardPath` to the `sdcard`category
 
 ### 0.2 <sub><sup>`2012/08/02`</sup></sub>
 - Checks if the app has connectivity to the Internet
@@ -19,7 +25,7 @@ For a fast overview of the capabilites of the library, check this [javadoc](http
 - public static long getCurrentTimeInSeconds()
 - `sleep` method now accepts milliseconds instead of seconds
 - `log` now has a warning method
-- Updated SDK version to 4.0.3
+- Updated max SDK version to 4.0.3
 - Added `math` category
 - Get a random number between a given range
 - Check if a number is odd
@@ -200,6 +206,33 @@ True if the sd card is writable and false if it is not
 QuickUtils.sdcard.isSDCardWritable();
 ```
 
+### Get the path to the SDCard `String`
+Return the complete path to the SDCard
+
+```java
+QuickUtils.sdcard.getSDCardPath();
+```
+
+
+### Copy a file from a place to another `void`
+Creates the specified `toFile` as a byte for byte copy of  the `fromFile`. If `toFile` already exists, then it will be replaced with a copy of `fromFile`. The name and path of`toFile` will be that of `toFile`.
+
+Note: `fromFile` and `toFile` will be closed by this function.
+
+
+As Files
+
+```java
+QuickUtils.sdcard.copyFile(fromFile, toFile);
+```
+
+or with Input and Output Streams:
+
+```java
+QuickUtils.sdcard.copyFile(fromFileInputStream, toFileOutputStream);
+```
+
+
 ## Example
 
 
@@ -286,13 +319,6 @@ If you intend to use the `hasConnectivity` method don't forget to add the networ
 ```
 
 
-Import
-------
-```java
-import com.cesar.android;
-```
-
-
 ## Contributing
 
 Want to contribute? Great! 
@@ -310,3 +336,7 @@ Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
 
 ## Authors
  * César Ferreira (cesar.manuel.ferreira@gmail.com)
+
+## Contributors
+ * César Ferreira (cesar.manuel.ferreira@gmail.com)
+ * Joel Rodrigues (j.rod.fernandes@gmail.com)
