@@ -12,9 +12,9 @@ Intended to help you getting your Android applications off the ground quickly, b
 
 ## Changelog
 
-### 0.3 <sub><sup>`2012/08/27`</sup></sub>
+### 0.3 <sub><sup>`2012/08/26`</sup></sub>
 - Added Javadocs to the project
-- All the `log` methods now can handle `Throwable` objects, thanks @joelrodrigues for the suggestion
+- All the `log` methods now can handle `Throwable` objects, thanks @joelfernandes for the suggestion
 - Added `copyFile(fromFile, toFile)` to the `sdcard` category
 - Added `copyFile(fromFileInputStream, toFileOutputStream)` to the `sdcard` category
 - Added `getSDCardPath` to the `sdcard`category
@@ -337,6 +337,13 @@ True if has connection to the Internet and false if it doesn't.
 QuickUtils.misc.hasInternetConnection(Context context);
 ```
 
+### Does a GET request to a given url `String`
+Note: Please use this method on an AsyncTask in order not to freeze the application unnecessarely  (http://developer.android.com/guide/practices/responsiveness.html)
+
+```java
+QuickUtils.misc.HTTPGetRequest(String url);
+```
+
 ------------
 
 ## SDCARD <sub><sup>`category`</sup></sub>
@@ -413,8 +420,6 @@ QuickUtils.sdcard.copyFile(fromFileInputStream, toFileOutputStream);
 			// ...
 
 			QuickUtils.misc.toast(this, "The result of your dangerous calculations is: " + number);
-
-			new WebTask().execute();
 
 		} catch (Exception exception) {
 			QuickUtils.log.e("Exception thrown", exception);
