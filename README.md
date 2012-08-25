@@ -21,7 +21,7 @@ Intended to help you getting your Android applications off the ground quickly, b
 - Added `web` category 
 - `hasInternetConnection()` moved from `misc` to `web` category
 - Added `HTTPGetRequest()` to the `web`category
-- Added `degreesToRadians`, `radiansTdoDegrees`, `acos`, `asin`, `atan`, `atan2`, `tan`, `max`, `min`, `abs`, `logarithm`, `exponencial` and `isEven`
+- Added `degreesToRadians`, `radiansTdoDegrees`, `acos`, `asin`, `atan`, `atan2`, `tan`, `max`, `min`, `abs`, `logarithm`, `exponencial` and `isEven` to the `math` category
 
 ### 0.2 <sub><sup>`2012/08/02`</sup></sub>
 - Checks if the app has connectivity to the Internet
