@@ -6,10 +6,20 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -110,7 +120,7 @@ public abstract class QuickUtils {
 		 * 
 		 * @param message
 		 *            The message you would like logged.
-		 * @return
+		 * 
 		 */
 		public static int i(String message) {
 			return logger(QuickUtils.INFO, message);
@@ -203,7 +213,7 @@ public abstract class QuickUtils {
 		 * @param message
 		 *            log output
 		 * @param throwable
-		 * @return
+		 * 
 		 */
 		private static int logger(int level, String message, Throwable throwable) {
 
@@ -236,7 +246,7 @@ public abstract class QuickUtils {
 		 * @param message
 		 *            log output
 		 * @param throwable
-		 * @return
+		 * 
 		 */
 		private static int logger(int level, String message) {
 
@@ -274,39 +284,6 @@ public abstract class QuickUtils {
 		 * private constructor
 		 */
 		private misc() {
-		}
-
-		/**
-		 * Checks if the app has connectivity to the Internet
-		 * 
-		 * @param context
-		 *            application context
-		 * @return true if has connection to the Internet and false if it
-		 *         doesn't
-		 */
-		public static boolean hasInternetConnection(Context context) {
-			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-			if (cm == null)
-				return false;
-			NetworkInfo info = cm.getActiveNetworkInfo();
-
-			// 3G
-			State mobile = cm.getNetworkInfo(0).getState();
-
-			// wifi
-			State wifi = cm.getNetworkInfo(1).getState();
-
-			if (info == null)
-				return false;
-
-			if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING) {
-
-				return info.isConnectedOrConnecting();
-			} else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) {
-
-				return info.isConnectedOrConnecting();
-			}
-			return info.isConnectedOrConnecting();
 		}
 
 		/**
@@ -408,6 +385,187 @@ public abstract class QuickUtils {
 		private math() {
 		}
 
+		private static final float DEG_TO_RAD = 3.1415926f / 180.0f;
+		private static final float RAD_TO_DEG = 180.0f / 3.1415926f;
+
+		/**
+		 * Degrees to radians
+		 * 
+		 * @param degrees
+		 * @return the converted value
+		 */
+		public static float degreesToRadians(float degrees) {
+			return degrees * DEG_TO_RAD;
+		}
+
+		/**
+		 * Radians to degrees
+		 * 
+		 * @param degrees
+		 * @return the converted value
+		 */
+		public static float radiansTdoDegrees(float radians) {
+			return radians * RAD_TO_DEG;
+		}
+
+		/**
+		 * Arc cosine
+		 * 
+		 * @param value
+		 * @return Returns the closest double approximation of the arc cosine of
+		 *         the argument within the range [0..pi]. The returned result is
+		 *         within 1 ulp (unit in the last place) of the real result.
+		 */
+		public static float acos(float value) {
+			return (float) Math.acos(value);
+		}
+
+		/**
+		 * Arc sine
+		 * 
+		 * @param value
+		 * @return Returns the closest double approximation of the arc sine of
+		 *         the argument within the range [-pi/2..pi/2]. The returned
+		 *         result is within 1 ulp (unit in the last place) of the real
+		 *         result.
+		 */
+		public static float asin(float value) {
+			return (float) Math.asin(value);
+		}
+
+		/**
+		 * Arc tangent
+		 * 
+		 * @param value
+		 * @return Returns the closest double approximation of the arc tangent
+		 *         of the argument within the range [-pi/2..pi/2]. The returned
+		 *         result is within 1 ulp (unit in the last place) of the real
+		 *         result.
+		 */
+		public static float atan(float value) {
+			return (float) Math.atan(value);
+		}
+
+		/**
+		 * Arc tangent of y/x within the range [-pi..pi]
+		 * 
+		 * @param a
+		 * @param b
+		 * @return Returns the closest double approximation of the arc tangent
+		 *         of y/x within the range [-pi..pi]. This is the angle of the
+		 *         polar representation of the rectangular coordinates (x,y).
+		 *         The returned result is within 2 ulps (units in the last
+		 *         place) of the real result.
+		 */
+		public static float atan2(float a, float b) {
+			return (float) Math.atan2(a, b);
+		}
+
+		/**
+		 * Tangent of an angle
+		 * 
+		 * @param angle
+		 *            angle
+		 * @return the tangent
+		 */
+		public static float tan(float angle) {
+			return (float) Math.tan(angle);
+		}
+
+		/**
+		 * Absolute value
+		 * 
+		 * @param v
+		 *            value
+		 * @return returns the absolute value
+		 */
+		public static float abs(float v) {
+			return v > 0 ? v : -v;
+		}
+
+		/**
+		 * Number's logarithm <br>
+		 * Special cases:
+		 * 
+		 * <li>log(+0.0) = -infinity</li> <li>log(-0.0) = -infinity</li><li>
+		 * log((anything < 0) = NaN</li> <li>log(+infinity) = +infinity</li><li>
+		 * log(-infinity) = NaN</li><li>log(NaN) = NaN</li>
+		 * 
+		 * 
+		 * @param number
+		 * @return Returns the closest double approximation of the natural
+		 *         logarithm of the argument. The returned result is within 1
+		 *         ulp (unit in the last place) of the real result.
+		 */
+		public static float logarithm(float number) {
+			return (float) Math.log(number);
+		}
+
+		/**
+		 * Number's Exponencial
+		 * 
+		 * @param number
+		 *            float number
+		 * @return Returns the closest double approximation of the natural
+		 *         logarithm of the argument. The returned result is within 1
+		 *         ulp (unit in the last place) of the real result.
+		 */
+		public static float exponencial(float number) {
+			return (float) Math.exp(number);
+		}
+
+		/**
+		 * Gets the higher number
+		 * 
+		 * @param a
+		 *            float number
+		 * @param b
+		 *            float number
+		 * @return the higher number between a and b
+		 */
+		public static float max(float a, float b) {
+			return a > b ? a : b;
+		}
+
+		/**
+		 * Gets the higher number
+		 * 
+		 * @param a
+		 *            int number
+		 * @param b
+		 *            int number
+		 * @return the higher number between a and b
+		 */
+		public static int max(int a, int b) {
+			return a > b ? a : b;
+		}
+
+		/**
+		 * Gets the lower number
+		 * 
+		 * @param a
+		 *            float number
+		 * @param b
+		 *            float number
+		 * @return the lower number between a and b
+		 */
+		public static float min(float a, float b) {
+			return a < b ? a : b;
+		}
+
+		/**
+		 * Gets the lower number
+		 * 
+		 * @param a
+		 *            float number
+		 * @param b
+		 *            float number
+		 * @return the lower number between a and b
+		 */
+		public static int min(int a, int b) {
+			return a < b ? a : b;
+		}
+
 		/**
 		 * Check if a number is Odd
 		 * 
@@ -416,7 +574,18 @@ public abstract class QuickUtils {
 		 * @return true if the num is odd and false if it's even
 		 */
 		public static boolean isOdd(int num) {
-			return !(num % 2 == 0);
+			return !isEven(num);
+		}
+
+		/**
+		 * Check if a number is Even
+		 * 
+		 * @param num
+		 *            int number
+		 * @return true if the num is even and false if it's odd
+		 */
+		public static boolean isEven(int num) {
+			return (num % 2 == 0);
 		}
 
 		/**
@@ -447,6 +616,94 @@ public abstract class QuickUtils {
 		 */
 		private date() {
 		}
+
+	}
+
+	/**
+	 * Internet utils
+	 * 
+	 * @author cesar
+	 * 
+	 */
+	public static class web {
+		/**
+		 * private constructor
+		 */
+		private web() {
+		}
+
+		/**
+		 * Checks if the app has connectivity to the Internet
+		 * 
+		 * @param context
+		 *            application context
+		 * @return true if has connection to the Internet and false if it
+		 *         doesn't
+		 */
+		public static boolean hasInternetConnection(Context context) {
+			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			if (cm == null)
+				return false;
+			NetworkInfo info = cm.getActiveNetworkInfo();
+
+			// 3G
+			State mobile = cm.getNetworkInfo(0).getState();
+
+			// wifi
+			State wifi = cm.getNetworkInfo(1).getState();
+
+			if (info == null)
+				return false;
+
+			if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING) {
+
+				return info.isConnectedOrConnecting();
+			} else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) {
+
+				return info.isConnectedOrConnecting();
+			}
+			return info.isConnectedOrConnecting();
+		}
+
+		/**
+		 * Does a GET request to a given url
+		 * 
+		 * Note: Please use this method on an AsyncTask in order not to freeze
+		 * the application unnecessarely
+		 * (http://developer.android.com/guide/practices/responsiveness.html)
+		 * 
+		 * @param url
+		 *            given url
+		 * @return the string output of the GET request or null if something
+		 *         went wrong
+		 */
+		public String HTTPGetRequest(String url) {
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpContext localContext = new BasicHttpContext();
+			StringBuffer stringBuffer = null;
+
+			HttpGet httpGet = new HttpGet(url);
+
+			try {
+				HttpResponse response = httpClient.execute(httpGet, localContext);
+				InputStream instream = response.getEntity().getContent();
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(instream));
+
+				String buffer;
+				while ((buffer = bufferedReader.readLine()) != null) {
+					stringBuffer.append(buffer);
+				}
+
+			} catch (ClientProtocolException e) {
+				QuickUtils.log.e("ClientProtocolException", e);
+			} catch (IOException e) {
+				QuickUtils.log.e("IOException", e);
+			} catch (IllegalArgumentException e) {
+				QuickUtils.log.e("IllegalArgumentException", e);
+			}
+
+			return stringBuffer == null ? null : stringBuffer.toString();
+		}
 	}
 
 	/**
@@ -455,12 +712,12 @@ public abstract class QuickUtils {
 	 * @author cesar
 	 * 
 	 */
-	public static class files {
+	public static class sdcard {
 
 		/**
 		 * private constructor
 		 */
-		private files() {
+		private sdcard() {
 		}
 
 		/**
@@ -524,7 +781,10 @@ public abstract class QuickUtils {
 		 * Read file from SDCard
 		 */
 		public static void readFileFromSDCard() {
+			// TODO this is incomplete
+
 			File directory = Environment.getExternalStorageDirectory();
+
 			// Assumes that a file article.rss is available on the SD card
 			File file = new File(directory + "/article.rss");
 			if (!file.exists()) {
@@ -545,7 +805,7 @@ public abstract class QuickUtils {
 					try {
 						reader.close();
 					} catch (IOException e) {
-						QuickUtils.log.d("IO Exception:", e);
+						QuickUtils.log.e("IO Exception:", e);
 					}
 				}
 			}

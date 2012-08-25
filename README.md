@@ -20,6 +20,8 @@ Intended to help you getting your Android applications off the ground quickly, b
 - Added `getSDCardPath` to the `sdcard`category
 - Added `web` category 
 - `hasInternetConnection()` moved from `misc` to `web` category
+- Added `HTTPGetRequest()` to the `web`category
+- Added `degreesToRadians`, `radiansTdoDegrees`, `acos`, `asin`, `atan`, `atan2`, `tan`, `max`, `min`, `abs`, `logarithm`, `exponencial` and `isEven`
 
 ### 0.2 <sub><sup>`2012/08/02`</sup></sub>
 - Checks if the app has connectivity to the Internet
@@ -176,21 +178,110 @@ QuickUtils.math.__method__
 A random int between MIN inclusive and MAX exclusive.
 
 ```java
-QuickUtils.sdcard.getRandomNumber(int min, int max);
+QuickUtils.math.getRandomNumber(int min, int max);
 ```
 
-### Check if a number is Odd. `boolean`
+### Check if a number is Odd `boolean`
 True if the num is odd and false if it's even
 
 ```java
-QuickUtils.sdcard.isOdd(int num);
+QuickUtils.math.isOdd(int num);
 ```
 
-### Check if a number is Even. `boolean`
+### Check if a number is Even `boolean`
 True if the num is even and false if it's odd
 
 ```java
-QuickUtils.sdcard.isEven(int num);
+QuickUtils.math.isEven(int num);
+```
+
+### Degrees to radians `float`
+Returns the converted value
+
+```java
+QuickUtils.math.degreesToRadians(float degrees);
+```
+
+### Radians to degrees `float`
+Returns the converted value
+
+```java
+QuickUtils.math.radiansTdoDegrees(float radians);
+```
+
+### Arc cosine `float`
+Returns the closest double approximation of the arc cosine of the argument within the range [0..pi]. The returned result is within 1 ulp (unit in the last place) of the real result.
+
+```java
+QuickUtils.math.acos(float value);
+```
+
+### Arc sine `float`
+Returns the closest double approximation of the arc sine of the argument within the range [-pi/2..pi/2]. The returned result is within 1 ulp (unit in the last place) of the real result.
+
+```java
+QuickUtils.math.asin(float value);
+```
+
+### Arc tangent `float`
+Returns the closest double approximation of the arc tangent of the argument within the range [-pi/2..pi/2]. The returned result is within 1 ulp (unit in the last place) of the real result.
+
+```java
+QuickUtils.math.atan(float value);
+```
+### Arc tangent of y/x within the range [-pi..pi] `float`
+Returns the closest double approximation of the arc tangent of y/x within the range [-pi..pi]. This is the angle of the polar representation of the rectangular coordinates (x,y). The returned result is within 2 ulps (units in the last place) of the real result.
+
+```java
+QuickUtils.math.atan2(float value);
+```
+
+### Tangent of an angle `float`
+Returns the tangent
+
+```java
+QuickUtils.math.tan(float angle);
+```
+### Absolute value `float`
+Returns the absolute value
+
+```java
+QuickUtils.math.abs(float v);
+```
+
+### Number's logarithm `float`
+Returns the closest double approximation of the natural logarithm of the argument. The returned result is within 1 ulp (unit in the last place) of the real result.
+
+```java
+QuickUtils.math.logarithm(float number);
+```
+### Number's Exponencial `float`
+Returns the closest double approximation of the natural logarithm of the argument. The returned result is within 1  ulp (unit in the last place) of the real result.
+
+```java
+QuickUtils.math.exponencial(float number);
+```
+
+### Gets the higher number `float` `int`
+the higher number between a and b
+
+```java
+QuickUtils.math.max(float a, float b);
+```
+
+```java
+QuickUtils.math.max(int a, int b);
+```
+
+### Gets the lower number `float` `int`
+the lower number between a and b
+
+```java
+QuickUtils.math.min(float a, float b);
+```
+
+```java
+QuickUtils.math.min(int a, int b);
 ```
 
 ------------
