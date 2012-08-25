@@ -22,6 +22,8 @@ Intended to help you getting your Android applications off the ground quickly, b
 - `hasInternetConnection()` moved from `misc` to `web` category
 - Added `HTTPGetRequest()` to the `web`category
 - Added `degreesToRadians`, `radiansTdoDegrees`, `acos`, `asin`, `atan`, `atan2`, `tan`, `max`, `min`, `abs`, `logarithm`, `exponencial` and `isEven`
+- `getCurrentTimeInSeconds()` and `getCurrentTimeInMilliseconds()` moved to the `date` category
+- Added`getDayAsString(int day, String format)` and `getDayAsDate(int day)` to the `date` category
 
 ### 0.2 <sub><sup>`2012/08/02`</sup></sub>
 - Checks if the app has connectivity to the Internet
@@ -123,14 +125,13 @@ QuickUtils.log.d("debug description", throwable);
 
 ------------
 
-## MISC <sub><sup>`category`</sup></sub>
+## DATE <sub><sup>`category`</sup></sub>
 
-With this methods you don't need to set....
+Date Utils
 
 ```java
-QuickUtils.misc.__method__
+QuickUtils.date.__method__
 ```
-
 
 ### Get the current time in milliseconds `long`
 
@@ -144,12 +145,38 @@ QuickUtils.misc.getCurrentTimeInMiliseconds();
 QuickUtils.misc.getCurrentTimeInSeconds();
 ```
 
-### Sleep `void`
-Causes the thread which sent this message to sleep for the given interval of time (given in milliseconds). The precision is not guaranteed - the Thread may sleep more or less than requested.
+### Gets a date with a desired format as a String `String`
+They "day" parameter can be provided as: 
+- `QuickUtils.date.YESTERDAY`, 
+- `QuickUtils.date.TODAY` or 
+- `QuickUtils.date.TOMORROW`
+
+The format can be provided as e.g. "yyyy-MM-dd HH:mm:ss"
+
+```java
+QuickUtils.misc.getDayAsString(int day, String format);
+```
+
+### Gets the desired day as a Date `Date`
+They "day" parameter can be provided as:
+- `QuickUtils.date.YESTERDAY`, 
+- `QuickUtils.date.TODAY` or 
+- `QuickUtils.date.TOMORROW`
+
+```java
+QuickUtils.misc.getDayAsDate(int day);
+```
+
+
+------------
+
+## MISC <sub><sup>`category`</sup></sub>
+
+Misc utils
 
 
 ```java
-QuickUtils.misc.sleep(durationInMilliseconds);
+QuickUtils.misc.__method__
 ```
 
 ### Toast method with short duration `void`
@@ -163,6 +190,13 @@ Either `Toast.LENGTH_SHORT` or `Toast.LENGTH_LONG`
 
 ```java
 QuickUtils.misc.toast(context, "This is a short toast", Toast.LENGTH_LONG);
+```
+
+### Sleep `void`
+Causes the thread which sent this message to sleep for the given interval of time (given in milliseconds). The precision is not guaranteed - the Thread may sleep more or less than requested.
+
+```java
+QuickUtils.misc.sleep(durationInMilliseconds);
 ```
 ------------
 
@@ -365,6 +399,11 @@ QuickUtils.sdcard.copyFile(fromFileInputStream, toFileOutputStream);
 		// SET ENVIRONMENT
 		QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE); // can be omited
 
+		// SET THE DEBUG TAG
+		QuickUtils.setTAG("SAMPLE_APP");
+
+		QuickUtils.log.v(QuickUtils.math.logarithm(number) + "");
+
 		try {
 			QuickUtils.log.w("This is dangerous code");
 
@@ -372,23 +411,34 @@ QuickUtils.sdcard.copyFile(fromFileInputStream, toFileOutputStream);
 			// ...
 			// ...
 
-			QuickUtils.misc.toast(this,
-					"The result of your dangerous calculations is: " + number);
+			QuickUtils.misc.toast(this, "The result of your dangerous calculations is: " + number);
+
+			new WebTask().execute();
 
 		} catch (Exception exception) {
-			QuickUtils.log.d("Exception thrown", exception);
+			QuickUtils.log.e("Exception thrown", exception);
 		}
 
 		// Check if you can write on your sdcard
-		if (QuickUtils.sdcard.isSDCardAvailable()
-				&& QuickUtils.sdcard.isSDCardWritable()) {
+		if (QuickUtils.sdcard.isSDCardAvailable() && QuickUtils.sdcard.isSDCardWritable()) {
 
 			// you can write safely on your sdcard
-			// ...
-			// ...
+		
+
+			File path = new File(QuickUtils.sdcard.getSDCardPath() + "/appName/");
+
+			File from = new File(path, "from.txt");
+			File to = new File(path, "to.txt");
+
+			try {
+				QuickUtils.sdcard.copyFile(from, to);
+				QuickUtils.log.i("Written to the sdcard");
+
+			} catch (IOException e) {
+				QuickUtils.log.e("IOException", e);
+			}
 		}
 
-	}
 ```
 
 ## Downloads
@@ -436,6 +486,12 @@ If you intend to use the `hasConnectivity` method don't forget to add the networ
 
 ```xml
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+
+If you intend to use the `HTTPGetRequest` method, if you haven't already, in your `<manifest>`:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
 ```
 
 

@@ -9,7 +9,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -350,25 +354,6 @@ public abstract class QuickUtils {
 			}
 		}
 
-		/**
-		 * get Current time in milliseconds
-		 * 
-		 * @return current time in milliseconds
-		 */
-		public static long getCurrentTimeInMiliseconds() {
-			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance().getTimeInMillis());
-		}
-
-		/**
-		 * get Current time in seconds
-		 * 
-		 * @return current time in seconds
-		 */
-		public static long getCurrentTimeInSeconds() {
-			Calendar c = Calendar.getInstance();
-			return c.get(Calendar.SECOND);
-		}
-
 	}
 
 	/**
@@ -617,6 +602,82 @@ public abstract class QuickUtils {
 		private date() {
 		}
 
+		public static final int YESTERDAY = -1;
+		public static final int TODAY = 0;
+		public static final int TOMORROW = 1;
+
+		/**
+		 * Gets a date with a desired format as a String
+		 * 
+		 * @param day
+		 *            Can be: <li>QuickUtils.date.YESTERDAY</li><li>
+		 *            QuickUtils.date.TODAY</li><li>QuickUtils.date.TOMORROW</li>
+		 * @param format
+		 *            desired format (e.g. "yyyy-MM-dd HH:mm:ss")
+		 * @return returns a day with the given format
+		 */
+		public static String getDayAsString(int day, String format) {
+			SimpleDateFormat simpleFormat = new SimpleDateFormat(format);
+			return simpleFormat.format(getDayAsDate(day));
+		}
+
+		/**
+		 * Gets the desired day as a Date
+		 * 
+		 * @param day
+		 *            Can be: <li>QuickUtils.date.YESTERDAY</li><li>
+		 *            QuickUtils.date.TODAY</li><li>QuickUtils.date.TOMORROW</li>
+		 * @return returns a Date for that day
+		 * 
+		 */
+		public static Date getDayAsDate(int day) {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, day);
+			return cal.getTime();
+		}
+
+		/**
+		 * Parse a data string into a real Date
+		 * 
+		 * Note: (e.g. "yyyy-MM-dd HH:mm:ss")
+		 * 
+		 * @param dateString
+		 *            date in String format
+		 * @param dateFormat
+		 *            desired format (e.g. "yyyy-MM-dd HH:mm:ss")
+		 * 
+		 * @return
+		 */
+		public static Date parseDate(String dateString, String dateFormat) {
+			Date newDate = null;
+
+			try {
+				newDate = new SimpleDateFormat(dateFormat, Locale.ENGLISH).parse(dateString);
+			} catch (ParseException e) {
+				QuickUtils.log.d("parse error", e);
+			}
+			return newDate;
+		}
+
+		/**
+		 * get Current time in milliseconds
+		 * 
+		 * @return current time in milliseconds
+		 */
+		public static long getCurrentTimeInMiliseconds() {
+			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance().getTimeInMillis());
+		}
+
+		/**
+		 * get Current time in seconds
+		 * 
+		 * @return current time in seconds
+		 */
+		public static long getCurrentTimeInSeconds() {
+			Calendar c = Calendar.getInstance();
+			return c.get(Calendar.SECOND);
+		}
+
 	}
 
 	/**
@@ -677,10 +738,10 @@ public abstract class QuickUtils {
 		 * @return the string output of the GET request or null if something
 		 *         went wrong
 		 */
-		public String HTTPGetRequest(String url) {
+		public static String HTTPGetRequest(String url) {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpContext localContext = new BasicHttpContext();
-			StringBuffer stringBuffer = null;
+			StringBuffer stringBuffer = new StringBuffer();
 
 			HttpGet httpGet = new HttpGet(url);
 
