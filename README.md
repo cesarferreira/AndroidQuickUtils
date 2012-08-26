@@ -519,6 +519,4 @@ Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
 ## Authors
  * César Ferreira (cesar.manuel.ferreira@gmail.com)
 
-## Contributors
- * César Ferreira (cesar.manuel.ferreira@gmail.com)
- * Joel Rodrigues (j.rod.fernandes@gmail.com)
+
