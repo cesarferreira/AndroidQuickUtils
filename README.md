@@ -334,14 +334,14 @@ QuickUtils.web.__method__
 True if has connection to the Internet and false if it doesn't.
 
 ```java
-QuickUtils.misc.hasInternetConnection(Context context);
+QuickUtils.web.hasInternetConnection(Context context);
 ```
 
 ### Does a GET request to a given url `String`
 Note: Please use this method on an AsyncTask in order not to freeze the application unnecessarely  (http://developer.android.com/guide/practices/responsiveness.html)
 
 ```java
-QuickUtils.misc.HTTPGetRequest(String url);
+QuickUtils.web.HTTPGetRequest(String url);
 ```
 
 ------------
