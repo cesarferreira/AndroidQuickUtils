@@ -137,13 +137,13 @@ QuickUtils.date.__method__
 ### Get the current time in milliseconds `long`
 
 ```java
-QuickUtils.misc.getCurrentTimeInMiliseconds();
+QuickUtils.date.getCurrentTimeInMiliseconds();
 ```
 
 ### Get the current time in seconds `long`
 
 ```java
-QuickUtils.misc.getCurrentTimeInSeconds();
+QuickUtils.date.getCurrentTimeInSeconds();
 ```
 
 ### Gets a date with a desired format as a String `String`
@@ -155,7 +155,7 @@ They "day" parameter can be provided as:
 The format can be provided as e.g. "yyyy-MM-dd HH:mm:ss"
 
 ```java
-QuickUtils.misc.getDayAsString(int day, String format);
+QuickUtils.date.getDayAsString(int day, String format);
 ```
 
 ### Gets the desired day as a Date `Date`
@@ -165,7 +165,7 @@ They "day" parameter can be provided as:
 - `QuickUtils.date.TOMORROW`
 
 ```java
-QuickUtils.misc.getDayAsDate(int day);
+QuickUtils.date.getDayAsDate(int day);
 ```
 
 
