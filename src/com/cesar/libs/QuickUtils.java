@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.http.HttpResponse;
@@ -33,6 +34,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Vibrator;
 import android.util.Log;
@@ -353,21 +355,48 @@ public abstract class QuickUtils {
 		 * @return true if the connection returned a successful code
 		 */
 		public static boolean checkServerConnection(URL u ) {
+			boolean value = false;
 			try {
-				HttpURLConnection huc = (HttpURLConnection) u.openConnection();
-				huc.setRequestMethod("GET");
-				huc.connect();
-				int code = huc.getResponseCode();
-				if (code == 200) {
-					return true;
-				}
-			} catch (MalformedURLException e) {
+				value = new RetreiveCheckServerConnection().execute(u).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (IOException e) {
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return false;
+			return value;
+			
 		}
+		
+		/**
+		 * AsyncTask that will run the code responsible to try to connect to the server url
+		 * 
+		 * @author Pereira
+		 *
+		 */
+		private static class RetreiveCheckServerConnection extends AsyncTask<URL, Void, Boolean> {
+
+		    private Exception exception;
+
+			protected Boolean doInBackground(URL... url) {
+				try {
+					HttpURLConnection huc = (HttpURLConnection) url[0].openConnection();
+					huc.setRequestMethod("GET");
+					huc.connect();
+					int code = huc.getResponseCode();
+					if (code == 200) {
+						return true;
+					}
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return false;
+		    }
+		    
+		 }
 
 		/**
 		 * Check if can connect to the server
@@ -375,27 +404,52 @@ public abstract class QuickUtils {
 		 * @return true if the connection returned a successful code
 		 */
 		public static boolean checkServerConnection(String serverURL ) {
+			boolean value = false;
 			try {
-				URL u = new URL(serverURL);
-				HttpURLConnection huc = (HttpURLConnection) u.openConnection();
-				huc.setRequestMethod("GET"); // OR huc.setRequestMethod
-												// ("HEAD");
-				huc.connect();
-				int code = huc.getResponseCode();
-				if (code == 200) {
-					return true;
-				}
-			} catch (MalformedURLException e) {
+				value = new RetreiveCheckServerConnectionString().execute(serverURL).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (IOException e) {
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return false;
+			return value;
 		}
+		
+		/**
+		 * AsyncTask that will run the code responsible to try to connect to the server url
+		 * 
+		 * @author Pereira
+		 *
+		 */
+		private static class RetreiveCheckServerConnectionString extends AsyncTask<String, Void, Boolean> {
+
+		    private Exception exception;
+
+		    protected Boolean doInBackground(String... serverURL) {
+		    	try {
+					URL u = new URL(serverURL[0]);
+					HttpURLConnection huc = (HttpURLConnection) u.openConnection();
+					huc.setRequestMethod("GET"); // OR huc.setRequestMethod
+													// ("HEAD");
+					huc.connect();
+					int code = huc.getResponseCode();
+					if (code == 200) {
+						return true;
+					}
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    	return false;
+		    }
+		    
+		 }
+		
 
 		/**
-=======
->>>>>>> 55929215763b0713757e10fdc7c9c2077b2eaeb2
 		 * Make the smartphone vibrate for a giving time.you need to put the
 		 * vibration permission in the manifest as follows: <uses-permission
 		 * android:name="android.permission.VIBRATE"/>
