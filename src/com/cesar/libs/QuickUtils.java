@@ -812,7 +812,7 @@ public abstract class QuickUtils {
 		
 		
 		/**
-		 * Set wireless connectivity On
+		 * Set wireless connectivity On, also this method will need the permissions "android.permission.CHANGE_WIFI_STATE" and "android.permission.ACCESS_WIFI_STATE"
 		 * 
 		 * @param context
 		 *            - application context
@@ -831,7 +831,7 @@ public abstract class QuickUtils {
 		}
 
 		/**
-		 * Check if can connect to the server
+		 * Check if can connect to the server, also this method will need the permissions "android.permission.INTERNET"
 		 * @param u - server url
 		 * @return true if the connection returned a successful code
 		 */
@@ -880,7 +880,7 @@ public abstract class QuickUtils {
 		 }
 
 		/**
-		 * Check if can connect to the server
+		 * Check if can connect to the server, also this method will need the permissions "android.permission.INTERNET"
 		 * @param serverURL - server url
 		 * @return true if the connection returned a successful code
 		 */
