@@ -330,123 +330,7 @@ public abstract class QuickUtils {
 			return info.isConnectedOrConnecting();
 		}
 
-		/**
-		 * Set wireless connectivity On
-		 * 
-		 * @param context
-		 *            - application context
-		 * @param state
-		 *            - set enable or disable wireless connection
-		 * @return true if was set successfully and false if it wasn't
-		 */
-		public static boolean changeWirelessState(Context context, boolean state) {
-			try {
-				WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-				wifi.setWifiEnabled(state);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-
-		/**
-		 * Check if can connect to the server
-		 * @param u - server url
-		 * @return true if the connection returned a successful code
-		 */
-		public static boolean checkServerConnection(URL u ) {
-			boolean value = false;
-			try {
-				value = new RetreiveCheckServerConnection().execute(u).get();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return value;
-			
-		}
 		
-		/**
-		 * AsyncTask that will run the code responsible to try to connect to the server url
-		 * 
-		 * @author Pereira
-		 *
-		 */
-		private static class RetreiveCheckServerConnection extends AsyncTask<URL, Void, Boolean> {
-
-		    private Exception exception;
-
-			protected Boolean doInBackground(URL... url) {
-				try {
-					HttpURLConnection huc = (HttpURLConnection) url[0].openConnection();
-					huc.setRequestMethod("GET");
-					huc.connect();
-					int code = huc.getResponseCode();
-					if (code == 200) {
-						return true;
-					}
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				return false;
-		    }
-		    
-		 }
-
-		/**
-		 * Check if can connect to the server
-		 * @param serverURL - server url
-		 * @return true if the connection returned a successful code
-		 */
-		public static boolean checkServerConnection(String serverURL ) {
-			boolean value = false;
-			try {
-				value = new RetreiveCheckServerConnectionString().execute(serverURL).get();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return value;
-		}
-		
-		/**
-		 * AsyncTask that will run the code responsible to try to connect to the server url
-		 * 
-		 * @author Pereira
-		 *
-		 */
-		private static class RetreiveCheckServerConnectionString extends AsyncTask<String, Void, Boolean> {
-
-		    private Exception exception;
-
-		    protected Boolean doInBackground(String... serverURL) {
-		    	try {
-					URL u = new URL(serverURL[0]);
-					HttpURLConnection huc = (HttpURLConnection) u.openConnection();
-					huc.setRequestMethod("GET"); // OR huc.setRequestMethod
-													// ("HEAD");
-					huc.connect();
-					int code = huc.getResponseCode();
-					if (code == 200) {
-						return true;
-					}
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		    	return false;
-		    }
-		    
-		 }
 		
 
 		/**
@@ -924,6 +808,126 @@ public abstract class QuickUtils {
 
 			return stringBuffer == null ? null : stringBuffer.toString();
 		}
+		
+		
+		
+		/**
+		 * Set wireless connectivity On
+		 * 
+		 * @param context
+		 *            - application context
+		 * @param state
+		 *            - set enable or disable wireless connection
+		 * @return true if was set successfully and false if it wasn't
+		 */
+		public static boolean changeWirelessState(Context context, boolean state) {
+			try {
+				WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+				wifi.setWifiEnabled(state);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		/**
+		 * Check if can connect to the server
+		 * @param u - server url
+		 * @return true if the connection returned a successful code
+		 */
+		public static boolean checkServerConnection(URL u ) {
+			boolean value = false;
+			try {
+				value = new RetreiveCheckServerConnection().execute(u).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return value;
+			
+		}
+		
+		/**
+		 * AsyncTask that will run the code responsible to try to connect to the server url
+		 * 
+		 * @author Pereira
+		 *
+		 */
+		private static class RetreiveCheckServerConnection extends AsyncTask<URL, Void, Boolean> {
+
+		    private Exception exception;
+
+			protected Boolean doInBackground(URL... url) {
+				try {
+					HttpURLConnection huc = (HttpURLConnection) url[0].openConnection();
+					huc.setRequestMethod("GET");
+					huc.connect();
+					int code = huc.getResponseCode();
+					if (code == 200) {
+						return true;
+					}
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return false;
+		    }
+		    
+		 }
+
+		/**
+		 * Check if can connect to the server
+		 * @param serverURL - server url
+		 * @return true if the connection returned a successful code
+		 */
+		public static boolean checkServerConnection(String serverURL ) {
+			boolean value = false;
+			try {
+				value = new RetreiveCheckServerConnectionString().execute(serverURL).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return value;
+		}
+		
+		/**
+		 * AsyncTask that will run the code responsible to try to connect to the server url
+		 * 
+		 * @author Pereira
+		 *
+		 */
+		private static class RetreiveCheckServerConnectionString extends AsyncTask<String, Void, Boolean> {
+
+		    private Exception exception;
+
+		    protected Boolean doInBackground(String... serverURL) {
+		    	try {
+					URL u = new URL(serverURL[0]);
+					HttpURLConnection huc = (HttpURLConnection) u.openConnection();
+					huc.setRequestMethod("GET"); // OR huc.setRequestMethod
+													// ("HEAD");
+					huc.connect();
+					int code = huc.getResponseCode();
+					if (code == 200) {
+						return true;
+					}
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    	return false;
+		    }
+		    
+		 }
 	}
 
 	/**
