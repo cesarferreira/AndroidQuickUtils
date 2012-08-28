@@ -6,6 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.Calendar;
 import java.util.Random;
@@ -15,6 +18,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
+import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.os.Vibrator;
 import android.util.Log;
@@ -197,6 +201,71 @@ public abstract class QuickUtils {
 				return info.isConnectedOrConnecting();
 			}
 			return info.isConnectedOrConnecting();
+		}
+
+		/**
+		 * Set wireless connectivity On
+		 * 
+		 * @param context
+		 *            - application context
+		 * @param state
+		 *            - set enable or disable wireless connection
+		 * @return true if was set successfully and false if it wasn't
+		 */
+		public static boolean changeWirelessState(Context context, boolean state) {
+			try {
+				WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+				wifi.setWifiEnabled(state);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		/**
+		 * Check if can connect to the server
+		 * @param u - server url
+		 * @return true if the connection returned a successful code
+		 */
+		public static boolean checkServerConnection(URL u ) {
+			try {
+				HttpURLConnection huc = (HttpURLConnection) u.openConnection();
+				huc.setRequestMethod("GET");
+				huc.connect();
+				int code = huc.getResponseCode();
+				if (code == 200) {
+					return true;
+				}
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		/**
+		 * Check if can connect to the server
+		 * @param serverURL - server url
+		 * @return true if the connection returned a successful code
+		 */
+		public static boolean checkServerConnection(String serverURL ) {
+			try {
+				URL u = new URL(serverURL);
+				HttpURLConnection huc = (HttpURLConnection) u.openConnection();
+				huc.setRequestMethod("GET"); // OR huc.setRequestMethod
+												// ("HEAD");
+				huc.connect();
+				int code = huc.getResponseCode();
+				if (code == 200) {
+					return true;
+				}
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return false;
 		}
 
 		/**
@@ -480,7 +549,7 @@ public abstract class QuickUtils {
 		 * @return the complete path to the SDCard
 		 */
 		public static String getSDCardPath() {
-			return Environment.getExternalStorageDirectory().toString()+"/";
+			return Environment.getExternalStorageDirectory().toString() + "/";
 		}
 
 		/**
