@@ -14,8 +14,10 @@ import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -29,15 +31,21 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Vibrator;
+import android.preference.PreferenceManager.OnActivityResultListener;
+import android.speech.RecognizerIntent;
 import android.util.Log;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.Toast;
 
 public abstract class QuickUtils {
@@ -49,6 +57,9 @@ public abstract class QuickUtils {
 	private static final int INFO = android.util.Log.INFO;
 	private static final int WARN = android.util.Log.WARN;
 	private static final int ERROR = android.util.Log.ERROR;
+
+	private static final int REQUEST_CODE = 1234;
+	private static final int RESULT_OK = 1234;
 
 	/**
 	 * Developer mode for Debugging purposes
@@ -297,7 +308,54 @@ public abstract class QuickUtils {
 		}
 
 		/**
-<<<<<<< HEAD
+		 * Start google activity of speechRecognition (needed on onActivityResult(int requestCode, int resultCode, Intent data) to call getSpeechRecognitionResults() to get the results)
+		 * @param activity - activity 
+		 * @param maxResults - Max number of results that you want to get
+		 * @param text - what will ask to user when activity start
+		 */
+		public static void speechRecognition(final Activity activity, int maxResults, String text) {
+		    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+		            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		    intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+		    intent.putExtra(RecognizerIntent.EXTRA_PROMPT, text);
+		    intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, maxResults);
+		    activity.startActivityForResult(intent, REQUEST_CODE);
+		}
+		
+	    /**
+	     * Get all results from the Google Speech Recognition activity  (to be called onActivityResult())
+	     * @param requestCode - onActivityResult request code
+	     * @param resultCode - onActivityResult result code
+	     * @param data - onActivityResult Intent data
+	     * @return ArrayList<String> with all results or null if was not possible to get any results
+	     */
+	    public static ArrayList<String> getSpeechRecognitionResults(int requestCode, int resultCode, Intent data){
+	    	ArrayList<String> matches = null;
+	    	if (requestCode == 0 && resultCode == RESULT_OK) {
+	    		matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+		    	StringBuilder sb = new StringBuilder();
+		    	for(String match: matches){
+		    	sb.append(match + ", ");
+		    	}
+		    }
+	    	return matches;
+	    }
+
+	    /**
+	     * Get first result from the Google Speech Recognition activity  (to be called onActivityResult())
+	     * @param data - onActivityResult Intent data
+	     * @return string containing the first result of what was recognized
+	     */
+		public static String getFirstSpeechRecognition(Intent data){
+		    List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+		    if(results != null && results.size() > 0){
+		        return results.get(0);
+		    }
+		    return null; //or maybe: return "";
+		}
+		
+		/**
 		 * Checks if the app has connectivity to the Internet
 		 * 
 		 * @param context
@@ -329,9 +387,6 @@ public abstract class QuickUtils {
 			}
 			return info.isConnectedOrConnecting();
 		}
-
-		
-		
 
 		/**
 		 * Make the smartphone vibrate for a giving time.you need to put the
@@ -808,11 +863,11 @@ public abstract class QuickUtils {
 
 			return stringBuffer == null ? null : stringBuffer.toString();
 		}
-		
-		
-		
+
 		/**
-		 * Set wireless connectivity On, also this method will need the permissions "android.permission.CHANGE_WIFI_STATE" and "android.permission.ACCESS_WIFI_STATE"
+		 * Set wireless connectivity On, also this method will need the
+		 * permissions "android.permission.CHANGE_WIFI_STATE" and
+		 * "android.permission.ACCESS_WIFI_STATE"
 		 * 
 		 * @param context
 		 *            - application context
@@ -831,11 +886,14 @@ public abstract class QuickUtils {
 		}
 
 		/**
-		 * Check if can connect to the server, also this method will need the permissions "android.permission.INTERNET"
-		 * @param u - server url
+		 * Check if can connect to the server, also this method will need the
+		 * permissions "android.permission.INTERNET"
+		 * 
+		 * @param u
+		 *            - server url
 		 * @return true if the connection returned a successful code
 		 */
-		public static boolean checkServerConnection(URL u ) {
+		public static boolean checkServerConnection(URL u) {
 			boolean value = false;
 			try {
 				value = new RetreiveCheckServerConnection().execute(u).get();
@@ -847,18 +905,19 @@ public abstract class QuickUtils {
 				e.printStackTrace();
 			}
 			return value;
-			
+
 		}
-		
+
 		/**
-		 * AsyncTask that will run the code responsible to try to connect to the server url
+		 * AsyncTask that will run the code responsible to try to connect to the
+		 * server url
 		 * 
 		 * @author Pereira
-		 *
+		 * 
 		 */
 		private static class RetreiveCheckServerConnection extends AsyncTask<URL, Void, Boolean> {
 
-		    private Exception exception;
+			private Exception exception;
 
 			protected Boolean doInBackground(URL... url) {
 				try {
@@ -875,16 +934,19 @@ public abstract class QuickUtils {
 					e.printStackTrace();
 				}
 				return false;
-		    }
-		    
-		 }
+			}
+
+		}
 
 		/**
-		 * Check if can connect to the server, also this method will need the permissions "android.permission.INTERNET"
-		 * @param serverURL - server url
+		 * Check if can connect to the server, also this method will need the
+		 * permissions "android.permission.INTERNET"
+		 * 
+		 * @param serverURL
+		 *            - server url
 		 * @return true if the connection returned a successful code
 		 */
-		public static boolean checkServerConnection(String serverURL ) {
+		public static boolean checkServerConnection(String serverURL) {
 			boolean value = false;
 			try {
 				value = new RetreiveCheckServerConnectionString().execute(serverURL).get();
@@ -897,19 +959,20 @@ public abstract class QuickUtils {
 			}
 			return value;
 		}
-		
+
 		/**
-		 * AsyncTask that will run the code responsible to try to connect to the server url
+		 * AsyncTask that will run the code responsible to try to connect to the
+		 * server url
 		 * 
 		 * @author Pereira
-		 *
+		 * 
 		 */
 		private static class RetreiveCheckServerConnectionString extends AsyncTask<String, Void, Boolean> {
 
-		    private Exception exception;
+			private Exception exception;
 
-		    protected Boolean doInBackground(String... serverURL) {
-		    	try {
+			protected Boolean doInBackground(String... serverURL) {
+				try {
 					URL u = new URL(serverURL[0]);
 					HttpURLConnection huc = (HttpURLConnection) u.openConnection();
 					huc.setRequestMethod("GET"); // OR huc.setRequestMethod
@@ -924,10 +987,10 @@ public abstract class QuickUtils {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-		    	return false;
-		    }
-		    
-		 }
+				return false;
+			}
+
+		}
 	}
 
 	/**
@@ -1106,15 +1169,19 @@ public abstract class QuickUtils {
 		public static File getSDCardPathFile() {
 			return Environment.getExternalStorageDirectory();
 		}
-		
+
 		/**
 		 * Check if file exists on SDCard or not
-		 * @param filePath - its the path of the file after SDCardDirectory (no need for getExternalStorageDirectory())
+		 * 
+		 * @param filePath
+		 *            - its the path of the file after SDCardDirectory (no need
+		 *            for getExternalStorageDirectory())
 		 * @return boolean - if file exist on SDCard or not
-		 */ 
-		public static boolean checkIfFileExists(String filePath){
+		 */
+		public static boolean checkIfFileExists(String filePath) {
 			File file = new File(getSDCardPath(), filePath);
 			return (file.exists() ? true : false);
 		}
+
 	}
 }
