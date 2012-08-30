@@ -1106,5 +1106,15 @@ public abstract class QuickUtils {
 		public static File getSDCardPathFile() {
 			return Environment.getExternalStorageDirectory();
 		}
+		
+		/**
+		 * Check if file exists on SDCard or not
+		 * @param filePath - its the path of the file after SDCardDirectory (no need for getExternalStorageDirectory())
+		 * @return boolean - if file exist on SDCard or not
+		 */ 
+		public static boolean checkIfFileExists(String filePath){
+			File file = new File(getSDCardPath(), filePath);
+			return (file.exists() ? true : false);
+		}
 	}
 }
