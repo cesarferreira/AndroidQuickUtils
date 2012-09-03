@@ -330,8 +330,28 @@ QuickUtils.web.__method__
 ```
 
 
-### Checks if the app has connectivity to the Internet `boolean`
-True if has connection to the Internet and false if it doesn't.
+### Set wireless connectivity On, also this method will need the permissions "android.permission.CHANGE_WIFI_STATE" and "android.permission.ACCESS_WIFI_STATE"
+true if was set successfully and false if it wasn't
+
+```java
+QuickUtils.web.changeWirelessState(Context context, boolean state);
+```
+
+### Check if can connect to the server, also this method will need the permissions "android.permission.INTERNET"
+true if the connection returned a successful code
+
+```java
+QuickUtils.web.checkServerConnection(URL u);
+```
+
+### Check if can connect to the server, also this method will need the permissions "android.permission.INTERNET"
+true if the connection returned a successful code
+
+```java
+QuickUtils.web.checkServerConnection(String serverURL);
+```
+
+###
 
 ```java
 QuickUtils.web.hasInternetConnection(Context context);
