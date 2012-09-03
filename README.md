@@ -1,10 +1,6 @@
 ## QuickUtils
 
 
-<!--
-<div style="float: left"><img src="http://cesarferreira.com/wp-content/uploads/2012/07/dribbble.png"  
-style="width:200px" /></div>  
--->
 <div style="float: left"><img src="https://dl.dropbox.com/u/86831/cesarferreira/nexus_header2.jpg" /></div>  
 This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework.
 Intended to help you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that's involved when writing Android apps.
