@@ -366,14 +366,16 @@ true if was set successfully and false if it wasn't
 QuickUtils.web.changeWirelessState(Context context, boolean state);
 ```
 
-### Check if can connect to the server, also this method will need the permissions "android.permission.INTERNET"
+### Check if can connect to the server
+also this method will need the permissions "android.permission.INTERNET"
 true if the connection returned a successful code
 
 ```java
 QuickUtils.web.checkServerConnection(URL u);
 ```
 
-### Check if can connect to the server, also this method will need the permissions "android.permission.INTERNET"
+### Check if can connect to the server
+also this method will need the permissions "android.permission.INTERNET"
 true if the connection returned a successful code
 
 ```java
