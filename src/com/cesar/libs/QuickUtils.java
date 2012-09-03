@@ -354,8 +354,9 @@ public abstract class QuickUtils {
 		}
 
 		/**
-		 * Get the first result that matches the Result List from Google Speech Recognition activity (to be
-		 * called onActivityResult()) and the Dictionary given
+		 * Get the first result that matches the Result List from Google Speech
+		 * Recognition activity (to be called onActivityResult()) and the
+		 * Dictionary given
 		 * 
 		 * @param requestCode
 		 *            - onActivityResult request code
@@ -363,7 +364,8 @@ public abstract class QuickUtils {
 		 *            - onActivityResult result code
 		 * @param data
 		 *            - onActivityResult Intent data
-		 * @param array - Dictionary with all keywords
+		 * @param array
+		 *            - Dictionary with all keywords
 		 * 
 		 * @return String with the first result matched or null if was not
 		 *         possible to get any result
@@ -389,16 +391,22 @@ public abstract class QuickUtils {
 		 * Get first result from the Google Speech Recognition activity (to be
 		 * called onActivityResult())
 		 * 
+		 * @param requestCode
+		 *            - onActivityResult request code
+		 * @param resultCode
+		 *            - onActivityResult result code
 		 * @param data
 		 *            - onActivityResult Intent data
 		 * @return string containing the first result of what was recognized
 		 */
-		public static String getSpeechRecognitionFirstResult(Intent data) {
-			List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-			if (results != null && results.size() > 0) {
-				return results.get(0);
+		public static String getSpeechRecognitionFirstResult(int requestCode, int resultCode, Intent data) {
+			if (requestCode == 0 && resultCode == RESULT_OK) {
+				List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+				if (results != null && results.size() > 0) {
+					return results.get(0);
+				}
 			}
-			return null; // or maybe: return "";
+			return null;
 		}
 
 		/**

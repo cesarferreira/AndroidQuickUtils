@@ -195,6 +195,38 @@ Causes the thread which sent this message to sleep for the given interval of tim
 ```java
 QuickUtils.misc.sleep(durationInMilliseconds);
 ```
+
+### Start google activity of speechRecognition 
+needed on onActivityResult(int requestCode, int resultCode, Intent data) to call getSpeechRecognitionResults() to get the results)
+
+```java
+QuickUtils.misc.speechRecognition(final Activity activity, int maxResults, String text);
+```
+
+### Get all results from the Google Speech Recognition activity 
+To be called onActivityResult()
+Return an ArrayList<String> with all results or null if was not possible to get any results
+
+```java
+QuickUtils.misc.getSpeechRecognitionResults(int requestCode, int resultCode, Intent data);
+```
+
+### Get the first result that matches the Result List from Google Speech Recognition activity and the Dictionary given
+To be called onActivityResult() 
+Return a String with the first result matched or null if was not possible to get any result
+
+```java
+QuickUtils.misc.getSpeechRecognitionResultFromDicionary(int requestCode, int resultCode, Intent data, ArrayList<String> array);
+```
+
+### Get first result from the Google Speech Recognition activity 
+To be called onActivityResult() 
+Return a string containing the first result of what was recognized
+
+```java
+QuickUtils.misc.getSpeechRecognitionFirstResult(int requestCode, int resultCode, Intent data);
+```
+
 ------------
 
 ## MATH <sub><sup>`category`</sup></sub>
@@ -326,7 +358,8 @@ QuickUtils.web.__method__
 ```
 
 
-### Set wireless connectivity On, also this method will need the permissions "android.permission.CHANGE_WIFI_STATE" and "android.permission.ACCESS_WIFI_STATE"
+### Set wireless connectivity On
+also this method will need the permissions "android.permission.CHANGE_WIFI_STATE" and "android.permission.ACCESS_WIFI_STATE"
 true if was set successfully and false if it wasn't
 
 ```java
@@ -391,6 +424,12 @@ Return the complete path to the SDCard
 QuickUtils.sdcard.getSDCardPath();
 ```
 
+### Check if file exists on SDCard or not
+boolean - if file exist on SDCard or not
+
+```java
+QuickUtils.sdcard.checkIfFileExists(String filePath)
+```
 
 ### Copy a file from a place to another `void`
 Creates the specified `toFile` as a byte for byte copy of  the `fromFile`. If `toFile` already exists, then it will be replaced with a copy of `fromFile`. The name and path of`toFile` will be that of `toFile`.
