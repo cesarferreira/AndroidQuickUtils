@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -37,15 +39,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Vibrator;
-import android.preference.PreferenceManager.OnActivityResultListener;
 import android.speech.RecognizerIntent;
 import android.util.Log;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.Toast;
 
 public abstract class QuickUtils {
@@ -798,7 +797,33 @@ public abstract class QuickUtils {
 		 * @return returns a date with the given format
 		 */
 		public static String formatDate(long date, String format) {
-			SimpleDateFormat simpleFormat = new SimpleDateFormat(format);
+			return formatDateBase(date, format, null);
+		}
+
+		/**
+		 * Gets a date with a desired format as a String
+		 * 
+		 * @param date
+		 *            date to be formated
+		 * 
+		 * @param format
+		 *            desired format (e.g. "yyyy-MM-dd HH:mm:ss")
+		 * 
+		 * @param timeZone
+		 *            specify the intended timezone (e.g. "GMT", "UTC", etc.)
+		 * @return returns a date with the given format
+		 */
+		public static String formatDate(long date, String format,
+				String timeZone) {
+			return formatDateBase(date, format, timeZone);
+		}
+
+		private static String formatDateBase(long date, String format,
+				String timeZone) {
+			DateFormat simpleFormat = new SimpleDateFormat(format);
+			if (timeZone != null) {
+				simpleFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
+			}
 			return simpleFormat.format(date);
 		}
 
