@@ -1,13 +1,16 @@
 package com.cesar.libs;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -318,11 +321,9 @@ public abstract class QuickUtils {
 		 * @param text
 		 *            - what will ask to user when activity start
 		 */
-		public static void speechRecognition(final Activity activity,
-				int maxResults, String text) {
+		public static void speechRecognition(final Activity activity, int maxResults, String text) {
 			Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-			intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-					RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+			intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 			intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
 			intent.putExtra(RecognizerIntent.EXTRA_PROMPT, text);
 			intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, maxResults);
@@ -342,12 +343,10 @@ public abstract class QuickUtils {
 		 * @return ArrayList<String> with all results or null if was not
 		 *         possible to get any results
 		 */
-		public static ArrayList<String> getSpeechRecognitionResults(
-				int requestCode, int resultCode, Intent data) {
+		public static ArrayList<String> getSpeechRecognitionResults(int requestCode, int resultCode, Intent data) {
 			ArrayList<String> matches = null;
 			if (requestCode == 0 && resultCode == RESULT_OK) {
-				matches = data
-						.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+				matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 				StringBuilder sb = new StringBuilder();
 				for (String match : matches) {
 					sb.append(match + ", ");
@@ -373,13 +372,10 @@ public abstract class QuickUtils {
 		 * @return String with the first result matched or null if was not
 		 *         possible to get any result
 		 */
-		public static String getSpeechRecognitionResultFromDicionary(
-				int requestCode, int resultCode, Intent data,
-				ArrayList<String> array) {
+		public static String getSpeechRecognitionResultFromDicionary(int requestCode, int resultCode, Intent data, ArrayList<String> array) {
 			ArrayList<String> matches = null;
 			if (requestCode == 0 && resultCode == RESULT_OK) {
-				matches = data
-						.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+				matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 				StringBuilder sb = new StringBuilder();
 				for (String match : matches) {
 					for (String arrayString : array) {
@@ -405,11 +401,9 @@ public abstract class QuickUtils {
 		 *            - onActivityResult Intent data
 		 * @return string containing the first result of what was recognized
 		 */
-		public static String getSpeechRecognitionFirstResult(int requestCode,
-				int resultCode, Intent data) {
+		public static String getSpeechRecognitionFirstResult(int requestCode, int resultCode, Intent data) {
 			if (requestCode == 0 && resultCode == RESULT_OK) {
-				List<String> results = data
-						.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+				List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 				if (results != null && results.size() > 0) {
 					return results.get(0);
 				}
@@ -426,8 +420,7 @@ public abstract class QuickUtils {
 		 *         doesn't
 		 */
 		public static boolean hasInternetConnection(Context context) {
-			ConnectivityManager cm = (ConnectivityManager) context
-					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 			if (cm == null)
 				return false;
 			NetworkInfo info = cm.getActiveNetworkInfo();
@@ -441,12 +434,10 @@ public abstract class QuickUtils {
 			if (info == null)
 				return false;
 
-			if (mobile == NetworkInfo.State.CONNECTED
-					|| mobile == NetworkInfo.State.CONNECTING) {
+			if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
-			} else if (wifi == NetworkInfo.State.CONNECTED
-					|| wifi == NetworkInfo.State.CONNECTING) {
+			} else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
 			}
@@ -466,8 +457,7 @@ public abstract class QuickUtils {
 		 * 
 		 */
 		public static void vibrate(Context context, int duration) {
-			Vibrator v = (Vibrator) context
-					.getSystemService(Context.VIBRATOR_SERVICE);
+			Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 			v.vibrate(duration);
 		}
 
@@ -511,8 +501,7 @@ public abstract class QuickUtils {
 		public static void sleep(int milliseconds) {
 
 			try {
-				QuickUtils.log.i("delaying for " + milliseconds / 1000
-						+ " seconds");
+				QuickUtils.log.i("delaying for " + milliseconds / 1000 + " seconds");
 				Thread.sleep(milliseconds);
 			} catch (InterruptedException e) {
 				QuickUtils.log.e("Interrupted exception", e);
@@ -813,13 +802,11 @@ public abstract class QuickUtils {
 		 *            specify the intended timezone (e.g. "GMT", "UTC", etc.)
 		 * @return returns a date with the given format
 		 */
-		public static String formatDate(long date, String format,
-				String timeZone) {
+		public static String formatDate(long date, String format, String timeZone) {
 			return formatDateBase(date, format, timeZone);
 		}
 
-		private static String formatDateBase(long date, String format,
-				String timeZone) {
+		private static String formatDateBase(long date, String format, String timeZone) {
 			DateFormat simpleFormat = new SimpleDateFormat(format);
 			if (timeZone != null) {
 				simpleFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
@@ -858,8 +845,7 @@ public abstract class QuickUtils {
 			Date newDate = null;
 
 			try {
-				newDate = new SimpleDateFormat(dateFormat, Locale.ENGLISH)
-						.parse(dateString);
+				newDate = new SimpleDateFormat(dateFormat, Locale.ENGLISH).parse(dateString);
 			} catch (ParseException e) {
 				QuickUtils.log.d("parse error", e);
 			}
@@ -872,8 +858,7 @@ public abstract class QuickUtils {
 		 * @return current time in milliseconds
 		 */
 		public static long getCurrentTimeInMiliseconds() {
-			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance()
-					.getTimeInMillis());
+			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance().getTimeInMillis());
 		}
 
 		/**
@@ -910,8 +895,7 @@ public abstract class QuickUtils {
 		 *         doesn't
 		 */
 		public static boolean hasInternetConnection(Context context) {
-			ConnectivityManager cm = (ConnectivityManager) context
-					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 			if (cm == null)
 				return false;
 			NetworkInfo info = cm.getActiveNetworkInfo();
@@ -925,12 +909,10 @@ public abstract class QuickUtils {
 			if (info == null)
 				return false;
 
-			if (mobile == NetworkInfo.State.CONNECTED
-					|| mobile == NetworkInfo.State.CONNECTING) {
+			if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
-			} else if (wifi == NetworkInfo.State.CONNECTED
-					|| wifi == NetworkInfo.State.CONNECTING) {
+			} else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
 			}
@@ -957,11 +939,9 @@ public abstract class QuickUtils {
 			HttpGet httpGet = new HttpGet(url);
 
 			try {
-				HttpResponse response = httpClient.execute(httpGet,
-						localContext);
+				HttpResponse response = httpClient.execute(httpGet, localContext);
 				InputStream instream = response.getEntity().getContent();
-				BufferedReader bufferedReader = new BufferedReader(
-						new InputStreamReader(instream));
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(instream));
 
 				String buffer;
 				while ((buffer = bufferedReader.readLine()) != null) {
@@ -992,8 +972,7 @@ public abstract class QuickUtils {
 		 */
 		public static boolean changeWirelessState(Context context, boolean state) {
 			try {
-				WifiManager wifi = (WifiManager) context
-						.getSystemService(Context.WIFI_SERVICE);
+				WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 				wifi.setWifiEnabled(state);
 				return true;
 			} catch (Exception e) {
@@ -1031,15 +1010,13 @@ public abstract class QuickUtils {
 		 * @author Pereira
 		 * 
 		 */
-		private static class RetreiveCheckServerConnection extends
-				AsyncTask<URL, Void, Boolean> {
+		private static class RetreiveCheckServerConnection extends AsyncTask<URL, Void, Boolean> {
 
 			private Exception exception;
 
 			protected Boolean doInBackground(URL... url) {
 				try {
-					HttpURLConnection huc = (HttpURLConnection) url[0]
-							.openConnection();
+					HttpURLConnection huc = (HttpURLConnection) url[0].openConnection();
 					huc.setRequestMethod("GET");
 					huc.connect();
 					int code = huc.getResponseCode();
@@ -1067,8 +1044,7 @@ public abstract class QuickUtils {
 		public static boolean checkServerConnection(String serverURL) {
 			boolean value = false;
 			try {
-				value = new RetreiveCheckServerConnectionString().execute(
-						serverURL).get();
+				value = new RetreiveCheckServerConnectionString().execute(serverURL).get();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1086,16 +1062,14 @@ public abstract class QuickUtils {
 		 * @author Pereira
 		 * 
 		 */
-		private static class RetreiveCheckServerConnectionString extends
-				AsyncTask<String, Void, Boolean> {
+		private static class RetreiveCheckServerConnectionString extends AsyncTask<String, Void, Boolean> {
 
 			private Exception exception;
 
 			protected Boolean doInBackground(String... serverURL) {
 				try {
 					URL u = new URL(serverURL[0]);
-					HttpURLConnection huc = (HttpURLConnection) u
-							.openConnection();
+					HttpURLConnection huc = (HttpURLConnection) u.openConnection();
 					huc.setRequestMethod("GET"); // OR huc.setRequestMethod
 													// ("HEAD");
 					huc.connect();
@@ -1234,8 +1208,7 @@ public abstract class QuickUtils {
 		 * @param toFile
 		 *            - FileOutpubStream for the file to copy to.
 		 */
-		public static void copyFile(FileInputStream fromFile,
-				FileOutputStream toFile) throws IOException {
+		public static void copyFile(FileInputStream fromFile, FileOutputStream toFile) throws IOException {
 			FileChannel fromChannel = null;
 			FileChannel toChannel = null;
 			try {
@@ -1270,10 +1243,8 @@ public abstract class QuickUtils {
 		 * @param toFile
 		 *            - File to copy to.
 		 */
-		public static void copyFile(File fromFile, File toFile)
-				throws IOException {
-			copyFile(new FileInputStream(fromFile),
-					new FileOutputStream(toFile));
+		public static void copyFile(File fromFile, File toFile) throws IOException {
+			copyFile(new FileInputStream(fromFile), new FileOutputStream(toFile));
 		}
 
 		/**
@@ -1305,6 +1276,62 @@ public abstract class QuickUtils {
 		public static boolean checkIfFileExists(String filePath) {
 			File file = new File(getSDCardPath(), filePath);
 			return (file.exists() ? true : false);
+		}
+
+		/**
+		 * Detailed log with a "yyyy/MM/dd HH:mm:ss.SSS" timestamp
+		 * 
+		 * @param text
+		 *            text to append
+		 * @param logFilePath
+		 *            path to the file
+		 */
+		public static void appendTextToLog(String text, String logFilePath) {
+			writeToFile(text, logFilePath, true);
+
+		}
+
+		/**
+		 * Append a new line of text to a certain file provided by `logFilePath`
+		 * 
+		 * @param text
+		 *            text to append
+		 * @param logFilePath
+		 *            path to the file
+		 */
+		public static void appendTextToFile(String text, String logFilePath) {
+			writeToFile(text, logFilePath, false);
+		}
+
+		/**
+		 * private write to file method
+		 * 
+		 * @param text
+		 *            text to append
+		 * @param logFilePath
+		 *            path to the file
+		 * @param isDetailed
+		 *            if it should show the timestamp or not
+		 */
+		private static void writeToFile(String text, String logFilePath, boolean isDetailed) {
+			if (isSDCardAvailable() && isSDCardWritable() && text != null) {
+
+				try {
+					File file = new File(logFilePath);
+					OutputStream os = new FileOutputStream(file, true);
+					if (isDetailed) {
+						os.write(("---" + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS").format(Calendar.getInstance().getTime()) + "---\n")
+								.getBytes());
+					}
+					os.write((text + "\n").getBytes());
+					// os.write(("------\n").getBytes());
+					os.close();
+				} catch (Exception e) {
+					QuickUtils.log.e("Exception", e);
+				}
+			} else {
+				return;
+			}
 		}
 
 	}
