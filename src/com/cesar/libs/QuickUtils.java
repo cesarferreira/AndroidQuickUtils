@@ -838,6 +838,8 @@ public abstract class QuickUtils {
 			DateFormat simpleFormat = new SimpleDateFormat(format);
 			if (timeZone != null) {
 				simpleFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
+			} else {
+				simpleFormat.setTimeZone(TimeZone.getDefault());
 			}
 			return simpleFormat.format(date);
 		}
@@ -895,8 +897,8 @@ public abstract class QuickUtils {
 		 * @return current time in seconds
 		 */
 		public static long getCurrentTimeInSeconds() {
-			Calendar c = Calendar.getInstance();
-			return c.get(Calendar.SECOND);
+			return TimeUnit.SECONDS.toSeconds(Calendar.getInstance().getTimeInMillis());
+
 		}
 
 	}
