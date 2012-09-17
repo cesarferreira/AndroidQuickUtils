@@ -1,12 +1,10 @@
 package com.cesar.libs;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -44,6 +42,7 @@ import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Vibrator;
 import android.speech.RecognizerIntent;
@@ -307,6 +306,35 @@ public abstract class QuickUtils {
 		 * private constructor
 		 */
 		private misc() {
+		}
+
+		/**
+		 * Navigate to a activity
+		 * 
+		 * @param A
+		 *            From Activity
+		 * @param B
+		 *            Destination Activity
+		 * 
+		 */
+		public static void goToActivity(Activity A, Class<?> B) {
+			Intent myIntent = new Intent(A, B);
+			A.startActivity(myIntent);
+		}
+
+		/**
+		 * 
+		 * @param A
+		 *            From Activity
+		 * @param B
+		 *            Destination Activity
+		 * @param extras
+		 *            Extras to be included in the new Activity
+		 */
+		public static void goToActivity(Activity A, Class<?> B, Bundle extras) {
+			Intent myIntent = new Intent(A, B);
+			myIntent.putExtras(extras);
+			A.startActivity(myIntent);
 		}
 
 		/**
