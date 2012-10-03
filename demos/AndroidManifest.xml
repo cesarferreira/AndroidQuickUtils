@@ -21,8 +21,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LogCategory"
+            android:name=".categories.LogCategory"
             android:label="@string/title_activity_log_category" >
+        </activity>
+        <activity
+            android:name=".categories.MathCategory"
+            android:label="@string/title_activity_math_category" >
         </activity>
     </application>
 

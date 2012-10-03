@@ -594,7 +594,7 @@ public abstract class QuickUtils {
 		 * @param degrees
 		 * @return the converted value
 		 */
-		public static float radiansTdoDegrees(float radians) {
+		public static float radiansToDegrees(float radians) {
 			return radians * RAD_TO_DEG;
 		}
 

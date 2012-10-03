@@ -12,15 +12,33 @@
         <item>Date</item>
         <item>Misc</item>
     </string-array>
-    
-       <string-array name="log_array">
+    <string-array name="log_array">
         <item>d</item>
         <item>e</item>
         <item>i</item>
         <item>v</item>
         <item>w</item>
     </string-array>
+    <string-array name="math_array">
+        <item>isOdd</item>
+        <item>isEven</item>
+        <item>degreesToRadians</item>
+        <item>radiansToDegrees</item>
+        <item>exponencial</item>
+        <item>getRandomNumber</item>
+        <item>logarithm</item>
+        <item>max</item>
+        <item>min</item>
+        <item>abs</item>
+        <item>acos</item>
+        <item>asin</item>
+        <item>atan</item>
+        <item>atan2</item>
+        <item>tan</item>
+    </string-array>
 
     <string name="title_activity_log_category">Log Category</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_math_category">MathCategory</string>
 
 </resources>

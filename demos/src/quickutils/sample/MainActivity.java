@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 
 			
 
-				String StringClassname = "quickutils.sample." + listItem.toString() + "Category";
+				String StringClassname = "quickutils.sample.categories." + listItem.toString() + "Category";
 
 				QuickUtils.misc.goToActivityByClassName(MainActivity.this, StringClassname);
 

@@ -1,9 +1,13 @@
-package quickutils.sample;
+package quickutils.sample.categories;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import quickutils.core.QuickUtils;
+import quickutils.sample.R;
+import quickutils.sample.R.array;
+import quickutils.sample.R.id;
+import quickutils.sample.R.layout;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
