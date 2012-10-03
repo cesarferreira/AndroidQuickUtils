@@ -1,4 +1,4 @@
-package com.cesar.libs;
+package quickutils.core;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -306,6 +306,29 @@ public abstract class QuickUtils {
 		 * private constructor
 		 */
 		private misc() {
+		}
+
+		/**
+		 * Navigate to an activity programmatically by providing the package +
+		 * activity name
+		 * 
+		 * @param fromActivity
+		 *            Activity where I am coming from
+		 * @param className
+		 *            Full path to the desired Activity (e.g.
+		 *            "com.sample.MainActivity")
+		 */
+		public static void goToActivityByClassName(Activity fromActivity, String className) {
+			Class<?> c = null;
+			if (className != null) {
+				try {
+					c = Class.forName(className);
+				} catch (ClassNotFoundException e) {
+					QuickUtils.log.d("ClassNotFound", e);
+				}
+			}
+
+			goToActivity(fromActivity, c);
 		}
 
 		/**
@@ -787,6 +810,21 @@ public abstract class QuickUtils {
 		public static final int YESTERDAY = -1;
 		public static final int TODAY = 0;
 		public static final int TOMORROW = 1;
+
+		/**
+		 * Miliseconds since midnight
+		 * 
+		 * @return the number of miliseconds since midnight
+		 */
+		public static long getTimeSinceMidnight() {
+			Calendar c = Calendar.getInstance();
+			long now = c.getTimeInMillis();
+			c.set(Calendar.HOUR_OF_DAY, 0);
+			c.set(Calendar.MINUTE, 0);
+			c.set(Calendar.SECOND, 0);
+			c.set(Calendar.MILLISECOND, 0);
+			return now - c.getTimeInMillis();
+		}
 
 		/**
 		 * Gets a date with a desired format as a String
