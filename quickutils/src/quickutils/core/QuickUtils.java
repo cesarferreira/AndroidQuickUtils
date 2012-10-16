@@ -823,7 +823,7 @@ public abstract class QuickUtils {
 			Calendar c = Calendar.getInstance();
 			return c.get(Calendar.YEAR);
 		}
-		
+
 		/**
 		 * Gets the current month
 		 * 
@@ -833,7 +833,7 @@ public abstract class QuickUtils {
 			Calendar c = Calendar.getInstance();
 			return c.get(Calendar.MONTH);
 		}
-		
+
 		/**
 		 * Gets the current day
 		 * 
@@ -843,9 +843,6 @@ public abstract class QuickUtils {
 			Calendar c = Calendar.getInstance();
 			return c.get(Calendar.DAY_OF_MONTH);
 		}
-		
-		
-		
 
 		/**
 		 * Miliseconds since midnight
@@ -1150,11 +1147,9 @@ public abstract class QuickUtils {
 			try {
 				value = new RetreiveCheckServerConnectionString().execute(serverURL).get();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				QuickUtils.log.e("InterruptedException", e);
 			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				QuickUtils.log.e("ExecutionException", e);
 			}
 			return value;
 		}
@@ -1266,36 +1261,36 @@ public abstract class QuickUtils {
 		/**
 		 * Read file from SDCard
 		 */
-		public static void readFileFromSDCard() {
-			// TODO this is incomplete
-
-			File directory = Environment.getExternalStorageDirectory();
-
-			// Assumes that a file article.rss is available on the SD card
-			File file = new File(directory + "/article.rss");
-			if (!file.exists()) {
-				throw new RuntimeException("File not found");
-			}
-			BufferedReader reader = null;
-			try {
-				reader = new BufferedReader(new FileReader(file));
-				StringBuilder builder = new StringBuilder();
-				String line;
-				while ((line = reader.readLine()) != null) {
-					builder.append(line);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if (reader != null) {
-					try {
-						reader.close();
-					} catch (IOException e) {
-						QuickUtils.log.e("IO Exception:", e);
-					}
-				}
-			}
-		}
+		// public static void readFileFromSDCard() {
+		// // TODO this is incomplete
+		//
+		// File directory = Environment.getExternalStorageDirectory();
+		//
+		// // Assumes that a file article.rss is available on the SD card
+		// File file = new File(directory + "/article.rss");
+		// if (!file.exists()) {
+		// throw new RuntimeException("File not found");
+		// }
+		// BufferedReader reader = null;
+		// try {
+		// reader = new BufferedReader(new FileReader(file));
+		// StringBuilder builder = new StringBuilder();
+		// String line;
+		// while ((line = reader.readLine()) != null) {
+		// builder.append(line);
+		// }
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// } finally {
+		// if (reader != null) {
+		// try {
+		// reader.close();
+		// } catch (IOException e) {
+		// QuickUtils.log.e("IO Exception:", e);
+		// }
+		// }
+		// }
+		// }
 
 		/**
 		 * Creates the specified <code>toFile</code> as a byte for byte copy of

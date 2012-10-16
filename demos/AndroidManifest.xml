@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:theme="@android:style/Theme.Black" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +23,13 @@
         </activity>
         <activity
             android:name=".categories.LogCategory"
-            android:label="@string/title_activity_log_category" >
+            android:label="@string/title_activity_log_category"
+            android:theme="@android:style/Theme.Black" >
         </activity>
         <activity
             android:name=".categories.MathCategory"
-            android:label="@string/title_activity_math_category" >
+            android:label="@string/title_activity_math_category"
+            android:theme="@android:style/Theme.Black" >
         </activity>
     </application>
 

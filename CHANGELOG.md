@@ -1,5 +1,27 @@
 ## Changelog
 
+### 0.4 <sub><sup>`2012/10/dd`</sup></sub>
+- Added `Demos` project for demonstration purposes
+- Added to the `web`category:
+	- changeWirelessState(Context context, boolean state)
+	- method checkServer(Url url)
+	- checkServerConnection(String serverURL)
+	- checkServerConnection(Url url)
+- Added to the `sdcard` category:
+	- checkIfFileExists(String filePath)
+	- String getSDCardPath()
+    - File getSDCardPath()
+	- appendTextToLog(String text, String logFilePath)
+	- appendTextToFile(String text, String logFilePath)
+- Added to the `date` category:
+	- getCurrentDay()
+	- getCurrentMonth()
+	- getCurrentYear()
+	- getTimeSinceMidnight()
+- Added `security` category
+	- calculateMD5(String string)
+	- calculateSHA1(String string) 
+
 ### 0.3 <sub><sup>`2012/08/26`</sup></sub>
 - Added Javadocs to the project
 - All the `log` methods now can handle `Throwable` objects, thanks @joelfernandes for the suggestion
