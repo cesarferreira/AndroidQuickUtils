@@ -5,10 +5,8 @@ import java.util.Arrays;
 
 import quickutils.core.QuickUtils;
 import quickutils.sample.R;
-import quickutils.sample.R.array;
-import quickutils.sample.R.id;
-import quickutils.sample.R.layout;
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +19,7 @@ public class LogCategory extends Activity {
 
 	private ListView mainListView;
 	private ArrayAdapter<String> listAdapter;
+	private Context mContext;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +27,7 @@ public class LogCategory extends Activity {
 		setContentView(R.layout.activity_main);
 		// Find the ListView resource.
 		mainListView = (ListView) findViewById(R.id.list);
+		mContext = this.getApplicationContext();
 
 		ArrayList<String> categoriesArray = new ArrayList<String>();
 
@@ -45,6 +45,26 @@ public class LogCategory extends Activity {
 
 			public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
 				Object listItem = mainListView.getItemAtPosition(position);
+
+				String optionValue = listItem.toString();
+
+				// If you are developing use this (default behaviour)
+				if (optionValue.equals("Development MODE")) {
+
+					QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE);
+					QuickUtils.misc.toast(mContext, "Developer mode activated");
+
+					return;
+				} else
+				// If you are want to put this app in PRODUCTION (disables
+				// Logcat outputs)
+				if (optionValue.equals("Production MODE")) {
+
+					QuickUtils.setDebugMode(QuickUtils.PRODUCTION_MODE);
+					QuickUtils.misc.toast(mContext, "Production mode activated (console output is now disabled)");
+
+					return;
+				}
 
 				char[] a = listItem.toString().toCharArray();
 
@@ -70,5 +90,4 @@ public class LogCategory extends Activity {
 			}
 		});
 	}
-
 }

@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 import quickutils.core.QuickUtils;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +24,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		QuickUtils.setTAG("SAMPLE_APP");
+//		QuickUtils.log.i("hash: " + QuickUtils.security.calculateSHA1("12345"));
 
 		// Find the ListView resource.
 		mainListView = (ListView) findViewById(R.id.list);
@@ -45,8 +45,6 @@ public class MainActivity extends Activity {
 
 			public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
 				Object listItem = mainListView.getItemAtPosition(position);
-
-			
 
 				String StringClassname = "quickutils.sample.categories." + listItem.toString() + "Category";
 
