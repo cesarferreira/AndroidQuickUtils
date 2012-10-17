@@ -24,8 +24,10 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		QuickUtils.setTAG("SAMPLE_APP");
-//		QuickUtils.log.i("hash: " + QuickUtils.security.calculateSHA1("12345"));
 
+		// QuickUtils.share.sendEmail(getApplicationContext(),
+		// "soupas@gmail.com", "ola", "body");
+		QuickUtils.share.sendTweet(getApplicationContext(), "yeahhhhhh");
 		// Find the ListView resource.
 		mainListView = (ListView) findViewById(R.id.list);
 
