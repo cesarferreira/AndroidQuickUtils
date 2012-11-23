@@ -1,61 +1,54 @@
 ## QuickUtils
 
-
-<div style="float: left"><img src="https://dl.dropbox.com/u/86831/cesarferreira/nexus_header2.jpg" /></div>  
-This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework.
-Intended to help you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that's involved when writing Android apps.
+QuickUtils is a development library for the Android platform.
+It is intended to make application development easier and consistent through your applications.
 
 
-## Changelog
+![](https://dl.dropbox.com/u/86831/cesarferreira/nexus_header2.jpg)
 
-### 0.3 <sub><sup>`2012/08/26`</sup></sub>
-- Added Javadocs to the project
-- All the `log` methods now can handle `Throwable` objects, thanks @joelfernandes for the suggestion
-- Added `copyFile(fromFile, toFile)` to the `sdcard` category
-- Added `copyFile(fromFileInputStream, toFileOutputStream)` to the `sdcard` category
-- Added `getSDCardPath` to the `sdcard`category
-- Added `web` category 
-- `hasInternetConnection()` moved from `misc` to `web` category
-- Added `HTTPGetRequest()` to the `web`category
-- Added `degreesToRadians`, `radiansTdoDegrees`, `acos`, `asin`, `atan`, `atan2`, `tan`, `max`, `min`, `abs`, `logarithm`, `exponencial` and `isEven` to the `math` category
-- `getCurrentTimeInSeconds()` and `getCurrentTimeInMilliseconds()` moved to the `date` category
-- Added`getDayAsString(int day, String format)` and `getDayAsDate(int day)` to the `date` category
+<!--
+Keep in mind this is still a work in progress. There are thousands of things to do and I hope we'll have enough time to develop all of the features we have in mind :)
 
-
-### 0.2 <sub><sup>`2012/08/02`</sup></sub>
-- Checks if the app has connectivity to the Internet
-- `getCurrentTime()` is now divided into `getCurrentTimeInSeconds()` and `getCurrentTimeInMilliseconds()`
-- public static long getCurrentTimeInSeconds()
-- `sleep` method now accepts milliseconds instead of seconds
-- `log` now has a warning method
-- Updated max SDK version to 4.0.3
-- Added `math` category
-- Get a random number between a given range
-- Check if a number is odd
-
-### 0.1 <sub><sup>`2012/07/10`</sup></sub>
-- Added `log` category
-- Added error log method
-- Added information log method
-- Added verbose log method
-- Added debug log method
-- Added `sdcard` category
-- Added isSDCardAvailable method
-- Added isSDCardWritable method
-- Added `misc` category
-- Added vibrate method
-- Added sleep method
-- Added toast method with custom lenght time
-- Added get current time in miliseconds method
+[![](http://lh4.ggpht.com/_OHO4y8YcQbs/TQFQZTft6OI/AAAAAAAAMpY/hAloaii6kRA/s288/gd7.png)](http://lh4.ggpht.com/_OHO4y8YcQbs/TQFQZTft6OI/AAAAAAAAMpY/hAloaii6kRA/s800/gd7.png)
+[![](https://lh6.googleusercontent.com/-DuebAvhlkYo/Ted7VA4WzoI/AAAAAAAAMvc/fs9IRD4ZtgU/s288/gd8.png)](https://lh6.googleusercontent.com/-DuebAvhlkYo/Ted7VA4WzoI/AAAAAAAAMvc/fs9IRD4ZtgU/s800/gd8.png)
+[![](https://lh6.googleusercontent.com/-oQoXEMJcO0E/Ted7UeGFemI/AAAAAAAAMvY/HpfJVIVE6-4/s288/gd9.png)](https://lh6.googleusercontent.com/-oQoXEMJcO0E/Ted7UeGFemI/AAAAAAAAMvY/HpfJVIVE6-4/s800/gd9.png)
+[![](http://lh6.ggpht.com/_OHO4y8YcQbs/TQFQTfazM2I/AAAAAAAAMpQ/lgPpIKImdZw/s288/gd5.png)](http://lh6.ggpht.com/_OHO4y8YcQbs/TQFQTfazM2I/AAAAAAAAMpQ/lgPpIKImdZw/s800/gd5.png)
+[![](http://lh3.ggpht.com/_OHO4y8YcQbs/TQFQS5hyrKI/AAAAAAAAMpM/4hqL9y_tVgM/s288/gd4.png)](http://lh3.ggpht.com/_OHO4y8YcQbs/TQFQS5hyrKI/AAAAAAAAMpM/4hqL9y_tVgM/s800/gd4.png)
+-->
+A sample application can be downloaded on the [Android Market](blabla)
 
 
 
------
+## Install
+
+Via **github**:
+
+1. Check a clone of this repo: `git@github.com:cesarferreira/AndroidQuickUtils.git`
+2. Import the **`QuickUtils`** project into Eclipse
+3. Open your project properties
+4. Go to Android
+5. Add **QuickUtils** as a `Library`
+
+Or via **download**:
+
+1. Download the latest `quickutils.jar` from [here](https://github.com/cesarferreira/AndroidQuickUtils/tags)
+2. Create a `lib/` folder in your project and add the `jar`
+3. Inside Eclipse Right Click the jar and `Build Path -> Add to Build Path`
 
 
 
+**Note:**
+if you use the `install via github`, all you need to do to get the latest version of **QuickUtills** is `git update` on the root of its directory. If you use the second method you need to download the newest version and re-add the `.jar`.
 
-## Usage
+## Downloads
+All the versions can be found [here](https://github.com/cesarferreira/AndroidQuickUtils/tags)
+
+
+## How to Use
+**Note:** There is a sample application in the folder **demos** with examples for all the methods.
+
+
+
 Really simple usage, you just need to specify the category and the method you want to use.
 
 ```java
@@ -452,69 +445,7 @@ QuickUtils.sdcard.copyFile(fromFileInputStream, toFileOutputStream);
 ```
 
 
-## Example
-
-
-```java
-@Override
- public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		// SET ENVIRONMENT
-		QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE); // can be omited
-
-		// SET THE DEBUG TAG
-		QuickUtils.setTAG("SAMPLE_APP");
-
-		QuickUtils.log.v(QuickUtils.math.logarithm(number) + "");
-
-		try {
-			QuickUtils.log.w("This is dangerous code");
-
-			// do DANGEROUS STUFF
-			// ...
-			// ...
-
-			QuickUtils.misc.toast(this, "The result of your dangerous calculations is: " + number);
-
-		} catch (Exception exception) {
-			QuickUtils.log.e("Exception thrown", exception);
-		}
-
-		// Check if you can write on your sdcard
-		if (QuickUtils.sdcard.isSDCardAvailable() && QuickUtils.sdcard.isSDCardWritable()) {
-
-			// you can write safely on your sdcard
-		
-
-			File path = new File(QuickUtils.sdcard.getSDCardPath() + "/appName/");
-
-			File from = new File(path, "from.txt");
-			File to = new File(path, "to.txt");
-
-			try {
-				QuickUtils.sdcard.copyFile(from, to);
-				QuickUtils.log.i("Written to the sdcard");
-
-			} catch (IOException e) {
-				QuickUtils.log.e("IOException", e);
-			}
-		}
-
-```
-
-## Downloads
-All the versions can be found [here](https://github.com/cesarferreira/AndroidQuickUtils/tags)
-
-
-## Instalation
-As simple as going to your project's properties and include the `QuickUtils.jar` library or add the QuickUtils project as a library as shown below.
-
- ![](https://dl.dropbox.com/u/86831/cesarferreira/goanswer.png)
-
-
-## Setting up the environment
+## Setting up the environment (THIS HAS TO BE MOVED SOMEWHERE ELSE)
 Set the default TAG for logcat debug purposes
 
 ```java
@@ -558,6 +489,8 @@ If you intend to use the `HTTPGetRequest` method, if you haven't already, in you
 ```
 
 
+
+
 ## Contributing
 
 Want to contribute? Great! 
@@ -576,6 +509,6 @@ Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
 ## Authors
  * César Ferreira (cesar.manuel.ferreira@gmail.com)
 
-## Contributors
+## Contributors <sup>([graph](https://github.com/cesarferreira/AndroidQuickUtils/graphs/contributors "link"))</sup>
  * César Ferreira (cesar.manuel.ferreira@gmail.com)
  * Luís Pereira (luispereira268@gmail.com)
