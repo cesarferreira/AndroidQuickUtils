@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="quickutils.core"
-    android:versionCode="1"
-    android:versionName="0.1" >
+    android:versionCode="4"
+    android:versionName="0.4b" >
 
     <uses-sdk
         android:minSdkVersion="8"

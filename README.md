@@ -38,7 +38,7 @@ Or via **download**:
 
 
 **Note:**
-if you use the `install via github`, all you need to do to get the latest version of **QuickUtills** is `git update` on the root of its directory. If you use the second method you need to download the newest version and re-add the `.jar`.
+if you use the `install via github`, all you need to do to get the latest version of **QuickUtills** is `git pull` on the root of its directory. If you use the second method you need to download the newest version and re-add the `.jar`.
 
 ## Downloads
 All the versions can be found [here](https://github.com/cesarferreira/AndroidQuickUtils/tags)
