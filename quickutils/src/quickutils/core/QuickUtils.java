@@ -19,8 +19,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -324,7 +326,8 @@ public abstract class QuickUtils {
 		 *            Full path to the desired Activity (e.g.
 		 *            "com.sample.MainActivity")
 		 */
-		public static void goToActivityByClassName(Activity fromActivity, String className) {
+		public static void goToActivityByClassName(Activity fromActivity,
+				String className) {
 			Class<?> c = null;
 			if (className != null) {
 				try {
@@ -378,9 +381,11 @@ public abstract class QuickUtils {
 		 * @param text
 		 *            - what will ask to user when activity start
 		 */
-		public static void speechRecognition(final Activity activity, int maxResults, String text) {
+		public static void speechRecognition(final Activity activity,
+				int maxResults, String text) {
 			Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-			intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+			intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+					RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 			intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
 			intent.putExtra(RecognizerIntent.EXTRA_PROMPT, text);
 			intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, maxResults);
@@ -400,10 +405,12 @@ public abstract class QuickUtils {
 		 * @return ArrayList<String> with all results or null if was not
 		 *         possible to get any results
 		 */
-		public static ArrayList<String> getSpeechRecognitionResults(int requestCode, int resultCode, Intent data) {
+		public static ArrayList<String> getSpeechRecognitionResults(
+				int requestCode, int resultCode, Intent data) {
 			ArrayList<String> matches = null;
 			if (requestCode == 0 && resultCode == RESULT_OK) {
-				matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+				matches = data
+						.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 				StringBuilder sb = new StringBuilder();
 				for (String match : matches) {
 					sb.append(match + ", ");
@@ -429,10 +436,13 @@ public abstract class QuickUtils {
 		 * @return String with the first result matched or null if was not
 		 *         possible to get any result
 		 */
-		public static String getSpeechRecognitionResultFromDicionary(int requestCode, int resultCode, Intent data, ArrayList<String> array) {
+		public static String getSpeechRecognitionResultFromDicionary(
+				int requestCode, int resultCode, Intent data,
+				ArrayList<String> array) {
 			ArrayList<String> matches = null;
 			if (requestCode == 0 && resultCode == RESULT_OK) {
-				matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+				matches = data
+						.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 				StringBuilder sb = new StringBuilder();
 				for (String match : matches) {
 					for (String arrayString : array) {
@@ -458,9 +468,11 @@ public abstract class QuickUtils {
 		 *            - onActivityResult Intent data
 		 * @return string containing the first result of what was recognized
 		 */
-		public static String getSpeechRecognitionFirstResult(int requestCode, int resultCode, Intent data) {
+		public static String getSpeechRecognitionFirstResult(int requestCode,
+				int resultCode, Intent data) {
 			if (requestCode == 0 && resultCode == RESULT_OK) {
-				List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+				List<String> results = data
+						.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 				if (results != null && results.size() > 0) {
 					return results.get(0);
 				}
@@ -477,7 +489,8 @@ public abstract class QuickUtils {
 		 *         doesn't
 		 */
 		public static boolean hasInternetConnection(Context context) {
-			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			ConnectivityManager cm = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
 			if (cm == null)
 				return false;
 			NetworkInfo info = cm.getActiveNetworkInfo();
@@ -491,10 +504,12 @@ public abstract class QuickUtils {
 			if (info == null)
 				return false;
 
-			if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING) {
+			if (mobile == NetworkInfo.State.CONNECTED
+					|| mobile == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
-			} else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) {
+			} else if (wifi == NetworkInfo.State.CONNECTED
+					|| wifi == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
 			}
@@ -514,7 +529,8 @@ public abstract class QuickUtils {
 		 * 
 		 */
 		public static void vibrate(Context context, int duration) {
-			Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+			Vibrator v = (Vibrator) context
+					.getSystemService(Context.VIBRATOR_SERVICE);
 			v.vibrate(duration);
 		}
 
@@ -558,13 +574,235 @@ public abstract class QuickUtils {
 		public static void sleep(int milliseconds) {
 
 			try {
-				QuickUtils.log.i("delaying for " + milliseconds / 1000 + " seconds");
+				QuickUtils.log.i("delaying for " + milliseconds / 1000
+						+ " seconds");
 				Thread.sleep(milliseconds);
 			} catch (InterruptedException e) {
 				QuickUtils.log.e("Interrupted exception", e);
 			}
 		}
 
+	}
+	
+	
+	
+	/**
+	 * Text library
+	 * 
+	 * @author Joel
+	 * 
+	 */
+	public static class Text {
+
+		/**
+		 * private constructor
+		 */
+		private Text() {
+		}
+		
+		
+		
+		 /** Common Lorem Ipsum sentence */
+	    public static final String LOREM_IPSUM = "Lorem ipsum dolor sit amet, "
+	            + "consectetur adipisicing elit, sed do eiusmod tempor incididunt "
+	            + "ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
+	            + " nostrud exercitation ullamco laboris nisi ut aliquip ex ea "
+	            + "commodo consequat. Duis aute irure dolor in reprehenderit in "
+	            + "voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
+	            + "Excepteur sint occaecat cupidatat non proident, sunt in culpa "
+	            + "qui officia deserunt mollit anim id est laborum.";
+	    
+	    /** Words used in Lorem Ipsum */
+	    private static final String[] DICTIONARY = new String[]{
+	        "exercitationem", "perferendis", "perspiciatis", "laborum", "eveniet",
+	        "sunt", "iure", "nam", "nobis", "eum", "cum", "officiis", "excepturi",
+	        "odio", "consectetur", "quasi", "aut", "quisquam", "vel", "eligendi",
+	        "itaque", "non", "odit", "tempore", "quaerat", "dignissimos",
+	        "facilis", "neque", "nihil", "expedita", "vitae", "vero", "ipsum",
+	        "nisi", "animi", "cumque", "pariatur", "velit", "modi", "natus",
+	        "iusto", "eaque", "sequi", "illo", "sed", "ex", "et", "voluptatibus",
+	        "tempora", "veritatis", "ratione", "assumenda", "incidunt", "nostrum",
+	        "placeat", "aliquid", "fuga", "provident", "praesentium", "rem",
+	        "necessitatibus", "suscipit", "adipisci", "quidem", "possimus",
+	        "voluptas", "debitis", "sint", "accusantium", "unde", "sapiente",
+	        "voluptate", "qui", "aspernatur", "laudantium", "soluta", "amet",
+	        "quo", "aliquam", "saepe", "culpa", "libero", "ipsa", "dicta",
+	        "reiciendis", "nesciunt", "doloribus", "autem", "impedit", "minima",
+	        "maiores", "repudiandae", "ipsam", "obcaecati", "ullam", "enim",
+	        "totam", "delectus", "ducimus", "quis", "voluptates", "dolores",
+	        "molestiae", "harum", "dolorem", "quia", "voluptatem", "molestias",
+	        "magni", "distinctio", "omnis", "illum", "dolorum", "voluptatum", "ea",
+	        "quas", "quam", "corporis", "quae", "blanditiis", "atque", "deserunt",
+	        "laboriosam", "earum", "consequuntur", "hic", "cupiditate",
+	        "quibusdam", "accusamus", "ut", "rerum", "error", "minus", "eius",
+	        "ab", "ad", "nemo", "fugit", "officia", "at", "in", "id", "quos",
+	        "reprehenderit", "numquam", "iste", "fugiat", "sit", "inventore",
+	        "beatae", "repellendus", "magnam", "recusandae", "quod", "explicabo",
+	        "doloremque", "aperiam", "consequatur", "asperiores", "commodi",
+	        "optio", "dolor", "labore", "temporibus", "repellat", "veniam",
+	        "architecto", "est", "esse", "mollitia", "nulla", "a", "similique",
+	        "eos", "alias", "dolore", "tenetur", "deleniti", "porro", "facere",
+	        "maxime", "corrupti"};
+	    /** Common words used in Lorem Ipsum */
+	    private static final String[] COMMON_WORDS = new String[]{
+	        "lorem", "ipsum", "dolor", "sit", "amet", "consectetur",
+	        "adipisicing", "elit", "sed", "do", "eiusmod", "tempor", "incididunt",
+	        "ut", "labore", "et", "dolore", "magna", "aliqua"};
+	    
+	    
+	    /**
+	     * Returns a list of words.
+	     * @param count the number of words to get
+	     * @param startLorem whether to start with standard Lorem Ipsum text
+	     *
+	     * @return a list of lorem ipsum words
+	     */
+	    public static List<String> getWords(int count, boolean startLorem) {
+	        LinkedList<String> wordList = new LinkedList<String>();
+
+	        if (startLorem) {
+	            if (count > COMMON_WORDS.length) {
+	                wordList.addAll(Arrays.asList(COMMON_WORDS));
+
+	            } else {
+	                // add first "count" words
+	                for (int i = 0; i < count; i++) {
+	                    wordList.add(COMMON_WORDS[i]);
+	                }
+	            }
+	        }
+
+	        // add remaining words (random)
+	        for (int i = wordList.size(); i < count; i++) {
+//	            wordList.add(RandomUtil.getRandomPosition(DICTIONARY));
+	        }
+
+	        return wordList;
+	    }
+
+	    /**
+	     * Returns a randomly generated sentence of lorem ipsum text.
+	     *<br/>
+	     * The first word is capitalized, and the sentence ends in either a period,
+	     * exclamation mark or question mark. Commas are added at random.<br/>
+	     * Same as {@code getSentence(13, startLorem); }<br/>
+	     * @see LoremIpsum#getSentence(int, boolean) getSentence(int, boolean)
+	     * 
+	     * @param startLorem whether to start with standard lorem ipsum text or not
+	     * @return generated sentence, with punctuation
+	     */
+	    public static String getSentence(boolean startLorem) {
+	        return getSentence(13, startLorem);
+	    }
+	    
+	    /**
+	     * Returns a randomly generated sentence of lorem ipsum text.
+	     *<br/>
+	     * The first word is capitalized, and the sentence ends in either a period,
+	     * exclamation mark or question mark. Commas are added at random.
+	     *
+	     * @param maxNumWords the length of the word
+	     * @param startLorem whether to start with standard lorem ipsum text or not
+	     * @return generated sentence, with punctuation
+	     */
+	    public static String getSentence(int maxNumWords, boolean startLorem) {
+	        // number of words varies between 3 and 15
+	        int wordCount = QuickUtils.math.getRandomInteger(3, maxNumWords);
+	        List<String> words = getWords(wordCount, startLorem);
+
+	        // run trough string, add commas every 3-10 words
+	        int i = 0;
+	        while (i < wordCount) {
+	            // decide a jump 3-end words
+	            i += QuickUtils.math.getRandomInteger(3, wordCount);
+	            if(i < wordCount - 1) {
+	                words.set(i, words.get(i) + ",");
+	            }
+	        }
+
+	        // add end puntuation - rand between '.', '!' and '?'.
+	        // '.' has most possibility of coming out
+	        char end = '.';
+	        switch (QuickUtils.math.getRandomInteger(10)) {
+	            case 9:
+	                end = '?';
+	                break;
+	            case 8:
+	                end = '!';
+	                break;
+	        }
+	        words.set(wordCount - 1, words.get(wordCount - 1) + end);
+	        String raw = implode(words.toArray(new String[words.size()]), " ");
+	        return capitalize(raw);
+	    }
+
+	    /**
+	     * Get a paragraph of lorem ipsum text. A paragraph is made of <i>n</i>
+	     * number of sentences. <i>n</i> is random between 1 and
+	     * {@code maxSenteces } sentences. <br/>
+	     * This is the same as {@code getParagraph(4, startLorem); }
+	     * @see LoremIpsum#getParagraph(int, boolean) getParagraph(int, boolean)
+	     *
+	     * @param startLorem whether to start first paragraph with standard lorem
+	     * ipsum text or not.
+	     * @return generated paragraph
+	     */
+	    public static String getParagraph (boolean startLorem) {
+	        return getParagraph(4, startLorem);
+	    }
+
+	    /**
+	     * Get a paragraph of lorem ipsum text. A paragraph is made of <i>n</i>
+	     * number of sentences. <i>n</i> is random between 1 and
+	     * {@code maxSenteces } sentences.
+	     * 
+	     * @param maxSentences maximum number of sentences to include in paragraph
+	     * @param startLorem whether to start first paragraph with standard lorem
+	     * ipsum text or not.
+	     * @return generated paragraph
+	     */
+	    public static String getParagraph (int maxSentences, boolean startLorem) {
+	        String paragraph = "";
+	        int sentences = QuickUtils.math.getRandomInteger(1, maxSentences);
+	        for (int i = 0; i < sentences; i++) {
+	            paragraph += getSentence(startLorem);
+	            startLorem = false; // run this only once
+	        }
+	        return paragraph;
+	    }
+	    
+	    // TODO add these methods to quickutils if deemed usefull 
+
+	    /**
+	     * Implodes an array into a string
+	     * Similar to PHP implode function
+	     * @param inputArr the array to implode
+	     * @param delimiter the delimiter that will be used to merge items in array
+	     * @return the imploded string
+	     */
+	    public static String implode(String[] inputArr, String delimiter) {
+	        String implodedStr = "";
+
+	        implodedStr += inputArr[0];
+	        for (int i = 1; i < inputArr.length; i++) {
+	            implodedStr += delimiter;
+	            implodedStr += inputArr[i];
+	        }
+	        return implodedStr;
+	    }
+
+	    /**
+	     * Capitalize first word in a string
+	     * @param input string to capitalize
+	     * @return capitalized string(first letter only)
+	     */
+	    public static String capitalize(String input) {
+	        char[] stringArray = input.toCharArray();
+	        stringArray[0] = Character.toUpperCase(stringArray[0]);
+	        return new String(stringArray);
+	    }
+		
+		
 	}
 
 	/**
@@ -583,6 +821,97 @@ public abstract class QuickUtils {
 
 		private static final float DEG_TO_RAD = 3.1415926f / 180.0f;
 		private static final float RAD_TO_DEG = 180.0f / 3.1415926f;
+
+		/**
+		 * Returns a random integer between MIN inclusive and MAX exclusive.
+		 * 
+		 * @param min
+		 *            value inclusive
+		 * @param max
+		 *            value exclusive
+		 * @return an int between MIN inclusive and MAX exclusive.
+		 */
+		public static int getRandomInteger(int min, int max) {
+			Random r = new Random();
+			return r.nextInt(max - min + 1) + min;
+		}
+
+		/**
+		 * Returns a random integer between 0 (Zero) inclusive and MAX
+		 * exclusive. <br/>
+		 * Same as {@code getRandomInteger(0, max);} <br/>
+		 * See {@see RandomUtil#getRandomInteger(int, int)}
+		 * 
+		 * @param max
+		 *            value exclusive
+		 * @return an int between 0 inclusive and MAX exclusive.
+		 */
+		public static int getRandomInteger(int max) {
+			return getRandomInteger(0, max);
+		}
+
+		/**
+		 * Returns a random double between MIN inclusive and MAX exclusive.
+		 * 
+		 * @param min
+		 *            value inclusive
+		 * @param max
+		 *            value exclusive
+		 * @return an int between 0 inclusive and MAX exclusive.
+		 */
+		public static double getRandomDouble(double min, double max) {
+			Random r = new Random();
+			return min + (max - min) * r.nextDouble();
+		}
+
+		/**
+		 * Returns a random double between 0 (Zero) inclusive and MAX exclusive. <br/>
+		 * Same as {@code getRandomDouble(0, max);} <br/>
+		 * See {@see RandomUtil#getRandomDouble(double, double)}
+		 * 
+		 * @param max
+		 *            value exclusive
+		 * @return an int between 0 inclusive and MAX exclusive.
+		 */
+		public static double getRandomDouble(double max) {
+			return getRandomDouble(0, max);
+		}
+
+		/**
+		 * Get a random position(object) from an array of generic objects. <br/>
+		 * Using generics saves the trouble of casting the return object.
+		 * 
+		 * @param <T>
+		 *            the type of the array to get the object from
+		 * @param array
+		 *            the array with objects
+		 * @return random object from given array or null of array is either
+		 *         null or empty
+		 */
+		public static <T> T getRandomPosition(T[] array) {
+			if (array == null || array.length == 0) {
+				return null;
+			}
+			return array[getRandomInteger(array.length - 1)];
+		}
+
+		/**
+		 * Get a random position(object) from a list of generic objects. <br/>
+		 * Using generics saves the trouble of casting the return object.
+		 * 
+		 * @param <T>
+		 *            the type of the list objects to get the object from
+		 * @param list
+		 *            the list with objects
+		 * @return random object from given list or null of list is either null
+		 *         or empty
+		 */
+		public static <T> T getRandomPosition(List<T> list) {
+			if (list == null || list.isEmpty()) {
+				return null;
+			}
+			return list.get(getRandomInteger(list.size() - 1));
+		}
 
 		/**
 		 * Degrees to radians
@@ -793,10 +1122,10 @@ public abstract class QuickUtils {
 		 *            value exclusive
 		 * @return an int between MIN inclusive and MAX exclusive.
 		 */
-		public static int getRandomNumber(int min, int max) {
-			Random r = new Random();
-			return r.nextInt(max - min + 1) + min;
-		}
+		 public static int getRandomNumber(int min, int max) {
+		 Random r = new Random();
+		 return r.nextInt(max - min + 1) + min;
+		 }
 
 	}
 
@@ -904,11 +1233,13 @@ public abstract class QuickUtils {
 		 *            specify the intended timezone (e.g. "GMT", "UTC", etc.)
 		 * @return returns a date with the given format
 		 */
-		public static String formatDate(long date, String format, String timeZone) {
+		public static String formatDate(long date, String format,
+				String timeZone) {
 			return formatDateBase(date, format, timeZone);
 		}
 
-		private static String formatDateBase(long date, String format, String timeZone) {
+		private static String formatDateBase(long date, String format,
+				String timeZone) {
 			DateFormat simpleFormat = new SimpleDateFormat(format);
 			if (timeZone != null) {
 				simpleFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
@@ -949,7 +1280,8 @@ public abstract class QuickUtils {
 			Date newDate = null;
 
 			try {
-				newDate = new SimpleDateFormat(dateFormat, Locale.ENGLISH).parse(dateString);
+				newDate = new SimpleDateFormat(dateFormat, Locale.ENGLISH)
+						.parse(dateString);
 			} catch (ParseException e) {
 				QuickUtils.log.d("parse error", e);
 			}
@@ -962,7 +1294,8 @@ public abstract class QuickUtils {
 		 * @return current time in milliseconds
 		 */
 		public static long getCurrentTimeInMiliseconds() {
-			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance().getTimeInMillis());
+			return TimeUnit.MILLISECONDS.toMillis(Calendar.getInstance()
+					.getTimeInMillis());
 		}
 
 		/**
@@ -971,7 +1304,8 @@ public abstract class QuickUtils {
 		 * @return current time in seconds
 		 */
 		public static long getCurrentTimeInSeconds() {
-			return TimeUnit.SECONDS.toSeconds(Calendar.getInstance().getTimeInMillis());
+			return TimeUnit.SECONDS.toSeconds(Calendar.getInstance()
+					.getTimeInMillis());
 
 		}
 
@@ -999,7 +1333,8 @@ public abstract class QuickUtils {
 		 *         doesn't
 		 */
 		public static boolean hasInternetConnection(Context context) {
-			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			ConnectivityManager cm = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
 			if (cm == null)
 				return false;
 			NetworkInfo info = cm.getActiveNetworkInfo();
@@ -1013,10 +1348,12 @@ public abstract class QuickUtils {
 			if (info == null)
 				return false;
 
-			if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING) {
+			if (mobile == NetworkInfo.State.CONNECTED
+					|| mobile == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
-			} else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) {
+			} else if (wifi == NetworkInfo.State.CONNECTED
+					|| wifi == NetworkInfo.State.CONNECTING) {
 
 				return info.isConnectedOrConnecting();
 			}
@@ -1043,9 +1380,11 @@ public abstract class QuickUtils {
 			HttpGet httpGet = new HttpGet(url);
 
 			try {
-				HttpResponse response = httpClient.execute(httpGet, localContext);
+				HttpResponse response = httpClient.execute(httpGet,
+						localContext);
 				InputStream instream = response.getEntity().getContent();
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(instream));
+				BufferedReader bufferedReader = new BufferedReader(
+						new InputStreamReader(instream));
 
 				String buffer;
 				while ((buffer = bufferedReader.readLine()) != null) {
@@ -1076,7 +1415,8 @@ public abstract class QuickUtils {
 		 */
 		public static boolean changeWirelessState(Context context, boolean state) {
 			try {
-				WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+				WifiManager wifi = (WifiManager) context
+						.getSystemService(Context.WIFI_SERVICE);
 				wifi.setWifiEnabled(state);
 				return true;
 			} catch (Exception e) {
@@ -1114,13 +1454,15 @@ public abstract class QuickUtils {
 		 * @author Pereira
 		 * 
 		 */
-		private static class RetreiveCheckServerConnection extends AsyncTask<URL, Void, Boolean> {
+		private static class RetreiveCheckServerConnection extends
+				AsyncTask<URL, Void, Boolean> {
 
 			private Exception exception;
 
 			protected Boolean doInBackground(URL... url) {
 				try {
-					HttpURLConnection huc = (HttpURLConnection) url[0].openConnection();
+					HttpURLConnection huc = (HttpURLConnection) url[0]
+							.openConnection();
 					huc.setRequestMethod("GET");
 					huc.connect();
 					int code = huc.getResponseCode();
@@ -1148,7 +1490,8 @@ public abstract class QuickUtils {
 		public static boolean checkServerConnection(String serverURL) {
 			boolean value = false;
 			try {
-				value = new RetreiveCheckServerConnectionString().execute(serverURL).get();
+				value = new RetreiveCheckServerConnectionString().execute(
+						serverURL).get();
 			} catch (InterruptedException e) {
 				QuickUtils.log.e("InterruptedException", e);
 			} catch (ExecutionException e) {
@@ -1164,14 +1507,16 @@ public abstract class QuickUtils {
 		 * @author Pereira
 		 * 
 		 */
-		private static class RetreiveCheckServerConnectionString extends AsyncTask<String, Void, Boolean> {
+		private static class RetreiveCheckServerConnectionString extends
+				AsyncTask<String, Void, Boolean> {
 
 			private Exception exception;
 
 			protected Boolean doInBackground(String... serverURL) {
 				try {
 					URL u = new URL(serverURL[0]);
-					HttpURLConnection huc = (HttpURLConnection) u.openConnection();
+					HttpURLConnection huc = (HttpURLConnection) u
+							.openConnection();
 					huc.setRequestMethod("GET"); // OR huc.setRequestMethod
 													// ("HEAD");
 					huc.connect();
@@ -1204,7 +1549,8 @@ public abstract class QuickUtils {
 		 * @param emailBody
 		 *            email body
 		 */
-		public static void sendEmail(Context context, String email, String subject, String emailBody) {
+		public static void sendEmail(Context context, String email,
+				String subject, String emailBody) {
 			Intent emailIntent = new Intent(Intent.ACTION_SEND);
 			emailIntent.setType("message/rfc822");
 			emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
@@ -1216,7 +1562,8 @@ public abstract class QuickUtils {
 			try {
 				context.startActivity(emailIntent);
 			} catch (android.content.ActivityNotFoundException ex) {
-				QuickUtils.misc.toast(context, "There are no email clients installed.");
+				QuickUtils.misc.toast(context,
+						"There are no email clients installed.");
 			}
 		}
 
@@ -1256,18 +1603,22 @@ public abstract class QuickUtils {
 		 *            Message to be delivered
 		 * @param activityInfoName
 		 */
-		private static void shareMethod(Context context, String message, String activityInfoName) {
+		private static void shareMethod(Context context, String message,
+				String activityInfoName) {
 			Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
 			shareIntent.setType("text/plain");
 			shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
 			PackageManager pm = context.getPackageManager();
-			List<ResolveInfo> activityList = pm.queryIntentActivities(shareIntent, 0);
+			List<ResolveInfo> activityList = pm.queryIntentActivities(
+					shareIntent, 0);
 			for (final ResolveInfo app : activityList) {
 				if ((app.activityInfo.name).contains(activityInfoName)) {
 					final ActivityInfo activity = app.activityInfo;
-					final ComponentName name = new ComponentName(activity.applicationInfo.packageName, activity.name);
+					final ComponentName name = new ComponentName(
+							activity.applicationInfo.packageName, activity.name);
 					shareIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-					shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+					shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+							| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 					shareIntent.setComponent(name);
 					context.startActivity(shareIntent);
 					break;
@@ -1371,40 +1722,7 @@ public abstract class QuickUtils {
 
 		}
 
-		/**
-		 * Read file from SDCard
-		 */
-		// public static void readFileFromSDCard() {
-		// // TODO this is incomplete
-		//
-		// File directory = Environment.getExternalStorageDirectory();
-		//
-		// // Assumes that a file article.rss is available on the SD card
-		// File file = new File(directory + "/article.rss");
-		// if (!file.exists()) {
-		// throw new RuntimeException("File not found");
-		// }
-		// BufferedReader reader = null;
-		// try {
-		// reader = new BufferedReader(new FileReader(file));
-		// StringBuilder builder = new StringBuilder();
-		// String line;
-		// while ((line = reader.readLine()) != null) {
-		// builder.append(line);
-		// }
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// } finally {
-		// if (reader != null) {
-		// try {
-		// reader.close();
-		// } catch (IOException e) {
-		// QuickUtils.log.e("IO Exception:", e);
-		// }
-		// }
-		// }
-		// }
-
+		
 		/**
 		 * Creates the specified <code>toFile</code> as a byte for byte copy of
 		 * the <code>fromFile</code>. If <code>toFile</code> already exists,
@@ -1420,7 +1738,8 @@ public abstract class QuickUtils {
 		 * @param toFile
 		 *            - FileOutpubStream for the file to copy to.
 		 */
-		public static void copyFile(FileInputStream fromFile, FileOutputStream toFile) throws IOException {
+		public static void copyFile(FileInputStream fromFile,
+				FileOutputStream toFile) throws IOException {
 			FileChannel fromChannel = null;
 			FileChannel toChannel = null;
 			try {
@@ -1455,8 +1774,10 @@ public abstract class QuickUtils {
 		 * @param toFile
 		 *            - File to copy to.
 		 */
-		public static void copyFile(File fromFile, File toFile) throws IOException {
-			copyFile(new FileInputStream(fromFile), new FileOutputStream(toFile));
+		public static void copyFile(File fromFile, File toFile)
+				throws IOException {
+			copyFile(new FileInputStream(fromFile),
+					new FileOutputStream(toFile));
 		}
 
 		/**
@@ -1525,14 +1846,19 @@ public abstract class QuickUtils {
 		 * @param isDetailed
 		 *            if it should show the timestamp or not
 		 */
-		private static void writeToFile(String text, String logFilePath, boolean isDetailed) {
+		private static void writeToFile(String text, String logFilePath,
+				boolean isDetailed) {
 			if (isSDCardAvailable() && isSDCardWritable() && text != null) {
 
 				try {
 					File file = new File(logFilePath);
 					OutputStream os = new FileOutputStream(file, true);
 					if (isDetailed) {
-						os.write(("---" + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS").format(Calendar.getInstance().getTime()) + "---\n")
+						os.write(("---"
+								+ new SimpleDateFormat(
+										"yyyy/MM/dd HH:mm:ss.SSS")
+										.format(Calendar.getInstance()
+												.getTime()) + "---\n")
 								.getBytes());
 					}
 					os.write((text + "\n").getBytes());
@@ -1573,7 +1899,8 @@ public abstract class QuickUtils {
 			byte[] hash;
 
 			try {
-				hash = MessageDigest.getInstance("MD5").digest(string.getBytes("UTF-8"));
+				hash = MessageDigest.getInstance("MD5").digest(
+						string.getBytes("UTF-8"));
 			} catch (NoSuchAlgorithmException e) {
 				throw new RuntimeException("Huh, MD5 should be supported?", e);
 			} catch (UnsupportedEncodingException e) {
@@ -1622,7 +1949,8 @@ public abstract class QuickUtils {
 				int halfbyte = (b >>> 4) & 0x0F;
 				int two_halfs = 0;
 				do {
-					buf.append((0 <= halfbyte) && (halfbyte <= 9) ? (char) ('0' + halfbyte) : (char) ('a' + (halfbyte - 10)));
+					buf.append((0 <= halfbyte) && (halfbyte <= 9) ? (char) ('0' + halfbyte)
+							: (char) ('a' + (halfbyte - 10)));
 					halfbyte = b & 0x0F;
 				} while (two_halfs++ < 1);
 			}
