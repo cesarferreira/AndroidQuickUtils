@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 
 		// QuickUtils.share.sendEmail(getApplicationContext(),
 		// "soupas@gmail.com", "ola", "body");
-		QuickUtils.share.sendTweet(getApplicationContext(), "yeahhhhhh");
+//		QuickUtils.share.sendTweet(getApplicationContext(), "yeahhhhhh");
 		// Find the ListView resource.
 		mainListView = (ListView) findViewById(R.id.list);
 
@@ -50,7 +50,11 @@ public class MainActivity extends Activity {
 
 				String StringClassname = "quickutils.sample.categories." + listItem.toString() + "Category";
 
-				QuickUtils.misc.goToActivityByClassName(MainActivity.this, StringClassname);
+				try {
+					QuickUtils.misc.goToActivityByClassName(MainActivity.this, StringClassname);
+				} catch (Exception e) {
+					QuickUtils.misc.toast(getApplicationContext(), "Not yet implemented");
+				}
 
 			}
 		});
