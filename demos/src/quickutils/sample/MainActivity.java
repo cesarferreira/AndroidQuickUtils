@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
 				String StringClassname = "quickutils.sample.categories." + listItem.toString() + "Category";
 
 				try {
-					QuickUtils.misc.goToActivityByClassName(MainActivity.this, StringClassname);
+					QuickUtils.misc.navigateToActivityByClassName(MainActivity.this, StringClassname);
 				} catch (Exception e) {
 					QuickUtils.misc.toast(getApplicationContext(), "Not yet implemented");
 				}

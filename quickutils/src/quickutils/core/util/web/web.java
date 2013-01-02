@@ -26,11 +26,12 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 
 public  class web {
+	
 	/**
-	 * private constructor
+	 * protected constructor
 	 */
-//	private web() {
-//	}
+	protected web() {
+	}
 
 	/**
 	 * Checks if the app has connectivity to the Internet
