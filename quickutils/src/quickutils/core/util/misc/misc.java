@@ -27,14 +27,13 @@ public class misc {
 	 * Navigate to an activity programmatically by providing the package +
 	 * activity name
 	 * 
-	 * @param fromActivity
-	 *            Activity where I am coming from
+	 * @param context
+	 *            Context where I am coming from
 	 * @param className
 	 *            Full path to the desired Activity (e.g.
 	 *            "com.sample.MainActivity")
 	 */
-	public static void navigateToActivityByClassName(Activity fromActivity,
-			String className) throws ClassNotFoundException {
+	public static void navigateToActivityByClassName(Context context, String className) throws ClassNotFoundException {
 		Class<?> c = null;
 		if (className != null) {
 			try {
@@ -44,14 +43,14 @@ public class misc {
 			}
 		}
 
-		navigateToActivity(fromActivity, c);
+		navigateToActivity(context, c);
 	}
 
 	/**
 	 * Navigate to an activity programmatically by providing the package +
 	 * activity name
 	 * 
-	 * @param fromActivity
+	 * @param context
 	 *            Activity where I am coming from
 	 * @param className
 	 *            Full path to the desired Activity (e.g.
@@ -59,8 +58,7 @@ public class misc {
 	 * @param flags
 	 *            flags to be set upon the launch of the B Activity
 	 */
-	public static void navigateToActivityByClassName(Activity fromActivity,
-			String className, int flags) throws ClassNotFoundException {
+	public static void navigateToActivityByClassName(Context context, String className, int flags) throws ClassNotFoundException {
 		Class<?> c = null;
 		if (className != null) {
 			try {
@@ -70,12 +68,12 @@ public class misc {
 			}
 		}
 
-		navigateToActivity(fromActivity, c, flags);
+		navigateToActivity(context, c, flags);
 	}
 
 	/**
 	 * Navigate to an activity.<br>
-	 * e.g. navigateToActivity(this,SecondActivity.class)
+	 * e.g. navigateToActivity(context, SecondActivity.class)
 	 * 
 	 * @param A
 	 *            From Activity
@@ -83,7 +81,7 @@ public class misc {
 	 *            Destination Activity
 	 * 
 	 */
-	public static void navigateToActivity(Activity A, Class<?> B) {
+	public static void navigateToActivity(Context A, Class<?> B) {
 		Intent myIntent = new Intent(A, B);
 		A.startActivity(myIntent);
 	}
@@ -101,7 +99,7 @@ public class misc {
 	 *            flags to be set upon the launch of the B Activity
 	 * 
 	 */
-	public static void navigateToActivity(Activity A, Class<?> B, int flags) {
+	public static void navigateToActivity(Context A, Class<?> B, int flags) {
 		Intent myIntent = new Intent(A, B);
 		myIntent.setFlags(flags);
 		A.startActivity(myIntent);
@@ -118,7 +116,7 @@ public class misc {
 	 * @param extras
 	 *            Extras to be included in the new Activity
 	 */
-	public static void navigateToActivity(Activity A, Class<?> B, Bundle extras) {
+	public static void navigateToActivity(Context A, Class<?> B, Bundle extras) {
 		Intent myIntent = new Intent(A, B);
 		myIntent.putExtras(extras);
 		A.startActivity(myIntent);
@@ -138,8 +136,7 @@ public class misc {
 	 * @param flags
 	 *            flags to be set upon the launch of the B Activity
 	 */
-	public static void navigateToActivity(Activity A, Class<?> B,
-			Bundle extras, int flags) {
+	public static void navigateToActivity(Context A, Class<?> B, Bundle extras, int flags) {
 		Intent myIntent = new Intent(A, B);
 		myIntent.putExtras(extras);
 		myIntent.setFlags(flags);
@@ -158,11 +155,9 @@ public class misc {
 	 * @param text
 	 *            - what will ask to user when activity start
 	 */
-	public static void speechRecognition(final Activity activity,
-			int maxResults, String text) {
+	public static void speechRecognition(final Activity activity, int maxResults, String text) {
 		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 		intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
 		intent.putExtra(RecognizerIntent.EXTRA_PROMPT, text);
 		intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, maxResults);
@@ -182,12 +177,10 @@ public class misc {
 	 * @return ArrayList<String> with all results or null if was not possible to
 	 *         get any results
 	 */
-	public static ArrayList<String> getSpeechRecognitionResults(
-			int requestCode, int resultCode, Intent data) {
+	public static ArrayList<String> getSpeechRecognitionResults(int requestCode, int resultCode, Intent data) {
 		ArrayList<String> matches = null;
 		if (requestCode == 0 && resultCode == QuickUtils.RESULT_OK) {
-			matches = data
-					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 			StringBuilder sb = new StringBuilder();
 			for (String match : matches) {
 				sb.append(match + ", ");
@@ -213,13 +206,10 @@ public class misc {
 	 * @return String with the first result matched or null if was not possible
 	 *         to get any result
 	 */
-	public static String getSpeechRecognitionResultFromDicionary(
-			int requestCode, int resultCode, Intent data,
-			ArrayList<String> array) {
+	public static String getSpeechRecognitionResultFromDicionary(int requestCode, int resultCode, Intent data, ArrayList<String> array) {
 		ArrayList<String> matches = null;
 		if (requestCode == 0 && resultCode == QuickUtils.RESULT_OK) {
-			matches = data
-					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 			StringBuilder sb = new StringBuilder();
 			for (String match : matches) {
 				for (String arrayString : array) {
@@ -245,52 +235,14 @@ public class misc {
 	 *            - onActivityResult Intent data
 	 * @return string containing the first result of what was recognized
 	 */
-	public static String getSpeechRecognitionFirstResult(int requestCode,
-			int resultCode, Intent data) {
+	public static String getSpeechRecognitionFirstResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 0 && resultCode == QuickUtils.RESULT_OK) {
-			List<String> results = data
-					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 			if (results != null && results.size() > 0) {
 				return results.get(0);
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * Checks if the app has connectivity to the Internet
-	 * 
-	 * @param context
-	 *            application context
-	 * @return true if has connection to the Internet and false if it doesn't
-	 */
-	@Deprecated
-	public static boolean hasInternetConnection(Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if (cm == null)
-			return false;
-		NetworkInfo info = cm.getActiveNetworkInfo();
-
-		// 3G
-		State mobile = cm.getNetworkInfo(0).getState();
-
-		// wifi
-		State wifi = cm.getNetworkInfo(1).getState();
-
-		if (info == null)
-			return false;
-
-		if (mobile == NetworkInfo.State.CONNECTED
-				|| mobile == NetworkInfo.State.CONNECTING) {
-
-			return info.isConnectedOrConnecting();
-		} else if (wifi == NetworkInfo.State.CONNECTED
-				|| wifi == NetworkInfo.State.CONNECTING) {
-
-			return info.isConnectedOrConnecting();
-		}
-		return info.isConnectedOrConnecting();
 	}
 
 	/**
@@ -306,8 +258,7 @@ public class misc {
 	 * 
 	 */
 	public static void vibrate(Context context, int duration) {
-		Vibrator v = (Vibrator) context
-				.getSystemService(Context.VIBRATOR_SERVICE);
+		Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 		v.vibrate(duration);
 	}
 
@@ -351,8 +302,7 @@ public class misc {
 	public static void sleep(int milliseconds) {
 
 		try {
-			QuickUtils.log
-					.i("delaying for " + milliseconds / 1000 + " seconds");
+			QuickUtils.log.i("delaying for " + milliseconds / 1000 + " seconds");
 			Thread.sleep(milliseconds);
 		} catch (InterruptedException e) {
 			QuickUtils.log.e("Interrupted exception", e);
