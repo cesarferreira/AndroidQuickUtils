@@ -4,18 +4,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import quickutils.core.QuickUtils;
 import android.content.Context;
@@ -24,9 +32,10 @@ import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.util.Log;
 
-public  class web {
-	
+public class web {
+
 	/**
 	 * protected constructor
 	 */
@@ -34,16 +43,73 @@ public  class web {
 	}
 
 	/**
+	 * Queries the given URL with a list of params
+	 * 
+	 * @param url
+	 *            the url to query
+	 * @param params
+	 *            list of pair-values
+	 * @return the result JSON
+	 */
+	public static JSONObject getJSONFromUrl(String url, List<NameValuePair> params) {
+
+		InputStream is = null;
+		JSONObject jObj = null;
+		String json = "";
+
+		// Making HTTP request
+		try {
+			// defaultHttpClient
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost(url);
+			httpPost.setEntity(new UrlEncodedFormEntity(params));
+
+			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpEntity httpEntity = httpResponse.getEntity();
+			is = httpEntity.getContent();
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			json = sb.toString();
+		} catch (Exception e) {
+			Log.e("Buffer Error", "Error converting result " + e.toString());
+		}
+
+		// try parse the string to a JSON object
+		try {
+			jObj = new JSONObject(json);
+		} catch (JSONException e) {
+			Log.e("JSON Parser", "Error parsing data " + e.toString());
+		}
+
+		// return JSON String
+		return jObj;
+
+	}
+
+	/**
 	 * Checks if the app has connectivity to the Internet
 	 * 
 	 * @param context
 	 *            application context
-	 * @return true if has connection to the Internet and false if it
-	 *         doesn't
+	 * @return true if has connection to the Internet and false if it doesn't
 	 */
 	public static boolean hasInternetConnection(Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		if (cm == null)
 			return false;
 		NetworkInfo info = cm.getActiveNetworkInfo();
@@ -57,12 +123,10 @@ public  class web {
 		if (info == null)
 			return false;
 
-		if (mobile == NetworkInfo.State.CONNECTED
-				|| mobile == NetworkInfo.State.CONNECTING) {
+		if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING) {
 
 			return info.isConnectedOrConnecting();
-		} else if (wifi == NetworkInfo.State.CONNECTED
-				|| wifi == NetworkInfo.State.CONNECTING) {
+		} else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) {
 
 			return info.isConnectedOrConnecting();
 		}
@@ -72,14 +136,14 @@ public  class web {
 	/**
 	 * Does a GET request to a given url
 	 * 
-	 * Note: Please use this method on an AsyncTask in order not to freeze
-	 * the application unnecessarely
+	 * Note: Please use this method on an AsyncTask in order not to freeze the
+	 * application unnecessarely
 	 * (http://developer.android.com/guide/practices/responsiveness.html)
 	 * 
 	 * @param url
 	 *            given url
-	 * @return the string output of the GET request or null if something
-	 *         went wrong
+	 * @return the string output of the GET request or null if something went
+	 *         wrong
 	 */
 	public static String HTTPGetRequest(String url) {
 		HttpClient httpClient = new DefaultHttpClient();
@@ -89,11 +153,9 @@ public  class web {
 		HttpGet httpGet = new HttpGet(url);
 
 		try {
-			HttpResponse response = httpClient.execute(httpGet,
-					localContext);
+			HttpResponse response = httpClient.execute(httpGet, localContext);
 			InputStream instream = response.getEntity().getContent();
-			BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(instream));
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(instream));
 
 			String buffer;
 			while ((buffer = bufferedReader.readLine()) != null) {
@@ -112,8 +174,8 @@ public  class web {
 	}
 
 	/**
-	 * Set wireless connectivity On, also this method will need the
-	 * permissions "android.permission.CHANGE_WIFI_STATE" and
+	 * Set wireless connectivity On, also this method will need the permissions
+	 * "android.permission.CHANGE_WIFI_STATE" and
 	 * "android.permission.ACCESS_WIFI_STATE"
 	 * 
 	 * @param context
@@ -124,8 +186,7 @@ public  class web {
 	 */
 	public static boolean changeWirelessState(Context context, boolean state) {
 		try {
-			WifiManager wifi = (WifiManager) context
-					.getSystemService(Context.WIFI_SERVICE);
+			WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 			wifi.setWifiEnabled(state);
 			return true;
 		} catch (Exception e) {
@@ -163,15 +224,13 @@ public  class web {
 	 * @author Pereira
 	 * 
 	 */
-	private static class RetreiveCheckServerConnection extends
-			AsyncTask<URL, Void, Boolean> {
+	private static class RetreiveCheckServerConnection extends AsyncTask<URL, Void, Boolean> {
 
 		private Exception exception;
 
 		protected Boolean doInBackground(URL... url) {
 			try {
-				HttpURLConnection huc = (HttpURLConnection) url[0]
-						.openConnection();
+				HttpURLConnection huc = (HttpURLConnection) url[0].openConnection();
 				huc.setRequestMethod("GET");
 				huc.connect();
 				int code = huc.getResponseCode();
@@ -199,8 +258,7 @@ public  class web {
 	public static boolean checkServerConnection(String serverURL) {
 		boolean value = false;
 		try {
-			value = new RetreiveCheckServerConnectionString().execute(
-					serverURL).get();
+			value = new RetreiveCheckServerConnectionString().execute(serverURL).get();
 		} catch (InterruptedException e) {
 			QuickUtils.log.e("InterruptedException", e);
 		} catch (ExecutionException e) {
@@ -216,16 +274,14 @@ public  class web {
 	 * @author Pereira
 	 * 
 	 */
-	private static class RetreiveCheckServerConnectionString extends
-			AsyncTask<String, Void, Boolean> {
+	private static class RetreiveCheckServerConnectionString extends AsyncTask<String, Void, Boolean> {
 
 		private Exception exception;
 
 		protected Boolean doInBackground(String... serverURL) {
 			try {
 				URL u = new URL(serverURL[0]);
-				HttpURLConnection huc = (HttpURLConnection) u
-						.openConnection();
+				HttpURLConnection huc = (HttpURLConnection) u.openConnection();
 				huc.setRequestMethod("GET"); // OR huc.setRequestMethod
 												// ("HEAD");
 				huc.connect();
@@ -243,4 +299,3 @@ public  class web {
 
 	}
 }
-

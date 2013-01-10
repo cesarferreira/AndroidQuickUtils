@@ -9,6 +9,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import android.text.format.Time;
+
 import quickutils.core.QuickUtils;
 
 public  class date {
@@ -50,6 +52,15 @@ public  class date {
 	public static int getCurrentDay() {
 		Calendar c = Calendar.getInstance();
 		return c.get(Calendar.DAY_OF_MONTH);
+	}
+	
+	/**
+	 * Gets the current date
+	 * 
+	 * @return current date
+	 */
+	public static Date getCurrentDate() {
+		return Calendar.getInstance().getTime();
 	}
 
 	/**
