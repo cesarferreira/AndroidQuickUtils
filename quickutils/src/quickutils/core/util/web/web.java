@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutionException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -51,7 +52,7 @@ public class web {
 	 *            list of pair-values
 	 * @return the result JSON
 	 */
-	public static JSONObject getJSONFromUrl(String url, List<NameValuePair> params) {
+	public static JSONObject getJSONFromUrlViaPOST(String url, List<NameValuePair> params) {
 
 		InputStream is = null;
 		JSONObject jObj = null;
@@ -99,6 +100,40 @@ public class web {
 		// return JSON String
 		return jObj;
 
+	}
+
+	public static JSONObject getJSONFromUrlViaGET(String url) {
+		
+		JSONObject jObj = null;
+
+		StringBuilder builder = new StringBuilder();
+		HttpClient client = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(url);
+		try {
+			HttpResponse response = client.execute(httpGet);
+			StatusLine statusLine = response.getStatusLine();
+			int statusCode = statusLine.getStatusCode();
+			if (statusCode == 200) {
+				HttpEntity entity = response.getEntity();
+				InputStream content = entity.getContent();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+				String line;
+				while ((line = reader.readLine()) != null) {
+					builder.append(line);
+				}
+				
+				jObj = new JSONObject(builder.toString());
+			} else {
+				// Log.e(ParseJSON.class.toString(), "Failed to download file");
+			}
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return jObj;
 	}
 
 	/**
