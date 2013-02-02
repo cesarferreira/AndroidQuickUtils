@@ -1,13 +1,17 @@
 package quickutils.core.util.web;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -44,7 +48,53 @@ public class web {
 	}
 
 	/**
-	 * Queries the given URL with a list of params
+	 * Download a file to the sdcard<br/>
+	 * Please remember to <br/>
+	 * <li>give your application the permission to access the Internet and to
+	 * write to external storage</li> <li>Create the Folder (eg.
+	 * <code>File wallpaperDirectory = new File("/sdcard/Wallpaper/");
+// have the object build the directory structure, if needed.
+wallpaperDirectory.mkdirs();</code>
+	 * 
+	 * 
+	 * @param url
+	 *            from where you want to download
+	 * @param sdcardPath
+	 *            path to download the asset
+	 * @return
+	 */
+	public static boolean downloadToSDCard(String downloadURL, String sdcardPath) {
+		try {
+			URL url = new URL(downloadURL);
+
+			URLConnection connection = url.openConnection();
+			connection.connect();
+
+			// download the file
+			InputStream input = new BufferedInputStream(url.openStream());
+			OutputStream output = new FileOutputStream(sdcardPath);
+
+			byte data[] = new byte[1024];
+			long total = 0;
+			int count;
+			while ((count = input.read(data)) != -1) {
+				total += count;
+				output.write(data, 0, count);
+			}
+
+			output.flush();
+			output.close();
+			input.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Queries the given URL with a list of params via POST
 	 * 
 	 * @param url
 	 *            the url to query
@@ -102,8 +152,15 @@ public class web {
 
 	}
 
+	/**
+	 * Queries the given URL with a GET request
+	 * 
+	 * @param url
+	 *            the url to query
+	 * @return the result JSON
+	 */
 	public static JSONObject getJSONFromUrlViaGET(String url) {
-		
+
 		JSONObject jObj = null;
 
 		StringBuilder builder = new StringBuilder();
@@ -121,7 +178,7 @@ public class web {
 				while ((line = reader.readLine()) != null) {
 					builder.append(line);
 				}
-				
+
 				jObj = new JSONObject(builder.toString());
 			} else {
 				// Log.e(ParseJSON.class.toString(), "Failed to download file");
@@ -159,10 +216,8 @@ public class web {
 			return false;
 
 		if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING) {
-
 			return info.isConnectedOrConnecting();
 		} else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) {
-
 			return info.isConnectedOrConnecting();
 		}
 		return info.isConnectedOrConnecting();

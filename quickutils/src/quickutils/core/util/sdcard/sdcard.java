@@ -161,7 +161,7 @@ public  class sdcard {
 	 * @return boolean - if file exist on SDCard or not
 	 */
 	public static boolean checkIfFileExists(String filePath) {
-		File file = new File(getSDCardPath(), filePath);
+		File file = new File(filePath);//getSDCardPath(), filePath);
 		return (file.exists() ? true : false);
 	}
 
