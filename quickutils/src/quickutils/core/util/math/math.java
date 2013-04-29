@@ -1,7 +1,10 @@
 package quickutils.core.util.math;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
+
+import quickutils.core.QuickUtils;
 
 public class math {
 
@@ -15,12 +18,79 @@ public class math {
 	private static final float RAD_TO_DEG = 180.0f / 3.1415926f;
 
 	/**
-	 * Returns a random integer between MIN inclusive and MAX exclusive.
+	 * Rounds a double value to a certain number of digits
+	 * 
+	 * @param toBeRounded
+	 *            number to be rounded
+	 * @param digits
+	 *            number of digits to be rounded
+	 * @return the double rounded
+	 */
+	public static double round(double toBeRounded, int digits) {
+		if (digits < 0) {
+			QuickUtils.log.e("must be greater than 0");
+			return 0;
+		}
+		String formater = "";
+		for (int i = 0; i < digits; i++) {
+			formater += "#";
+		}
+
+		DecimalFormat twoDForm = new DecimalFormat("#." + formater);
+		return Double.valueOf(twoDForm.format(toBeRounded));
+	}
+
+	/**
+	 * Converts pounds to kilograms
+	 * 
+	 * @param weight
+	 *            to be converted
+	 * @return value converted
+	 */
+	public static double poundsToKg(double weight) {
+		return weight / 2.2;
+	}
+
+	/**
+	 * Converts kilograms to pounds
+	 * 
+	 * @param weight
+	 *            to be converted
+	 * @return value converted
+	 */
+	public static double kgToPounds(double weight) {
+		return weight * 2.2;
+	}
+
+	/**
+	 * Converts inches to centimeters
+	 * 
+	 * @param value
+	 *            to be converted
+	 * @return value converted
+	 */
+	public static double inchesToCm(double inches) {
+		return inches * 2.54;
+	}
+
+	/**
+	 * Converts centimeters to inches
+	 * 
+	 * @param value
+	 *            to be converted
+	 * @return value converted
+	 */
+	public static double cmToInches(double cm) {
+		return cm / 2.54;
+	}
+
+	/**
+	 * Returns a random integer between MIN inclusive and MAX inclusive.
 	 * 
 	 * @param min
 	 *            value inclusive
 	 * @param max
-	 *            value exclusive
+	 *            value inclusive
 	 * @return an int between MIN inclusive and MAX exclusive.
 	 */
 	public static int getRandomInteger(int min, int max) {
@@ -29,25 +99,25 @@ public class math {
 	}
 
 	/**
-	 * Returns a random integer between 0 (Zero) inclusive and MAX exclusive. <br/>
+	 * Returns a random integer between 0 (Zero) inclusive and MAX inclusive. <br/>
 	 * Same as {@code getRandomInteger(0, max);} <br/>
 	 * See {@see RandomUtil#getRandomInteger(int, int)}
 	 * 
 	 * @param max
 	 *            value exclusive
-	 * @return an int between 0 inclusive and MAX exclusive.
+	 * @return an int between 0 inclusive and MAX inclusive.
 	 */
 	public static int getRandomInteger(int max) {
 		return getRandomInteger(0, max);
 	}
 
 	/**
-	 * Returns a random double between MIN inclusive and MAX exclusive.
+	 * Returns a random double between MIN inclusive and MAX inclusive.
 	 * 
 	 * @param min
 	 *            value inclusive
 	 * @param max
-	 *            value exclusive
+	 *            value inclusive
 	 * @return an int between 0 inclusive and MAX exclusive.
 	 */
 	public static double getRandomDouble(double min, double max) {
@@ -56,13 +126,13 @@ public class math {
 	}
 
 	/**
-	 * Returns a random double between 0 (Zero) inclusive and MAX exclusive. <br/>
+	 * Returns a random double between 0 (Zero) inclusive and MAX inclusive. <br/>
 	 * Same as {@code getRandomDouble(0, max);} <br/>
 	 * See {@see RandomUtil#getRandomDouble(double, double)}
 	 * 
 	 * @param max
 	 *            value exclusive
-	 * @return an int between 0 inclusive and MAX exclusive.
+	 * @return an int between 0 inclusive and MAX inclusive.
 	 */
 	public static double getRandomDouble(double max) {
 		return getRandomDouble(0, max);
