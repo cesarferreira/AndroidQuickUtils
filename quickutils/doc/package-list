@@ -1,1 +1,10 @@
 quickutils.core
+quickutils.core.util.date
+quickutils.core.util.log
+quickutils.core.util.math
+quickutils.core.util.misc
+quickutils.core.util.sdcard
+quickutils.core.util.security
+quickutils.core.util.share
+quickutils.core.util.text
+quickutils.core.util.web
