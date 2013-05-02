@@ -10,7 +10,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
-public  class share {
+public class share {
 
 	/**
 	 * Share via Email
@@ -24,8 +24,7 @@ public  class share {
 	 * @param emailBody
 	 *            email body
 	 */
-	public static void sendEmail(Context context, String email,
-			String subject, String emailBody) {
+	public static void sendEmail(Context context, String email, String subject, String emailBody) {
 		Intent emailIntent = new Intent(Intent.ACTION_SEND);
 		emailIntent.setType("message/rfc822");
 		emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
@@ -37,8 +36,7 @@ public  class share {
 		try {
 			context.startActivity(emailIntent);
 		} catch (android.content.ActivityNotFoundException ex) {
-			QuickUtils.misc.toast(context,
-					"There are no email clients installed.");
+			QuickUtils.misc.toast(context, "There are no email clients installed.");
 		}
 	}
 
@@ -55,9 +53,8 @@ public  class share {
 	}
 
 	/**
-	 * Share message via Facebook (for the time being, facebook api has a
-	 * bug that prevents this from working, we hope facebook solves it fast
-	 * enough!)
+	 * Share message via Facebook (for the time being, facebook api has a bug
+	 * that prevents this from working, we hope facebook solves it fast enough!)
 	 * 
 	 * @param context
 	 *            Application Context
@@ -78,22 +75,18 @@ public  class share {
 	 *            Message to be delivered
 	 * @param activityInfoName
 	 */
-	private static void shareMethod(Context context, String message,
-			String activityInfoName) {
+	private static void shareMethod(Context context, String message, String activityInfoName) {
 		Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
 		shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
 		PackageManager pm = context.getPackageManager();
-		List<ResolveInfo> activityList = pm.queryIntentActivities(
-				shareIntent, 0);
+		List<ResolveInfo> activityList = pm.queryIntentActivities(shareIntent, 0);
 		for (final ResolveInfo app : activityList) {
 			if ((app.activityInfo.name).contains(activityInfoName)) {
 				final ActivityInfo activity = app.activityInfo;
-				final ComponentName name = new ComponentName(
-						activity.applicationInfo.packageName, activity.name);
+				final ComponentName name = new ComponentName(activity.applicationInfo.packageName, activity.name);
 				shareIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-				shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+				shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 				shareIntent.setComponent(name);
 				context.startActivity(shareIntent);
 				break;
@@ -102,27 +95,23 @@ public  class share {
 	}
 
 	/**
-	 * Generic method for sharing that Deliver some data to someone else.
-	 * Who the data is being delivered to is not specified; it is up to the
-	 * receiver of this action to ask the user where the data should be
-	 * sent.
+	 * Generic method for sharing that Deliver some data to someone else. Who
+	 * the data is being delivered to is not specified; it is up to the receiver
+	 * of this action to ask the user where the data should be sent.
 	 * 
 	 * @param context
 	 *            Application Context
+	 * @param subject
+	 *            The title, if applied
 	 * @param message
 	 *            Message to be delivered
 	 */
-	public static void genericSharing(Context context, String message) {
+	public static void genericSharing(Context context, String subject, String message) {
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("text/plain");
 		intent.putExtra(Intent.EXTRA_TEXT, message);
+		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-		try {
-			context.startActivity(intent);
-		} catch (android.content.ActivityNotFoundException ex) {
-			QuickUtils.log.e("ActivityNotFound", ex);
-		}
+		context.startActivity(intent);
 	}
 }
-
