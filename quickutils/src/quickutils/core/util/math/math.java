@@ -1,7 +1,9 @@
 package quickutils.core.util.math;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import quickutils.core.QuickUtils;
@@ -36,7 +38,7 @@ public class math {
 			formater += "#";
 		}
 
-		DecimalFormat twoDForm = new DecimalFormat("#." + formater);
+		DecimalFormat twoDForm = new DecimalFormat("#." + formater, new DecimalFormatSymbols(Locale.US));
 		return Double.valueOf(twoDForm.format(toBeRounded));
 	}
 
