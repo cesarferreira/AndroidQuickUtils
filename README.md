@@ -445,7 +445,7 @@ QuickUtils.sdcard.copyFile(fromFileInputStream, toFileOutputStream);
 ```
 
 
-## Setting up the environment (THIS HAS TO BE MOVED SOMEWHERE ELSE)
+## Setting up the environment
 Set the default TAG for logcat debug purposes
 
 ```java
