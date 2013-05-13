@@ -1,5 +1,7 @@
 package quickutils.core.util.misc;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +9,18 @@ import quickutils.core.QuickUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.speech.RecognizerIntent;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 public class misc {
@@ -141,6 +149,33 @@ public class misc {
 		myIntent.putExtras(extras);
 		myIntent.setFlags(flags);
 		A.startActivity(myIntent);
+	}
+
+	/**
+	 * Your app key hash is required for example, for Facebook Login in order to
+	 * perform security check before authorizing your app.
+	 * 
+	 * @param context
+	 * @param packageName
+	 * @return
+	 */
+	public static String getApplicationHashKey(Context context, String packageName) {
+
+		String hash = "";
+		try {
+			PackageInfo info = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+			for (Signature signature : info.signatures) {
+				MessageDigest md = MessageDigest.getInstance("SHA");
+				md.update(signature.toByteArray());
+				hash = Base64.encodeToString(md.digest(), Base64.DEFAULT);
+			}
+		} catch (NameNotFoundException e) {
+			QuickUtils.log.e("NameNotFoundException");
+		} catch (NoSuchAlgorithmException e) {
+			QuickUtils.log.e("NoSuchAlgorithmException");
+
+		}
+		return hash;
 	}
 
 	/**
