@@ -134,4 +134,13 @@ public abstract class QuickUtils {
 	 */
 	public static class security extends quickutils.core.util.security.security {
 	}
+	
+	/**
+	 * Security Utils
+	 * 
+	 * @author cesar
+	 * 
+	 */
+	public static class voice extends quickutils.core.util.voice.voice {
+	}
 }
