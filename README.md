@@ -189,37 +189,6 @@ Causes the thread which sent this message to sleep for the given interval of tim
 QuickUtils.misc.sleep(durationInMilliseconds);
 ```
 
-### Start google activity of speechRecognition 
-needed on onActivityResult(int requestCode, int resultCode, Intent data) to call getSpeechRecognitionResults() to get the results)
-
-```java
-QuickUtils.misc.speechRecognition(final Activity activity, int maxResults, String text);
-```
-
-### Get all results from the Google Speech Recognition activity 
-To be called onActivityResult()
-Return an ArrayList<String> with all results or null if was not possible to get any results
-
-```java
-QuickUtils.misc.getSpeechRecognitionResults(int requestCode, int resultCode, Intent data);
-```
-
-### Get the first result that matches the Result List from Google Speech Recognition activity and the Dictionary given
-To be called onActivityResult() 
-Return a String with the first result matched or null if was not possible to get any result
-
-```java
-QuickUtils.misc.getSpeechRecognitionResultFromDicionary(int requestCode, int resultCode, Intent data, ArrayList<String> array);
-```
-
-### Get first result from the Google Speech Recognition activity 
-To be called onActivityResult() 
-Return a string containing the first result of what was recognized
-
-```java
-QuickUtils.misc.getSpeechRecognitionFirstResult(int requestCode, int resultCode, Intent data);
-```
-
 ------------
 
 ## MATH <sub><sup>`category`</sup></sub>
@@ -338,6 +307,48 @@ QuickUtils.math.min(float a, float b);
 
 ```java
 QuickUtils.math.min(int a, int b);
+```
+
+------------
+
+## VOICE <sub><sup>`category`</sup></sub>
+
+Voice utils
+
+
+```java
+QuickUtils.voice.__method__
+```
+
+### Start activity of speechRecognition (Void)
+Start activity of Google Voice Recognition
+
+```java
+QuickUtils.misc.speechRecognition(final Activity activity, int maxResults, String text);
+```
+
+### results from Google Voice Recognition (ArrayList<String>)
+To be called onActivityResult()
+Return an ArrayList<String> with all results or null if was not possible to get any results
+
+```java
+QuickUtils.misc.getSpeechRecognitionResults(int requestCode, int resultCode, Intent data);
+```
+
+### First result from Google Speech Recognition matching the Dictionary given (String)
+To be called onActivityResult() 
+Return a String with the first result matched or null if was not possible to get any result
+
+```java
+QuickUtils.misc.getSpeechRecognitionResultFromDicionary(int requestCode, int resultCode, Intent data, ArrayList<String> array);
+```
+
+### First result from Google Speech Recognition (String)
+To be called onActivityResult() 
+Return a string containing the first result of what was recognized
+
+```java
+QuickUtils.misc.getSpeechRecognitionFirstResult(int requestCode, int resultCode, Intent data);
 ```
 
 ------------
