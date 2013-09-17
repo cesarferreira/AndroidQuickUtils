@@ -387,5 +387,22 @@ public class math {
 		Random r = new Random();
 		return r.nextInt(max - min + 1) + min;
 	}
+	
+	/**
+	 * Truncates a value
+	 * @param value - value to be truncated
+	 * @param places - decimal places
+	 * @return
+	 */
+	public static double truncate(double value, int places) {
+	    if (places < 0) {
+	        throw new IllegalArgumentException();
+	    }
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = (long) value;
+	    return (double) tmp / factor;
+	}
 
 }
