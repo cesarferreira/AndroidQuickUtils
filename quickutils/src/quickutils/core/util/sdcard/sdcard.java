@@ -12,13 +12,13 @@ import java.util.Calendar;
 import quickutils.core.QuickUtils;
 import android.os.Environment;
 
-public  class sdcard {
+public class sdcard {
 
 	/**
 	 * private constructor
 	 */
-//	private sdcard() {
-//	}
+	// private sdcard() {
+	// }
 
 	/**
 	 * Check if the SD Card is Available
@@ -78,22 +78,20 @@ public  class sdcard {
 	}
 
 	/**
-	 * Creates the specified <code>toFile</code> as a byte for byte copy of
-	 * the <code>fromFile</code>. If <code>toFile</code> already exists,
-	 * then it will be replaced with a copy of <code>fromFile</code>. The
-	 * name and path of <code>toFile</code> will be that of
-	 * <code>toFile</code>.<br/>
+	 * Creates the specified <code>toFile</code> as a byte for byte copy of the
+	 * <code>fromFile</code>. If <code>toFile</code> already exists, then it
+	 * will be replaced with a copy of <code>fromFile</code>. The name and path
+	 * of <code>toFile</code> will be that of <code>toFile</code>.<br/>
 	 * <br/>
-	 * <i> Note: <code>fromFile</code> and <code>toFile</code> will be
-	 * closed by this function.</i>
+	 * <i> Note: <code>fromFile</code> and <code>toFile</code> will be closed by
+	 * this function.</i>
 	 * 
 	 * @param fromFile
 	 *            - FileInputStream for the file to copy from.
 	 * @param toFile
 	 *            - FileOutpubStream for the file to copy to.
 	 */
-	public static void copyFile(FileInputStream fromFile,
-			FileOutputStream toFile) throws IOException {
+	public static void copyFile(FileInputStream fromFile, FileOutputStream toFile) throws IOException {
 		FileChannel fromChannel = null;
 		FileChannel toChannel = null;
 		try {
@@ -114,24 +112,21 @@ public  class sdcard {
 	}
 
 	/**
-	 * Creates the specified <code>toFile</code> as a byte for byte copy of
-	 * the <code>fromFile</code>. If <code>toFile</code> already exists,
-	 * then it will be replaced with a copy of <code>fromFile</code>. The
-	 * name and path of <code>toFile</code> will be that of
-	 * <code>toFile</code>.<br/>
+	 * Creates the specified <code>toFile</code> as a byte for byte copy of the
+	 * <code>fromFile</code>. If <code>toFile</code> already exists, then it
+	 * will be replaced with a copy of <code>fromFile</code>. The name and path
+	 * of <code>toFile</code> will be that of <code>toFile</code>.<br/>
 	 * <br/>
-	 * <i> Note: <code>fromFile</code> and <code>toFile</code> will be
-	 * closed by this function.</i>
+	 * <i> Note: <code>fromFile</code> and <code>toFile</code> will be closed by
+	 * this function.</i>
 	 * 
 	 * @param fromFile
 	 *            - File to copy from.
 	 * @param toFile
 	 *            - File to copy to.
 	 */
-	public static void copyFile(File fromFile, File toFile)
-			throws IOException {
-		copyFile(new FileInputStream(fromFile),
-				new FileOutputStream(toFile));
+	public static void copyFile(File fromFile, File toFile) throws IOException {
+		copyFile(new FileInputStream(fromFile), new FileOutputStream(toFile));
 	}
 
 	/**
@@ -156,13 +151,30 @@ public  class sdcard {
 	 * Check if file exists on SDCard or not
 	 * 
 	 * @param filePath
-	 *            - its the path of the file after SDCardDirectory (no need
-	 *            for getExternalStorageDirectory())
+	 *            - its the path of the file after SDCardDirectory (no need for
+	 *            getExternalStorageDirectory())
 	 * @return boolean - if file exist on SDCard or not
 	 */
 	public static boolean checkIfFileExists(String filePath) {
-		File file = new File(filePath);//getSDCardPath(), filePath);
+		File file = new File(filePath);// getSDCardPath(), filePath);
 		return (file.exists() ? true : false);
+	}
+
+	/**
+	 * Create folder in the SDCard
+	 * @param path 
+	 * @return
+	 */
+	public static boolean createFolder(String path) {
+		File direct = new File(Environment.getExternalStorageDirectory() + "/" + path);
+
+		if (!direct.exists()) {
+			if (direct.mkdir()) {
+				return true;
+			}
+
+		}
+		return false;
 	}
 
 	/**
@@ -200,20 +212,14 @@ public  class sdcard {
 	 * @param isDetailed
 	 *            if it should show the timestamp or not
 	 */
-	private static void writeToFile(String text, String logFilePath,
-			boolean isDetailed) {
+	private static void writeToFile(String text, String logFilePath, boolean isDetailed) {
 		if (isSDCardAvailable() && isSDCardWritable() && text != null) {
 
 			try {
 				File file = new File(logFilePath);
 				OutputStream os = new FileOutputStream(file, true);
 				if (isDetailed) {
-					os.write(("---"
-							+ new SimpleDateFormat(
-									"yyyy/MM/dd HH:mm:ss.SSS")
-									.format(Calendar.getInstance()
-											.getTime()) + "---\n")
-							.getBytes());
+					os.write(("---" + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS").format(Calendar.getInstance().getTime()) + "---\n").getBytes());
 				}
 				os.write((text + "\n").getBytes());
 				// os.write(("------\n").getBytes());
@@ -227,5 +233,3 @@ public  class sdcard {
 	}
 
 }
-
-
