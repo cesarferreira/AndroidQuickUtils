@@ -156,8 +156,10 @@ public class misc {
 	 * perform security check before authorizing your app.
 	 * 
 	 * @param context
+	 *            Application context
 	 * @param packageName
-	 * @return
+	 *            name of the package (e.g. "com.example.app")
+	 * @return the application hash key
 	 */
 	public static String getApplicationHashKey(Context context, String packageName) {
 
