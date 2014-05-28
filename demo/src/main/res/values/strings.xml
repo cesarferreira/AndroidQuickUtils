@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">SamplesQuickUtils</string>
@@ -11,6 +12,7 @@
         <item>Web</item>
         <item>Date</item>
         <item>Misc</item>
+        <item>Animation</item>
     </string-array>
     <string-array name="log_array">
         <item>Production MODE</item>
@@ -42,5 +44,7 @@
     <string name="title_activity_log_category">Log Category</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_math_category">MathCategory</string>
+    <string name="title_activity_animation_category">AnimationCategory</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

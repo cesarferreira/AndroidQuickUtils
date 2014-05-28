@@ -1,47 +1,33 @@
-## QuickUtils
+QuickUtils
+============
 
 QuickUtils is a development library for the Android platform.
 It is intended to make application development easier and consistent through your applications.
 
 
-![](https://dl.dropbox.com/u/86831/cesarferreira/nexus_header2.jpg)
-
-<!--
-Keep in mind this is still a work in progress. There are thousands of things to do and I hope we'll have enough time to develop all of the features we have in mind :)
-
-[![](http://lh4.ggpht.com/_OHO4y8YcQbs/TQFQZTft6OI/AAAAAAAAMpY/hAloaii6kRA/s288/gd7.png)](http://lh4.ggpht.com/_OHO4y8YcQbs/TQFQZTft6OI/AAAAAAAAMpY/hAloaii6kRA/s800/gd7.png)
-[![](https://lh6.googleusercontent.com/-DuebAvhlkYo/Ted7VA4WzoI/AAAAAAAAMvc/fs9IRD4ZtgU/s288/gd8.png)](https://lh6.googleusercontent.com/-DuebAvhlkYo/Ted7VA4WzoI/AAAAAAAAMvc/fs9IRD4ZtgU/s800/gd8.png)
-[![](https://lh6.googleusercontent.com/-oQoXEMJcO0E/Ted7UeGFemI/AAAAAAAAMvY/HpfJVIVE6-4/s288/gd9.png)](https://lh6.googleusercontent.com/-oQoXEMJcO0E/Ted7UeGFemI/AAAAAAAAMvY/HpfJVIVE6-4/s800/gd9.png)
-[![](http://lh6.ggpht.com/_OHO4y8YcQbs/TQFQTfazM2I/AAAAAAAAMpQ/lgPpIKImdZw/s288/gd5.png)](http://lh6.ggpht.com/_OHO4y8YcQbs/TQFQTfazM2I/AAAAAAAAMpQ/lgPpIKImdZw/s800/gd5.png)
-[![](http://lh3.ggpht.com/_OHO4y8YcQbs/TQFQS5hyrKI/AAAAAAAAMpM/4hqL9y_tVgM/s288/gd4.png)](http://lh3.ggpht.com/_OHO4y8YcQbs/TQFQS5hyrKI/AAAAAAAAMpM/4hqL9y_tVgM/s800/gd4.png)
--->
-A sample application can be downloaded on the [Android Market](blabla)
+![](http://i1.cdnds.net/13/44/618x464/tech-nexus-5-screenshot-6.png)
 
 
+# Including in your project
 
-## Install
+If you use Maven:
 
-Via **github**:
+```xml
+<dependency>
+  <groupId>com.cesarferreira.quickutils</groupId>
+  <artifactId>library</artifactId>
+  <version>1.0.0</version>
+  <type>aar</type>
+</dependency>
+```
 
-1. Check a clone of this repo: `git@github.com:cesarferreira/AndroidQuickUtils.git`
-2. Import the **`QuickUtils`** project into Eclipse
-3. Open your project properties
-4. Go to Android
-5. Add **QuickUtils** as a `Library`
+or Gradle:
 
-Or via **download**:
-
-1. Download the latest `quickutils.jar` from [here](https://github.com/cesarferreira/AndroidQuickUtils/tags)
-2. Create a `lib/` folder in your project and add the `jar`
-3. Inside Eclipse Right Click the jar and `Build Path -> Add to Build Path`
-
-
-
-**Note:**
-if you use the `install via github`, all you need to do to get the latest version of **QuickUtills** is `git pull` on the root of its directory. If you use the second method you need to download the newest version and re-add the `.jar`.
-
-## Downloads
-All the versions can be found [here](https://github.com/cesarferreira/AndroidQuickUtils/tags)
+```groovy
+dependencies {
+    compile 'com.cesarferreira.quickutils:library:1.0.0'
+}
+```
 
 
 ## How to Use
@@ -371,22 +357,14 @@ QuickUtils.web.changeWirelessState(Context context, boolean state);
 ```
 
 ### Check if can connect to the server
-also this method will need the permissions "android.permission.INTERNET"
-true if the connection returned a successful code
 
-```java
-QuickUtils.web.checkServerConnection(URL u);
-```
-
-### Check if can connect to the server
-also this method will need the permissions "android.permission.INTERNET"
-true if the connection returned a successful code
+`True` if the connection returned a successful code
 
 ```java
 QuickUtils.web.checkServerConnection(String serverURL);
 ```
 
-###
+### Checks if there is an internet connection
 
 ```java
 QuickUtils.web.hasInternetConnection(Context context);
@@ -478,40 +456,9 @@ When the application is ready to go and you want to disable the log outputs.
 QuickUtils.setDebugMode(QuickUtils.PRODUCTION_MODE);
 ```
 
-AndroidManifest.xml
--------------------
 
-If you intend to use the vibration util don't forget to add the vibration permission, if you haven't already, in your `<manifest>`:
-
-```xml
-<uses-permission android:name="android.permission.VIBRATE" />   
-```
-
-If you intend to use the `hasConnectivity` method don't forget to add the network state access permission, if you haven't already, in your `<manifest>`:
-
-```xml
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-```
-
-If you intend to use the `HTTPGetRequest` method, if you haven't already, in your `<manifest>`:
-
-```xml
-<uses-permission android:name="android.permission.INTERNET" />
-```
-
-
-
-
-## Contributing
-
-Want to contribute? Great! 
-
-1. Fork it.
-2. Create a branch (`git checkout -b my_branch`)
-3. Commit your changes (`git commit -am "Added changes"`)
-4. Push to the branch (`git push origin my_branch`)
-5. Create an [Issue](https://github.com/cesarferreira/AndroidQuickUtils/issues) with a link to your branch
-6. Enjoy a refreshing Diet Coke and wait
+# Contributing
+Contributions welcome via Github pull requests.
 
 
 ## License
