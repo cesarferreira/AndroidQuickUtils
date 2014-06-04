@@ -7,7 +7,6 @@ import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
