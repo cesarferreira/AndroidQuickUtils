@@ -310,7 +310,13 @@ public class web {
         }
     }
 
-    public static boolean checkMobiledataState(Context context)
+    /**
+     * Check state of mobile data connectivity (on/off).
+     * Please note that this method *does not* guarantee that a connection is available.
+     * @param context Application Context
+     * @return true if enabled, false if disabled
+     */
+    public static boolean checkMobiledataState(Context context) throws Exception
     {
         try
         {
@@ -322,7 +328,8 @@ public class web {
         }
         catch(Exception e)
         {
-            return false;
+            e.printStackTrace();
+            throw new Exception("Unexpected exception. Please check stack trace");
         }
     }
 
