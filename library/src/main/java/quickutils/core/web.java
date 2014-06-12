@@ -3,7 +3,6 @@ package quickutils.core;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -193,26 +192,21 @@ public class web {
      * @return true if has connection to the Internet and false if it doesn't
      */
     public static boolean hasInternetConnection(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm == null)
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity == null) {
             return false;
-        NetworkInfo info = cm.getActiveNetworkInfo();
-
-        // 3G
-        State mobile = cm.getNetworkInfo(0).getState();
-
-        // wifi
-        State wifi = cm.getNetworkInfo(1).getState();
-
-        if (info == null)
-            return false;
-
-        if (mobile == State.CONNECTED || mobile == State.CONNECTING) {
-            return info.isConnectedOrConnecting();
-        } else if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
-            return info.isConnectedOrConnecting();
+        } else {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
         }
-        return info.isConnectedOrConnecting();
+        return false;
     }
 
     /**
