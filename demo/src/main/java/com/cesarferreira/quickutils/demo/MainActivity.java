@@ -3,7 +3,10 @@ package com.cesarferreira.quickutils.demo;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import quickutils.core.OnEventListener;
 import quickutils.core.QuickUtils;
+import quickutils.core.services.CustomTask;
+
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -24,6 +27,21 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		QuickUtils.setTAG("SAMPLE_APP");
+/*
+        QuickUtils.log.d(QuickUtils.misc.getDeviceID(getApplicationContext()));
+
+        new CustomTask<String>(String.class, new OnEventListener<String>() {
+            @Override
+            public void onSuccess(String object) {
+                QuickUtils.log.d("SUCESSO: "+object);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        }).execute();*/
+
 
 		// QuickUtils.share.sendEmail(getApplicationContext(),
 		// "soupas@gmail.com", "ola", "body");

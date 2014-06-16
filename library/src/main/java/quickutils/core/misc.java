@@ -18,6 +18,7 @@ import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.util.Base64;
 import android.util.Log;
@@ -243,5 +244,18 @@ public class misc {
 			QuickUtils.log.e("Interrupted exception", e);
 		}
 	}
+
+
+    /**
+     * Get device ID
+     * @param context application context
+     * @return
+     */
+    public static String getDeviceID(Context context) {
+        return   Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
+
+
+
 
 }
