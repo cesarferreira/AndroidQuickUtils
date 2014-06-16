@@ -5,19 +5,19 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class BoldRobotoTextView extends TextView {
+public class RobotoBoldTextView extends TextView {
 
-	public BoldRobotoTextView(Context context, AttributeSet attrs, int defStyle) {
+	public RobotoBoldTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
 
-	public BoldRobotoTextView(Context context, AttributeSet attrs) {
+	public RobotoBoldTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
 
-	public BoldRobotoTextView(Context context) {
+	public RobotoBoldTextView(Context context) {
 		super(context);
 		init();
 	}
