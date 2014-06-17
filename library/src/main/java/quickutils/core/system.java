@@ -24,12 +24,12 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
-public class misc {
+public class system {
 
 	/**
 	 * private constructor
 	 */
-	protected misc() {
+	protected system() {
 	}
 
 	/**

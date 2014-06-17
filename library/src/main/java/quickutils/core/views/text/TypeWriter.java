@@ -1,4 +1,4 @@
-package quickutils.core.views;
+package quickutils.core.views.text;
 
 import android.content.Context;
 import android.os.Handler;

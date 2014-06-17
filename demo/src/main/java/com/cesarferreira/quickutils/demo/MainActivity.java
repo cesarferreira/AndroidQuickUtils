@@ -3,9 +3,7 @@ package com.cesarferreira.quickutils.demo;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import quickutils.core.OnEventListener;
 import quickutils.core.QuickUtils;
-import quickutils.core.services.CustomTask;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -69,9 +67,9 @@ public class MainActivity extends Activity {
 				String StringClassname = "com.cesarferreira.quickutils.demo.categories." + listItem.toString() + "Category";
 
 				try {
-					QuickUtils.misc.navigateToActivityByClassName(MainActivity.this, StringClassname);
+					QuickUtils.system.navigateToActivityByClassName(MainActivity.this, StringClassname);
 				} catch (Exception e) {
-					QuickUtils.misc.toast(getApplicationContext(), "Not yet implemented");
+					QuickUtils.system.toast(getApplicationContext(), "Not yet implemented");
 				}
 
 			}

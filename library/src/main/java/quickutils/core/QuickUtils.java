@@ -64,7 +64,7 @@ public abstract class QuickUtils {
      *
      * @author cesar
      */
-    public static class misc extends quickutils.core.misc {
+    public static class system extends quickutils.core.system {
 
     }
 

@@ -2,7 +2,7 @@ package quickutils.core.services;
 
 import android.os.AsyncTask;
 
-import quickutils.core.OnEventListener;
+import quickutils.core.interfaces.OnEventListener;
 
 /**
  * Created by cesarferreira on 16/06/14.

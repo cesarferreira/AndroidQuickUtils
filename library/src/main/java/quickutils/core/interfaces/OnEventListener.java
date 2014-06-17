@@ -1,4 +1,4 @@
-package quickutils.core;
+package quickutils.core.interfaces;
 
 /**
  * Created by cesarferreira on 16/06/14.

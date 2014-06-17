@@ -53,7 +53,7 @@ public class AnimationCategory extends Activity {
                 if (optionValue.equals("Development MODE")) {
 
                     QuickUtils.setDebugMode(QuickUtils.DEVELOPER_MODE);
-                    QuickUtils.misc.toast(mContext, "Developer mode activated");
+                    QuickUtils.system.toast(mContext, "Developer mode activated");
 
                     return;
                 } else
@@ -62,7 +62,7 @@ public class AnimationCategory extends Activity {
                     if (optionValue.equals("Production MODE")) {
 
                         QuickUtils.setDebugMode(QuickUtils.PRODUCTION_MODE);
-                        QuickUtils.misc.toast(mContext, "Production mode activated (console output is now disabled)");
+                        QuickUtils.system.toast(mContext, "Production mode activated (console output is now disabled)");
 
                         return;
                     }
