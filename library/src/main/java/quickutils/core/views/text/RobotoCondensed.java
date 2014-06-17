@@ -5,26 +5,26 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class RobotoThinTextView extends TextView {
+public class RobotoCondensed extends TextView {
 
-	public RobotoThinTextView(Context context, AttributeSet attrs, int defStyle) {
+	public RobotoCondensed(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
 
-	public RobotoThinTextView(Context context, AttributeSet attrs) {
+	public RobotoCondensed(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
 
-	public RobotoThinTextView(Context context) {
+	public RobotoCondensed(Context context) {
 		super(context);
 		init();
 	}
 
 	public void init() {
 
-		Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Thin.ttf");
+		Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Condensed.ttf");
 		setTypeface(tf, 1);
 
 	}

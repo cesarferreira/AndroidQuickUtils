@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 /**
  * Created by cesarferreira on 11/06/14.
  */
-public class TypeWriter extends RobotoTextView {
+public class TypeWriter extends Roboto {
 
     private CharSequence mText;
     private int mIndex;

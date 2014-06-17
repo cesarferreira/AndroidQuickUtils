@@ -1,6 +1,8 @@
 package quickutils.core;
 
 
+import android.content.Context;
+
 public abstract class QuickUtils {
 
     public static String TAG = "DESIRED_TAG";
@@ -22,7 +24,7 @@ public abstract class QuickUtils {
     /**
      * Production mode for Debugging purposes
      */
-    public static final boolean PRODUCTION_MODE = false;
+    public static final boolean PRODUCTION_MODE = !DEVELOPER_MODE;
 
     public static boolean DEBUG_MODE = QuickUtils.DEVELOPER_MODE;
 
@@ -30,6 +32,16 @@ public abstract class QuickUtils {
      * private constructor
      */
     private QuickUtils() {
+    }
+
+    /**
+     * Initialize QuickUtils
+     *
+     */
+    public static synchronized void init(String TAG, boolean debugMode) throws Exception {
+        setDebugMode(debugMode);
+        setTAG(TAG);
+
     }
 
     /**
@@ -125,7 +137,7 @@ public abstract class QuickUtils {
     }
 
     /**
-     * Security Utils
+     * Voice Utils
      *
      * @author cesar
      */
@@ -139,5 +151,13 @@ public abstract class QuickUtils {
      * @author cesar
      */
     public static class animation extends quickutils.core.animation {
+    }
+
+    /**
+     * Animation Utils
+     *
+     * @author cesar
+     */
+    public static class image extends quickutils.core.image {
     }
 }

@@ -5,26 +5,26 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class RobotoLightTextView extends TextView {
+public class RobotoThin extends TextView {
 
-	public RobotoLightTextView(Context context, AttributeSet attrs, int defStyle) {
+	public RobotoThin(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
 
-	public RobotoLightTextView(Context context, AttributeSet attrs) {
+	public RobotoThin(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
 
-	public RobotoLightTextView(Context context) {
+	public RobotoThin(Context context) {
 		super(context);
 		init();
 	}
 
 	public void init() {
 
-		Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Light.ttf");
+		Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Thin.ttf");
 		setTypeface(tf, 1);
 
 	}
