@@ -182,7 +182,7 @@ public class system {
 	}
 
 	/**
-	 * Make the smartphone vibrate for a giving time.you need to put the
+	 * Make the smartphone vibrate for a giving time. You need to put the
 	 * vibration permission in the manifest as follows: <uses-permission
 	 * android:name="android.permission.VIBRATE"/>
 	 * 
@@ -238,7 +238,6 @@ public class system {
 	public static void sleep(int milliseconds) {
 
 		try {
-			QuickUtils.log.i("delaying for " + milliseconds / 1000 + " seconds");
 			Thread.sleep(milliseconds);
 		} catch (InterruptedException e) {
 			QuickUtils.log.e("Interrupted exception", e);
@@ -247,7 +246,8 @@ public class system {
 
 
     /**
-     * Get device ID
+     * Get device unique ID
+     *
      * @param context application context
      * @return
      */
