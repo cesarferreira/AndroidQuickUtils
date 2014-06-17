@@ -16,7 +16,7 @@ If you use Maven:
 <dependency>
   <groupId>com.cesarferreira.quickutils</groupId>
   <artifactId>library</artifactId>
-  <version>1.0.2</version>
+  <version>1.1.0</version>
   <type>aar</type>
 </dependency>
 ```
@@ -25,7 +25,7 @@ or Gradle:
 
 ```groovy
 dependencies {
-    compile 'com.cesarferreira.quickutils:library:1.0.2'
+    compile 'com.cesarferreira.quickutils:library:1.1.0'
 }
 ```
 
