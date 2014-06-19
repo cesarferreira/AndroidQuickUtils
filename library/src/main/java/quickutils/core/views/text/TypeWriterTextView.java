@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 /**
  * Created by cesarferreira on 11/06/14.
  */
-public class TypeWriter extends Roboto {
+public class TypeWriterTextView extends RobotoTextView {
 
     private CharSequence mText;
     private int mIndex;
@@ -20,11 +20,11 @@ public class TypeWriter extends Roboto {
     // textView.setCharacterDelay(60);
     // textView.animateText(mCountries.get(position).name);
 
-    public TypeWriter(Context context) {
+    public TypeWriterTextView(Context context) {
         super(context);
     }
 
-    public TypeWriter(Context context, AttributeSet attrs) {
+    public TypeWriterTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

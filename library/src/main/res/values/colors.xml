@@ -155,4 +155,18 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
+
+    <color name="graphBgGreen">#992ecc71</color>
+    <color name="graphBgViolet">#998e44ad</color>
+    <color name="graphBgYellow">#99f1c40f</color>
+    <color name="graphBgOrange">#99d35400</color>
+    <color name="graphBgTurquoise">#99167462</color>
+    <color name="graphBgWhite">#99ffffff</color>
+    <color name="graphBgBlack">#99000000</color>
+    <color name="graphBgRed">#99e74c3c</color>
+    <color name="graphBlue">#993498db</color>
+    <color name="graphMidnightBlue">#2c3e50</color>
+
+    <color name="halftransparent">#99000000</color>
+    <color name="quartertransparent">#44000000</color>
 </resources>

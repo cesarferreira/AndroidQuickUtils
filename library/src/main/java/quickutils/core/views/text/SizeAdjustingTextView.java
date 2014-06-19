@@ -34,7 +34,7 @@ import android.widget.TextView;
  * @since Apr 4, 2011
  *
  */
-public class SizeAdjusting extends TextView{
+public class SizeAdjustingTextView extends TextView{
 
     // Minimum text size for this text view
     public static final float MIN_TEXT_SIZE = 20;
@@ -64,17 +64,17 @@ public class SizeAdjusting extends TextView{
     private boolean mAddEllipsis = true;
 
     // Default constructor override
-    public SizeAdjusting(Context context) {
+    public SizeAdjustingTextView(Context context) {
         this(context, null);
     }
 
     // Default constructor when inflating from XML file
-    public SizeAdjusting(Context context, AttributeSet attrs) {
+    public SizeAdjustingTextView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
     // Default constructor override
-    public SizeAdjusting(Context context, AttributeSet attrs, int defStyle) {
+    public SizeAdjustingTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mTextSize = getTextSize();
     }

@@ -21,12 +21,17 @@ android {
 
         minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+
+        renderscriptTargetApi 19
+        renderscriptSupportMode true
     }
 
 }
 
 dependencies {
-
+    compile 'com.android.support:appcompat-v7:19.+'
+    compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.android.support:support-v13:19.+'
 }
 
 task clearJar(type: Delete) {

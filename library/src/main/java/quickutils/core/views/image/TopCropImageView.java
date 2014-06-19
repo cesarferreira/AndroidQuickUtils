@@ -7,9 +7,9 @@ import android.widget.ImageView;
 /**
  * Created by cesarferreira on 17/06/14.
  */
-public class TopCrop extends ImageView {
+public class TopCropImageView extends ImageView {
 
-    public TopCrop(Context context) {
+    public TopCropImageView(Context context) {
         super(context);
         setScaleType(ImageView.ScaleType.MATRIX);
     }
