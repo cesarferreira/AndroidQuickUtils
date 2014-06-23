@@ -337,7 +337,7 @@ public class web {
     public static boolean checkServerConnection(URL u) {
         boolean value = false;
         try {
-            value = new RetreiveCheckServerConnection().execute(u).get();
+            value = new RetrieveCheckServerConnection().execute(u).get();
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
