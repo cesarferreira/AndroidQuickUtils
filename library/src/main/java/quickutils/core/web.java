@@ -355,7 +355,7 @@ public class web {
      *
      * @author Pereira
      */
-    private static class RetreiveCheckServerConnection extends AsyncTask<URL, Void, Boolean> {
+    private static class RetrieveCheckServerConnection extends AsyncTask<URL, Void, Boolean> {
 
         private Exception exception;
 
