@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -30,6 +31,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.Exception;
+import java.lang.UnsupportedOperationException;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -264,6 +268,62 @@ public class web {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    /**
+     * Set mobile data connectivity on/off.
+     * API level 9+ only (Android 2.3+).
+     * This method will need "android.permission.CHANGE_NETWORK_STATE" permission.
+     *
+     * @param context Application Context
+     * @param dataEnabled true to enable and false to disable mobile data
+     * @return true if set successfully, false otherwise
+     */
+    public static boolean changeMobileDataState(Context context, boolean dataEnabled)
+    {
+        if(Build.VERSION.SDK_INT < 9)
+        {
+            throw new UnsupportedOperationException("Unsupported SDK version. This operation is only available on SDK 9 or above.");
+        }
+
+        try
+        {
+            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            Class connectivityManagerClass = Class.forName(connectivityManager.getClass().getName());
+            Method setMobileDataEnabled = connectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+            setMobileDataEnabled.setAccessible(true);
+            setMobileDataEnabled.invoke(connectivityManager, dataEnabled);
+
+            return true;
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Check state of mobile data connectivity (on/off).
+     * Please note that this method *does not* guarantee that a connection is available, it only
+     * checks if mobile data is turned on/off.
+     * @param context Application Context
+     * @return true if enabled, false if disabled
+     */
+    public static boolean checkMobileDataState(Context context) throws Exception
+    {
+        try
+        {
+            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            Class connectivityManagerClass = Class.forName(connectivityManager.getClass().getName());
+            Method getMobileDataEnabled = connectivityManagerClass.getDeclaredMethod("getMobileDataEnabled");
+            getMobileDataEnabled.setAccessible(true);
+            return (Boolean) getMobileDataEnabled.invoke(connectivityManager);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw new Exception("Unexpected exception. Please check stack trace");
         }
     }
 
