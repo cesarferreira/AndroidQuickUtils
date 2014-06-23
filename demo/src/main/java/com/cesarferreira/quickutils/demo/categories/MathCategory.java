@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewDebug.FlagToString;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -122,7 +121,7 @@ public class MathCategory extends ParentActivity {
 				}
 
 				// Output the result
-				QuickUtils.misc.toast(mContext, optionString + " " + resultString);
+				QuickUtils.system.toast(mContext, optionString + " " + resultString);
 			}
 		});
 	}

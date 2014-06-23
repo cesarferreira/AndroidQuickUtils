@@ -1,8 +1,10 @@
 package quickutils.core;
 
+import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import quickutils.core.QuickUtils;
 
@@ -230,5 +232,18 @@ public class text {
 		stringArray[0] = Character.toUpperCase(stringArray[0]);
 		return new String(stringArray);
 	}
+
+
+    /**
+     * The following snippets remove from a String accented letters and replace them by their regular ASCII equivalent.
+     * @param input String that will be transformed
+     * @return If we pass "à", the method returns "a"
+     */
+    public static String unAccent(String input) {
+        String temp = Normalizer.normalize(input, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(temp).replaceAll("");
+    }
+
 
 }

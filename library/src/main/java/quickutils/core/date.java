@@ -197,6 +197,79 @@ public  class date {
 
 	}
 
+
+    /**
+     * Get number with a suffix
+     * @param number number that will be converted
+     *
+     * @return (e.g. "1" becomes "1st", "3" becomes "3rd", etc)
+     */
+    public static String getNumberWithSuffix(int number) {
+        int j = number % 10;
+        if (j == 1 && number != 11) {
+            return number + "st";
+        }
+        if (j == 2 && number != 12) {
+            return number + "nd";
+        }
+        if (j == 3 && number != 13) {
+            return number + "rd";
+        }
+        return number + "th";
+    }
+
+
+    /**
+     * Converts a month by number to full text
+     * @param month number of the month 1..12
+     * @param useShort boolean that gives "Jun" instead of "June" if true
+     * @return returns "January" if "1" is given
+     */
+    public static String convertMonth(int month, boolean useShort) {
+        String monthStr;
+        switch (month) {
+            default:
+                monthStr = "January";
+                break;
+            case Calendar.FEBRUARY:
+                monthStr = "February";
+                break;
+            case Calendar.MARCH:
+                monthStr = "March";
+                break;
+            case Calendar.APRIL:
+                monthStr = "April";
+                break;
+            case Calendar.MAY:
+                monthStr = "May";
+                break;
+            case Calendar.JUNE:
+                monthStr = "June";
+                break;
+            case Calendar.JULY:
+                monthStr = "July";
+                break;
+            case Calendar.AUGUST:
+                monthStr = "August";
+                break;
+            case Calendar.SEPTEMBER:
+                monthStr = "September";
+                break;
+            case Calendar.OCTOBER:
+                monthStr = "October";
+                break;
+            case Calendar.NOVEMBER:
+                monthStr = "November";
+                break;
+            case Calendar.DECEMBER:
+                monthStr = "December";
+                break;
+        }
+        if (useShort) monthStr = monthStr.substring(0, 3);
+        return monthStr;
+    }
+
+
 }
 
 

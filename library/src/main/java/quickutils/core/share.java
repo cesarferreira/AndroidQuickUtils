@@ -2,7 +2,6 @@ package quickutils.core;
 
 import java.util.List;
 
-import quickutils.core.QuickUtils;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +35,7 @@ public class share {
 		try {
 			context.startActivity(emailIntent);
 		} catch (android.content.ActivityNotFoundException ex) {
-			QuickUtils.misc.toast(context, "There are no email clients installed.");
+			QuickUtils.system.toast(context, "There are no email clients installed.");
 		}
 	}
 

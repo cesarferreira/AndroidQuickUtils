@@ -18,17 +18,18 @@ import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
-public class misc {
+public class system {
 
 	/**
 	 * private constructor
 	 */
-	protected misc() {
+	protected system() {
 	}
 
 	/**
@@ -181,7 +182,7 @@ public class misc {
 	}
 
 	/**
-	 * Make the smartphone vibrate for a giving time.you need to put the
+	 * Make the smartphone vibrate for a giving time. You need to put the
 	 * vibration permission in the manifest as follows: <uses-permission
 	 * android:name="android.permission.VIBRATE"/>
 	 * 
@@ -237,11 +238,24 @@ public class misc {
 	public static void sleep(int milliseconds) {
 
 		try {
-			QuickUtils.log.i("delaying for " + milliseconds / 1000 + " seconds");
 			Thread.sleep(milliseconds);
 		} catch (InterruptedException e) {
 			QuickUtils.log.e("Interrupted exception", e);
 		}
 	}
+
+
+    /**
+     * Get device unique ID
+     *
+     * @param context application context
+     * @return
+     */
+    public static String getDeviceID(Context context) {
+        return   Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
+
+
+
 
 }
