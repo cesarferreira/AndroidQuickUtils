@@ -277,10 +277,10 @@ public class web {
      * This method will need "android.permission.CHANGE_NETWORK_STATE" permission.
      *
      * @param context Application Context
-     * @param state set enable or disable mobile data connection
-     * @return true if was set successfully and false if it wasn't
+     * @param dataEnabled true to enable and false to disable mobile data
+     * @return true if set successfully, false otherwise
      */
-    public static boolean changeMobiledataState(Context context, boolean state)
+    public static boolean changeMobileDataState(Context context, boolean dataEnabled)
     {
         if(Build.VERSION.SDK_INT < 9)
         {
@@ -293,7 +293,7 @@ public class web {
             Class connectivityManagerClass = Class.forName(connectivityManager.getClass().getName());
             Method setMobileDataEnabled = connectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
             setMobileDataEnabled.setAccessible(true);
-            setMobileDataEnabled.invoke(connectivityManager, state);
+            setMobileDataEnabled.invoke(connectivityManager, dataEnabled);
 
             return true;
         }
@@ -305,11 +305,12 @@ public class web {
 
     /**
      * Check state of mobile data connectivity (on/off).
-     * Please note that this method *does not* guarantee that a connection is available.
+     * Please note that this method *does not* guarantee that a connection is available, it only
+     * checks if mobile data is turned on/off.
      * @param context Application Context
      * @return true if enabled, false if disabled
      */
-    public static boolean checkMobiledataState(Context context) throws Exception
+    public static boolean checkMobileDataState(Context context) throws Exception
     {
         try
         {
