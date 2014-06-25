@@ -339,10 +339,8 @@ public class web {
         try {
             value = new RetrieveCheckServerConnection().execute(u).get();
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ExecutionException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return value;

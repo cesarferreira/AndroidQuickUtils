@@ -1,5 +1,7 @@
 package quickutils.core;
 
+import android.os.Environment;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,9 +10,6 @@ import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import quickutils.core.QuickUtils;
-import android.os.Environment;
 
 public class sdcard {
 
@@ -47,6 +46,29 @@ public class sdcard {
 		return mExternalStorageAvailable;
 
 	}
+
+    /**
+     * Delete directory
+     * @param path
+     * @return returns true if deletion was successful
+     */
+    public static boolean deleteDirectory(File path) {
+        if( path.exists() ) {
+            File[] files = path.listFiles();
+            if (files == null) {
+                return true;
+            }
+            for(int i=0; i<files.length; i++) {
+                if(files[i].isDirectory()) {
+                    deleteDirectory(files[i]);
+                }
+                else {
+                    files[i].delete();
+                }
+            }
+        }
+        return( path.delete() );
+    }
 
 	/**
 	 * Check if the SD Card is writable
