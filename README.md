@@ -25,7 +25,7 @@ or Gradle:
 
 ```groovy
 dependencies {
-    compile 'com.cesarferreira.quickutils:library:1.1.1'
+    compile 'com.cesarferreira.quickutils:library:1.+'
 }
 ```
 
@@ -50,9 +50,9 @@ Contributions welcome via Github pull requests.
 ## License
 Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
 
-## Authors
- * César Ferreira (cesar.manuel.ferreira@gmail.com)
 
 ## Contributors <sup>([graph](https://github.com/cesarferreira/AndroidQuickUtils/graphs/contributors "link"))</sup>
- * César Ferreira (cesar.manuel.ferreira@gmail.com)
- * Luís Pereira (luispereira268@gmail.com)
+
+* [@cesarferreira](https://github.com/cesarferreira "link")
+* [@luispereira](https://github.com/luispereira "link")
+* [@telmomarques](https://github.com/telmomarques "link")
