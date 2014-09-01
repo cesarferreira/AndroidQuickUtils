@@ -8,6 +8,21 @@ It is intended to make application development easier and consistent throughout 
 
 ![](http://i1.cdnds.net/13/44/618x464/tech-nexus-5-screenshot-6.png)
 
+## Features
+
+- **More than 1000 preloaded Colors in the project** - check the list [here](https://github.com/cesarferreira/AndroidQuickUtils/wiki/Colors.xml)
+- **Log Category** - Write logs without needing tags, etc.
+- **TextViews** - TypeWriter effect, Roboto bold, thin, condensed, etc.
+- **Animation Category** - With classes for blinking views, etc.
+- **Math Category** - Sin, arcsin, tang, random numbers, etc.
+- **SDCard Category** - SDCard availability, write files, etc.
+- **Security Category** - EncodeBase64, DecodeBase64, Sha1, MD5, etc.
+- **System Category** - Sleep, vibrate, toasts, navigate to activity, etc.
+- **Voice Category** - Get speech recognition results, etc.
+- **Date Category** - Get current time in seconds and miliseconds, etc.
+- **Image Category** - Apply blur to a bitmap, image brightness, etc.
+- **Web Category** - has internet connection, change wireless state, GET requests, etc
+- **Image Views** - Top crop image views, circular image views etc.
 
 # Including in your project
 
