@@ -3,10 +3,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.11.+'
+        classpath 'com.android.tools.build:gradle:0.12.2'
     }
 }
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 repositories {
     mavenCentral()
@@ -35,14 +35,14 @@ dependencies {
 }
 
 task clearJar(type: Delete) {
-    delete 'build/libs/androidquickutils-'+project.VERSION_NAME+'.jar'
+    delete 'build/libs/androidquickutils-' + project.VERSION_NAME + '.jar'
 }
 
 task makeJar(type: Copy) {
     from('build/bundles/debug/')
     into('build/libs/')
     include('classes.jar')
-    rename ('classes.jar', 'androidquickutils-'+project.VERSION_NAME+'.jar')
+    rename('classes.jar', 'androidquickutils-' + project.VERSION_NAME + '.jar')
 }
 
 makeJar.dependsOn(clearJar, build)
