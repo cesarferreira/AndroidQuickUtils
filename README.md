@@ -33,13 +33,9 @@ Really simple usage, you just need to specify the category and the method you wa
 QuickUtils.__category__.__method__
 ```
 
-
-## Read the simple manual
-All that you can do with this library is explained in detail [here](https://github.com/cesarferreira/AndroidQuickUtils/wiki "link")
-
 More Documentation
 ------------------
-Check our [wiki][].
+Take a look at our [wiki][https://github.com/cesarferreira/AndroidQuickUtils/wiki].
 
 # Including in your project
 
