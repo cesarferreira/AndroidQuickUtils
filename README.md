@@ -35,7 +35,7 @@ QuickUtils.__category__.__method__
 
 More Documentation
 ------------------
-Take a look at our [wiki][https://github.com/cesarferreira/AndroidQuickUtils/wiki].
+Take a look at our [wiki](https://github.com/cesarferreira/AndroidQuickUtils/wiki).
 
 # Including in your project
 
