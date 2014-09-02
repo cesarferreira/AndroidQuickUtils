@@ -45,7 +45,7 @@ If you use Maven:
 <dependency>
   <groupId>com.cesarferreira.quickutils</groupId>
   <artifactId>library</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.3</version>
   <type>aar</type>
 </dependency>
 ```
