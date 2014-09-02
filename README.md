@@ -24,6 +24,23 @@ It is intended to make application development easier and consistent throughout 
 - **Web Category** - has internet connection, change wireless state, GET requests, etc
 - **Image Views** - Top crop image views, circular image views etc.
 
+
+## How to Use
+
+Really simple usage, you just need to specify the category and the method you want to use.
+
+```java
+QuickUtils.__category__.__method__
+```
+
+
+## Read the simple manual
+All that you can do with this library is explained in detail [here](https://github.com/cesarferreira/AndroidQuickUtils/wiki "link")
+
+More Documentation
+------------------
+Check our [wiki][].
+
 # Including in your project
 
 If you use Maven:
@@ -45,18 +62,6 @@ dependencies {
 }
 ```
 
-
-## How to Use
-
-Really simple usage, you just need to specify the category and the method you want to use.
-
-```java
-QuickUtils.__category__.__method__
-```
-
-
-## Read the simple manual
-All that you can do with this library is explained in detail [here](https://github.com/cesarferreira/AndroidQuickUtils/wiki "link")
 
 
 # Contributing
