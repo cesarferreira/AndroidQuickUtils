@@ -52,7 +52,9 @@ public abstract class BaseImageView extends ImageView {
 
     public void invalidate() {
         mWeakBitmap = null;
-        if (mMaskBitmap != null) { mMaskBitmap.recycle(); }
+        if (mMaskBitmap != null) {
+            mMaskBitmap.recycle();
+        }
         super.invalidate();
     }
 

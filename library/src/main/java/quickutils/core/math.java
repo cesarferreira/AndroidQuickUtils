@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-import quickutils.core.QuickUtils;
-
 public class math {
 
 	/**
@@ -205,7 +203,7 @@ public class math {
 	 *         1 ulp (unit in the last place) of the real result.
 	 */
 	public static float acos(float value) {
-		return (float) Math.acos(value);
+		return (float) java.lang.Math.acos(value);
 	}
 
 	/**
@@ -217,7 +215,7 @@ public class math {
 	 *         within 1 ulp (unit in the last place) of the real result.
 	 */
 	public static float asin(float value) {
-		return (float) Math.asin(value);
+		return (float) java.lang.Math.asin(value);
 	}
 
 	/**
@@ -229,7 +227,7 @@ public class math {
 	 *         is within 1 ulp (unit in the last place) of the real result.
 	 */
 	public static float atan(float value) {
-		return (float) Math.atan(value);
+		return (float) java.lang.Math.atan(value);
 	}
 
 	/**
@@ -244,7 +242,7 @@ public class math {
 	 *         result.
 	 */
 	public static float atan2(float a, float b) {
-		return (float) Math.atan2(a, b);
+		return (float) java.lang.Math.atan2(a, b);
 	}
 
 	/**
@@ -255,7 +253,7 @@ public class math {
 	 * @return the tangent
 	 */
 	public static float tan(float angle) {
-		return (float) Math.tan(angle);
+		return (float) java.lang.Math.tan(angle);
 	}
 
 	/**
@@ -284,7 +282,7 @@ public class math {
 	 *         last place) of the real result.
 	 */
 	public static float logarithm(float number) {
-		return (float) Math.log(number);
+		return (float) java.lang.Math.log(number);
 	}
 
 	/**
@@ -297,7 +295,7 @@ public class math {
 	 *         last place) of the real result.
 	 */
 	public static float exponencial(float number) {
-		return (float) Math.exp(number);
+		return (float) java.lang.Math.exp(number);
 	}
 
 	/**
@@ -399,7 +397,7 @@ public class math {
 	        throw new IllegalArgumentException();
 	    }
 
-	    long factor = (long) Math.pow(10, places);
+	    long factor = (long) java.lang.Math.pow(10, places);
 	    value = value * factor;
 	    long tmp = (long) value;
 	    return (double) tmp / factor;

@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import quickutils.core.QuickUtils;
 import android.util.Base64;
 
 public class security {

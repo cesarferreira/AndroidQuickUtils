@@ -106,7 +106,7 @@ public class image {
             widthScaleFactor = (float) maxWidth / (float) bitmap.getWidth();
         }
         if (heightScaleFactor < 1 || widthScaleFactor < 1) {
-            scaleFactor = Math.min(heightScaleFactor, widthScaleFactor);
+            scaleFactor = math.min(heightScaleFactor, widthScaleFactor);
         }
         bitmap = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * scaleFactor), (int) (bitmap.getHeight() * scaleFactor), true);
         return saveBitmap(bitmap, filename, path, recycle);
@@ -325,7 +325,7 @@ public class image {
         int g[] = new int[wh];
         int b[] = new int[wh];
         int rsum, gsum, bsum, x, y, i, p, yp, yi, yw;
-        int vmin[] = new int[Math.max(w, h)];
+        int vmin[] = new int[math.max(w, h)];
 
         int divsum = (div + 1) >> 1;
         divsum *= divsum;
@@ -348,12 +348,12 @@ public class image {
         for (y = 0; y < h; y++) {
             rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
             for (i = -radius; i <= radius; i++) {
-                p = pix[yi + Math.min(wm, Math.max(i, 0))];
+                p = pix[yi + math.min(wm, math.max(i, 0))];
                 sir = stack[i + radius];
                 sir[0] = (p & 0xff0000) >> 16;
                 sir[1] = (p & 0x00ff00) >> 8;
                 sir[2] = (p & 0x0000ff);
-                rbs = r1 - Math.abs(i);
+                rbs = (int) (r1 - math.abs(i));
                 rsum += sir[0] * rbs;
                 gsum += sir[1] * rbs;
                 bsum += sir[2] * rbs;
@@ -387,7 +387,7 @@ public class image {
                 boutsum -= sir[2];
 
                 if (y == 0) {
-                    vmin[x] = Math.min(x + radius + 1, wm);
+                    vmin[x] = math.min(x + radius + 1, wm);
                 }
                 p = pix[yw + vmin[x]];
 
@@ -422,7 +422,7 @@ public class image {
             rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
             yp = -radius * w;
             for (i = -radius; i <= radius; i++) {
-                yi = Math.max(0, yp) + x;
+                yi = math.max(0, yp) + x;
 
                 sir = stack[i + radius];
 
@@ -430,7 +430,7 @@ public class image {
                 sir[1] = g[yi];
                 sir[2] = b[yi];
 
-                rbs = r1 - Math.abs(i);
+                rbs = (int) (r1 - math.abs(i));
 
                 rsum += r[yi] * rbs;
                 gsum += g[yi] * rbs;
@@ -468,7 +468,7 @@ public class image {
                 boutsum -= sir[2];
 
                 if (x == 0) {
-                    vmin[y] = Math.min(y + r1, hm) * w;
+                    vmin[y] = math.min(y + r1, hm) * w;
                 }
                 p = x + vmin[y];
 

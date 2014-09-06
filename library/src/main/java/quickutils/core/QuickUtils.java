@@ -1,8 +1,6 @@
 package quickutils.core;
 
 
-import android.content.Context;
-
 public abstract class QuickUtils {
 
     public static String TAG = "DESIRED_TAG";
@@ -21,7 +19,7 @@ public abstract class QuickUtils {
      */
     public static final boolean DEVELOPER_MODE = true;
 
-    /**
+    /**s
      * Production mode for Debugging purposes
      */
     public static final boolean PRODUCTION_MODE = !DEVELOPER_MODE;
@@ -41,7 +39,6 @@ public abstract class QuickUtils {
     public static synchronized void init(String TAG, boolean debugMode) throws Exception {
         setDebugMode(debugMode);
         setTAG(TAG);
-
     }
 
     /**
@@ -63,101 +60,34 @@ public abstract class QuickUtils {
         TAG = tag;
     }
 
-    /**
-     * Log Utils
-     *
-     * @author cesar
-     */
-    public static class log extends quickutils.core.log {
-    }
+    public static class log extends quickutils.core.log {}
 
-    /**
-     * Miscelaneous android App Utils
-     *
-     * @author cesar
-     */
-    public static class system extends quickutils.core.system {
+    public static class system extends quickutils.core.system {}
 
-    }
+    public static class text extends quickutils.core.text {}
 
-    /**
-     * Text library
-     *
-     * @author Joel
-     */
-    public static class text extends quickutils.core.text {
-    }
+    public static class Math extends math {}
 
-    /**
-     * Math library
-     *
-     * @author cesar
-     */
-    public static class math extends quickutils.core.math {
-    }
+    public static class date extends quickutils.core.date {}
 
-    /**
-     * Date Utils
-     *
-     * @author cesar
-     */
-    public static class date extends quickutils.core.date {
-    }
+    public static class web extends quickutils.core.web {}
 
-    /**
-     * Internet utils
-     *
-     * @author cesar
-     */
-    public static class web extends quickutils.core.web {
-    }
+    public static class share extends quickutils.core.share {}
 
-    /**
-     * Share utils
-     *
-     * @author cesar
-     */
-    public static class share extends quickutils.core.share {
-    }
+    public static class sdcard extends quickutils.core.sdcard {}
 
-    /**
-     * File Utils
-     *
-     * @author cesar
-     */
-    public static class sdcard extends quickutils.core.sdcard {
-    }
+    public static class security extends quickutils.core.security {}
 
-    /**
-     * Security Utils
-     *
-     * @author cesar
-     */
-    public static class security extends quickutils.core.security {
-    }
+    public static class voice extends quickutils.core.voice {}
 
-    /**
-     * Voice Utils
-     *
-     * @author cesar
-     */
-    public static class voice extends quickutils.core.voice {
-    }
+    public static class animation extends quickutils.core.animation {}
 
+    public static class image extends quickutils.core.image {}
 
-    /**
-     * Animation Utils
-     *
-     * @author cesar
-     */
-    public static class animation extends quickutils.core.animation {
-    }
+    public static class fragment extends quickutils.core.fragment {}
 
-    /**
-     * Animation Utils
-     *
-     * @author cesar
-     */
-    public static class image extends quickutils.core.image {
-    }
+    public static class collection extends quickutils.core.collection {}
+
+    public static class views extends view {}
+
 }

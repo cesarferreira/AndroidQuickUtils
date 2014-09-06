@@ -2,7 +2,6 @@ package quickutils.core;
 
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 
 /**
  * Created by cesarferreira on 28/05/14.
@@ -23,11 +22,11 @@ public class animation {
      */
     public static View blink(View view, int duration, int offset) {
 
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        android.view.animation.Animation anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(duration);
         anim.setStartOffset(offset);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(Animation.INFINITE);
+        anim.setRepeatMode(android.view.animation.Animation.REVERSE);
+        anim.setRepeatCount(android.view.animation.Animation.INFINITE);
         view.startAnimation(anim);
         return view;
 

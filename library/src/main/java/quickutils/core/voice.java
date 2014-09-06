@@ -1,11 +1,11 @@
 package quickutils.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class voice {
 	protected voice() {

@@ -61,63 +61,63 @@ public class MathCategory extends ParentActivity {
 
 				// isOdd
 				if (optionString.equals("isOdd")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.math.isOdd(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.Math.isOdd(intValue);
 				} else
 				// isEven
 				if (optionString.equals("isEven")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.math.isEven(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.Math.isEven(intValue);
 				}
 				// degreesToRadians
 				if (optionString.equals("degreesToRadians")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.math.degreesToRadians(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.Math.degreesToRadians(intValue);
 				}
 				// radiansToDegrees
 				if (optionString.equals("radiansToDegrees")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.math.radiansToDegrees(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.Math.radiansToDegrees(intValue);
 				}
 				// exponencial
 				if (optionString.equals("exponencial")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.math.exponencial(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.Math.exponencial(intValue);
 				}
 				// logarithm
 				if (optionString.equals("logarithm")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.math.logarithm(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.Math.logarithm(intValue);
 				}
 				// logarithm
 				if (optionString.equals("getRandomNumber")) {
-					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.math.getRandomNumber(minValue, intValue);
+					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.Math.getRandomNumber(minValue, intValue);
 				}
 				// max
 				if (optionString.equals("max")) {
-					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.math.max(minValue, intValue);
+					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.Math.max(minValue, intValue);
 				}
 				// min
 				if (optionString.equals("min")) {
-					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.math.min(minValue, intValue);
+					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.Math.min(minValue, intValue);
 				}	
 				// abs
 				if (optionString.equals("abs")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.math.abs(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.Math.abs(floatValue);
 				}
 				// acos
 				if (optionString.equals("acos")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.math.acos(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.Math.acos(floatValue);
 				}
 				// asin
 				if (optionString.equals("asin")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.math.asin(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.Math.asin(floatValue);
 				}
 				// tan
 				if (optionString.equals("tan")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.math.tan(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.Math.tan(floatValue);
 				}
 				// atan
 				if (optionString.equals("atan")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.math.atan(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.Math.atan(floatValue);
 				}
 				// atan2
 				if (optionString.equals("atan2")) {
-					resultString = "(" + minFloatValue + "," + floatValue + ") = " + QuickUtils.math.atan2(minFloatValue,floatValue);
+					resultString = "(" + minFloatValue + "," + floatValue + ") = " + QuickUtils.Math.atan2(minFloatValue, floatValue);
 				}
 
 				// Output the result
