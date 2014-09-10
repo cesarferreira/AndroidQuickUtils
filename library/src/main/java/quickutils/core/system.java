@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -312,6 +313,169 @@ public class system {
             }
         }
         return false;
+    }
+
+
+
+    /**
+     * Write a value to a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name reprensenting where data will be written to.
+     * @param key A string for the key that will be used to retrieve the value in the future.
+     * @param value A the value to be inserted.
+     */
+    public void writeToPreferences(Context context, String preferenceFileName, String key,
+                                   long value) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(key, value);
+        editor.apply();
+    }
+
+    /**
+     * Write a value to a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name reprensenting where data will be written to.
+     * @param key A string for the key that will be used to retrieve the value in the future.
+     * @param value A the value to be inserted.
+     */
+    public void writeToPreferences(Context context, String preferenceFileName, String key,
+                                   String value) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    /**
+     * Write a value to a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name reprensenting where data will be written to.
+     * @param key A string for the key that will be used to retrieve the value in the future.
+     * @param value A the value to be inserted.
+     */
+    public void writeToPreferences(Context context, String preferenceFileName, String key,
+                                   boolean value) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
+
+    /**
+     * Write a value to a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name reprensenting where data will be written to.
+     * @param key A string for the key that will be used to retrieve the value in the future.
+     * @param value A the value to be inserted.
+     */
+    public void writeToPreferences(Context context, String preferenceFileName, String key,
+                                   int value) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(key, value);
+        editor.apply();
+    }
+
+    /**
+     * Write a value to a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name reprensenting where data will be written to.
+     * @param key A string for the key that will be used to retrieve the value in the future.
+     * @param value A the value to be inserted.
+     */
+    public void writeToPreferences(Context context, String preferenceFileName, String key,
+                                   float value) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat(key, value);
+        editor.apply();
+    }
+
+    /**
+     * Get a value from a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name representing where data will be get from.
+     * @param key A key that will be used to retrieve the value from the preference file.
+     * @return The value retrieved from the preferences file.
+     */
+    public int getIntFromPreferences(Context context, String preferenceFileName, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(key, 0);
+    }
+
+
+    /**
+     * Get a value from a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name representing where data will be get from.
+     * @param key A key that will be used to retrieve the value from the preference file.
+     * @return The value retrieved from the preferences file.
+     */
+    public long getLongFromPreferences(Context context, String preferenceFileName, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        return sharedPreferences.getLong(key, 0);
+    }
+
+    /**
+     * Get a value from a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name representing where data will be get from.
+     * @param key A key that will be used to retrieve the value from the preference file.
+     * @return The value retrieved from the preferences file.
+     */
+    public float getFloatFromPreferences(Context context, String preferenceFileName, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        return sharedPreferences.getFloat(key, 0);
+    }
+
+    /**
+     * Get a value from a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name representing where data will be get from.
+     * @param key A key that will be used to retrieve the value from the preference file.
+     * @return The value retrieved from the preferences file.
+     */
+    public String getStringFromPreferences(Context context, String preferenceFileName, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, "0");
+    }
+
+    /**
+     * Get a value from a user preferences file.
+     *
+     * @param context {@link android.content.Context} to retrieve android user preferences.
+     * @param preferenceFileName A file name representing where data will be get from.
+     * @param key A key that will be used to retrieve the value from the preference file.
+     * @return The value retrieved from the preferences file.
+     */
+    public boolean getBooleanFromPreferences(Context context, String preferenceFileName, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
+                Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(key, false);
     }
 
 }
