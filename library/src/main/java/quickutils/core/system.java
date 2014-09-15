@@ -278,6 +278,22 @@ public class system {
     }
 
     /**
+     * Returns the version code of the current app
+     *
+     * @param context an app context to retrieve the package manager and package name
+     * @return the version name or "unknown" if the package name (of this current app) is not found
+     */
+    public static int getVersionCode(Context context) {
+        int versionName = -1;
+        try {
+            versionName = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES).versionCode;
+        } catch (PackageManager.NameNotFoundException ignore) {
+            QuickUtils.log.d(ignore.getMessage());
+        }
+        return versionName;
+    }
+
+    /**
      * Current device DPI
      *
      * @param c context
@@ -325,7 +341,7 @@ public class system {
      * @param key A string for the key that will be used to retrieve the value in the future.
      * @param value A the value to be inserted.
      */
-    public void writeToPreferences(Context context, String preferenceFileName, String key,
+    public static void writeToPreferences(Context context, String preferenceFileName, String key,
                                    long value) {
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
@@ -343,7 +359,7 @@ public class system {
      * @param key A string for the key that will be used to retrieve the value in the future.
      * @param value A the value to be inserted.
      */
-    public void writeToPreferences(Context context, String preferenceFileName, String key,
+    public static void writeToPreferences(Context context, String preferenceFileName, String key,
                                    String value) {
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
@@ -361,7 +377,7 @@ public class system {
      * @param key A string for the key that will be used to retrieve the value in the future.
      * @param value A the value to be inserted.
      */
-    public void writeToPreferences(Context context, String preferenceFileName, String key,
+    public static void writeToPreferences(Context context, String preferenceFileName, String key,
                                    boolean value) {
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
@@ -379,7 +395,7 @@ public class system {
      * @param key A string for the key that will be used to retrieve the value in the future.
      * @param value A the value to be inserted.
      */
-    public void writeToPreferences(Context context, String preferenceFileName, String key,
+    public static void writeToPreferences(Context context, String preferenceFileName, String key,
                                    int value) {
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
@@ -397,7 +413,7 @@ public class system {
      * @param key A string for the key that will be used to retrieve the value in the future.
      * @param value A the value to be inserted.
      */
-    public void writeToPreferences(Context context, String preferenceFileName, String key,
+    public static void writeToPreferences(Context context, String preferenceFileName, String key,
                                    float value) {
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
@@ -415,7 +431,7 @@ public class system {
      * @param key A key that will be used to retrieve the value from the preference file.
      * @return The value retrieved from the preferences file.
      */
-    public int getIntFromPreferences(Context context, String preferenceFileName, String key) {
+    public static int getIntFromPreferences(Context context, String preferenceFileName, String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
                 Context.MODE_PRIVATE);
         return sharedPreferences.getInt(key, 0);
@@ -430,7 +446,7 @@ public class system {
      * @param key A key that will be used to retrieve the value from the preference file.
      * @return The value retrieved from the preferences file.
      */
-    public long getLongFromPreferences(Context context, String preferenceFileName, String key) {
+    public static long getLongFromPreferences(Context context, String preferenceFileName, String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
                 Context.MODE_PRIVATE);
         return sharedPreferences.getLong(key, 0);
@@ -444,7 +460,7 @@ public class system {
      * @param key A key that will be used to retrieve the value from the preference file.
      * @return The value retrieved from the preferences file.
      */
-    public float getFloatFromPreferences(Context context, String preferenceFileName, String key) {
+    public static float getFloatFromPreferences(Context context, String preferenceFileName, String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
                 Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(key, 0);
@@ -458,7 +474,7 @@ public class system {
      * @param key A key that will be used to retrieve the value from the preference file.
      * @return The value retrieved from the preferences file.
      */
-    public String getStringFromPreferences(Context context, String preferenceFileName, String key) {
+    public static String getStringFromPreferences(Context context, String preferenceFileName, String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
                 Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, "0");
@@ -472,7 +488,7 @@ public class system {
      * @param key A key that will be used to retrieve the value from the preference file.
      * @return The value retrieved from the preferences file.
      */
-    public boolean getBooleanFromPreferences(Context context, String preferenceFileName, String key) {
+    public static boolean getBooleanFromPreferences(Context context, String preferenceFileName, String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
                 Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, false);

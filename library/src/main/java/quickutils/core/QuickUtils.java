@@ -66,7 +66,7 @@ public abstract class QuickUtils {
 
     public static class text extends quickutils.core.text {}
 
-    public static class Math extends math {}
+    public static class math extends quickutils.core.math {}
 
     public static class date extends quickutils.core.date {}
 
@@ -78,7 +78,7 @@ public abstract class QuickUtils {
 
     public static class security extends quickutils.core.security {}
 
-    public static class voice extends quickutils.core.voice {}
+    //todo public static class voice extends quickutils.core.voice {}
 
     public static class animation extends quickutils.core.animation {}
 
