@@ -126,7 +126,7 @@ public class text {
 
         // add remaining words (random)
         for (int i = wordList.size(); i < count; i++) {
-            wordList.add(QuickUtils.Math.getRandomPosition(DICTIONARY));
+            wordList.add(QuickUtils.math.getRandomPosition(DICTIONARY));
         }
 
         return wordList;
@@ -159,14 +159,14 @@ public class text {
      */
     public static String getSentence(int maxNumWords, boolean startLorem) {
         // number of words varies between 3 and 15
-        int wordCount = QuickUtils.Math.getRandomInteger(3, maxNumWords);
+        int wordCount = QuickUtils.math.getRandomInteger(3, maxNumWords);
         List<String> words = getWords(wordCount, startLorem);
 
         // run trough string, add commas every 3-10 words
         int i = 0;
         while (i < wordCount) {
             // decide a jump 3-end words
-            i += QuickUtils.Math.getRandomInteger(3, wordCount);
+            i += QuickUtils.math.getRandomInteger(3, wordCount);
             if (i < wordCount - 1) {
                 words.set(i, words.get(i) + ",");
             }
@@ -175,7 +175,7 @@ public class text {
         // add end puntuation - rand between '.', '!' and '?'.
         // '.' has most possibility of coming out
         char end = '.';
-        switch (QuickUtils.Math.getRandomInteger(10)) {
+        switch (QuickUtils.math.getRandomInteger(10)) {
             case 9:
                 end = '?';
                 break;
@@ -215,7 +215,7 @@ public class text {
      */
     public static String getParagraph(int maxSentences, boolean startLorem) {
         String paragraph = "";
-        int sentences = QuickUtils.Math.getRandomInteger(1, maxSentences);
+        int sentences = QuickUtils.math.getRandomInteger(1, maxSentences);
         for (int i = 0; i < sentences; i++) {
             paragraph += getSentence(startLorem);
             startLorem = false; // run this only once

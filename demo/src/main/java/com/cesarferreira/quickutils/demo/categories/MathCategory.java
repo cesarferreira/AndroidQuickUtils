@@ -1,10 +1,5 @@
 package com.cesarferreira.quickutils.demo.categories;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import quickutils.core.QuickUtils;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -16,6 +11,11 @@ import android.widget.ListView;
 
 import com.cesarferreira.quickutils.demo.ParentActivity;
 import com.cesarferreira.quickutils.demo.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import quickutils.core.QuickUtils;
 
 public class MathCategory extends ParentActivity {
 
@@ -61,63 +61,63 @@ public class MathCategory extends ParentActivity {
 
 				// isOdd
 				if (optionString.equals("isOdd")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.Math.isOdd(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.math.isOdd(intValue);
 				} else
 				// isEven
 				if (optionString.equals("isEven")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.Math.isEven(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.math.isEven(intValue);
 				}
 				// degreesToRadians
 				if (optionString.equals("degreesToRadians")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.Math.degreesToRadians(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.math.degreesToRadians(intValue);
 				}
 				// radiansToDegrees
 				if (optionString.equals("radiansToDegrees")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.Math.radiansToDegrees(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.math.radiansToDegrees(intValue);
 				}
 				// exponencial
 				if (optionString.equals("exponencial")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.Math.exponencial(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.math.exponencial(intValue);
 				}
 				// logarithm
 				if (optionString.equals("logarithm")) {
-					resultString = "(" + intValue + ") = " + QuickUtils.Math.logarithm(intValue);
+					resultString = "(" + intValue + ") = " + QuickUtils.math.logarithm(intValue);
 				}
 				// logarithm
 				if (optionString.equals("getRandomNumber")) {
-					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.Math.getRandomNumber(minValue, intValue);
+					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.math.getRandomNumber(minValue, intValue);
 				}
 				// max
 				if (optionString.equals("max")) {
-					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.Math.max(minValue, intValue);
+					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.math.max(minValue, intValue);
 				}
 				// min
 				if (optionString.equals("min")) {
-					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.Math.min(minValue, intValue);
+					resultString = "(" + minValue + "," + intValue + ") = " + QuickUtils.math.min(minValue, intValue);
 				}	
 				// abs
 				if (optionString.equals("abs")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.Math.abs(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.math.abs(floatValue);
 				}
 				// acos
 				if (optionString.equals("acos")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.Math.acos(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.math.acos(floatValue);
 				}
 				// asin
 				if (optionString.equals("asin")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.Math.asin(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.math.asin(floatValue);
 				}
 				// tan
 				if (optionString.equals("tan")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.Math.tan(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.math.tan(floatValue);
 				}
 				// atan
 				if (optionString.equals("atan")) {
-					resultString = "(" + floatValue + ") = " + QuickUtils.Math.atan(floatValue);
+					resultString = "(" + floatValue + ") = " + QuickUtils.math.atan(floatValue);
 				}
 				// atan2
 				if (optionString.equals("atan2")) {
-					resultString = "(" + minFloatValue + "," + floatValue + ") = " + QuickUtils.Math.atan2(minFloatValue, floatValue);
+					resultString = "(" + minFloatValue + "," + floatValue + ") = " + QuickUtils.math.atan2(minFloatValue, floatValue);
 				}
 
 				// Output the result
