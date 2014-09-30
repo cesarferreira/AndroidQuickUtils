@@ -1,6 +1,8 @@
 package quickutils.core;
 
 
+import android.content.Context;
+
 public abstract class QuickUtils {
 
     public static String TAG = "DESIRED_TAG";
@@ -36,7 +38,7 @@ public abstract class QuickUtils {
      * Initialize QuickUtils
      *
      */
-    public static synchronized void init(String TAG, boolean debugMode) throws Exception {
+    public static synchronized void init(String TAG, boolean debugMode) {
         setDebugMode(debugMode);
         setTAG(TAG);
     }
@@ -87,6 +89,12 @@ public abstract class QuickUtils {
     public static class fragment extends quickutils.core.fragment {}
 
     public static class collection extends quickutils.core.collection {}
+
+    public static class prefs extends Prefs {
+        prefs(Context context) {
+            super(context);
+        }
+    }
 
     public static class views extends view {}
 

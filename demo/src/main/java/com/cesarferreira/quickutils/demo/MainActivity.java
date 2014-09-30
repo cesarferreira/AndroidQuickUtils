@@ -1,79 +1,94 @@
 package com.cesarferreira.quickutils.demo;
 
 import android.app.Activity;
-import android.content.res.Resources;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import quickutils.core.QuickUtils;
 
 public class MainActivity extends Activity {
 
-    private ListView mainListView;
-    private ArrayAdapter<String> listAdapter;
+    private Context mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        QuickUtils.setTAG("SAMPLE_APP");
-/*
-        QuickUtils.log.d(QuickUtils.misc.getDeviceID(getApplicationContext()));
+        mContext = getApplicationContext();
 
-        new CustomTask<String>(String.class, new OnEventListener<String>() {
-            @Override
-            public void onSuccess(String object) {
-                QuickUtils.log.d("SUCESSO: "+object);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-
-            }
-        }).execute();*/
+        QuickUtils.init("Demo-App", QuickUtils.DEBUG_MODE);
 
 
-        // QuickUtils.share.sendEmail(getApplicationContext(),
-        // "soupas@gmail.com", "ola", "body");
-//		QuickUtils.share.sendTweet(getApplicationContext(), "yeahhhhhh");
-        // Find the ListView resource.
-        mainListView = (ListView) findViewById(R.id.list);
+        ///////////////////////////////////////////////////////////////////////
+        // PREFERENCES CATEGORY
+        ///////////////////////////////////////////////////////////////////////
 
-        ArrayList<String> categoriesArray = new ArrayList<String>();
+        // Boolean
+        QuickUtils.prefs.with(mContext).save("key", true);
+        QuickUtils.prefs.with(mContext).getBoolean("key", false);
 
-        Resources res = getResources();
-        String[] categoriesStringArray = res.getStringArray(R.array.categories_array);
-        categoriesArray.addAll(Arrays.asList(categoriesStringArray));
+        // Int
+        QuickUtils.prefs.with(mContext).save("key", 15);
+        QuickUtils.prefs.with(mContext).getInt("key", -1);
 
-        // Create ArrayAdapter using the category list.
-        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, categoriesArray);
 
-        // Set the ArrayAdapter as the ListView's adapter.
-        mainListView.setAdapter(listAdapter);
+        ///////////////////////////////////////////////////////////////////////
+        // MATH CATEGORY
+        ///////////////////////////////////////////////////////////////////////
 
-        mainListView.setOnItemClickListener(new OnItemClickListener() {
+        int minValue = 0;
+        int intValue = 15;
+        float minFloatValue = (float) 0.3;
+        float floatValue = (float) 2.2;
 
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                Object listItem = mainListView.getItemAtPosition(position);
 
-                String StringClassname = "com.cesarferreira.quickutils.demo.categories." + listItem.toString() + "Category";
+        // isOdd
+        QuickUtils.log.i("(" + intValue + ") = " + QuickUtils.math.isOdd(intValue));
 
-                try {
-                    QuickUtils.system.navigateToActivityByClassName(MainActivity.this, StringClassname);
-                } catch (Exception e) {
-                    QuickUtils.system.toast(getApplicationContext(), "Not yet implemented");
-                }
+        // isEven
+        QuickUtils.log.i("(" + intValue + ") = " + QuickUtils.math.isEven(intValue));
 
-            }
-        });
+        // degreesToRadians
+        QuickUtils.log.i("(" + intValue + ") = " + QuickUtils.math.degreesToRadians(intValue));
+
+        // radiansToDegrees
+        QuickUtils.log.i("(" + intValue + ") = " + QuickUtils.math.radiansToDegrees(intValue));
+
+        // exponencial
+        QuickUtils.log.i("(" + intValue + ") = " + QuickUtils.math.exponencial(intValue));
+
+        // logarithm
+        QuickUtils.log.i("(" + intValue + ") = " + QuickUtils.math.logarithm(intValue));
+
+        // random numbers
+        QuickUtils.log.i("(" + minValue + "," + intValue + ") = " + QuickUtils.math.getRandomNumber(minValue, intValue));
+
+        // max
+        QuickUtils.log.i("(" + minValue + "," + intValue + ") = " + QuickUtils.math.max(minValue, intValue));
+
+        // min
+        QuickUtils.log.i("(" + minValue + "," + intValue + ") = " + QuickUtils.math.min(minValue, intValue));
+
+        // abs
+        QuickUtils.log.i("(" + floatValue + ") = " + QuickUtils.math.abs(floatValue));
+
+        // acos
+        QuickUtils.log.i("(" + floatValue + ") = " + QuickUtils.math.acos(floatValue));
+
+        // asin
+        QuickUtils.log.i("(" + floatValue + ") = " + QuickUtils.math.asin(floatValue));
+
+        // tan
+        QuickUtils.log.i("(" + floatValue + ") = " + QuickUtils.math.tan(floatValue));
+
+        // atan
+        QuickUtils.log.i("(" + floatValue + ") = " + QuickUtils.math.atan(floatValue));
+
+        // atan2
+        QuickUtils.log.i("(" + minFloatValue + "," + floatValue + ") = " + QuickUtils.math.atan2(minFloatValue, floatValue));
+
 
     }
 
