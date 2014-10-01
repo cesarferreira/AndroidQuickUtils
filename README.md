@@ -23,6 +23,7 @@ It is intended to make application development easier and consistent throughout 
 - **Image Category** - Apply blur to a bitmap, image brightness, etc.
 - **Web Category** - has internet connection, change wireless state, GET requests, etc
 - **Image Views** - Top crop image views, circular image views etc.
+- ...
 
 
 ## How to Use
@@ -32,6 +33,45 @@ Really simple usage, you just need to specify the category and the method you wa
 ```java
 QuickUtils.__category__.__method__
 ```
+
+Quick Sample
+-------------------
+A small sample of the shared preferences wrapper to save/read data with only 1 line of code.
+
+#### Save data
+
+```JAVA
+QuickUtils.prefs.with(context).save(key, value);
+```
+
+You can save:
+
+* String
+* int
+* float
+* long
+* boolean
+
+#### Retrieve saved data
+```JAVA
+// String
+QuickUtils.prefs.with(context).getString(key, defValue);
+// boolean
+QuickUtils.prefs.with(context).getBoolean(key, defValue);
+// int
+QuickUtils.prefs.with(context).getInt(key, defValue);
+// float
+QuickUtils.prefs.with(context).getFloat(key, defValue);
+//long
+QuickUtils.prefs.with(context).getLong(key, defValue);
+
+```
+#### Remove data
+
+```JAVA
+QuickUtils.prefs.with(context).remove(key);
+```
+
 
 More Documentation
 ------------------
