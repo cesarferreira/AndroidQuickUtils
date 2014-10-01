@@ -27,11 +27,11 @@ public class MainActivity extends Activity {
 
         // Boolean
         QuickUtils.prefs.with(mContext).save("key", true);
-        QuickUtils.prefs.with(mContext).getBoolean("key", false);
+        boolean someBoolean = QuickUtils.prefs.with(mContext).getBoolean("key", false);
 
         // Int
         QuickUtils.prefs.with(mContext).save("key", 15);
-        QuickUtils.prefs.with(mContext).getInt("key", -1);
+        int someInt = QuickUtils.prefs.with(mContext).getInt("key", -1);
 
 
         ///////////////////////////////////////////////////////////////////////
