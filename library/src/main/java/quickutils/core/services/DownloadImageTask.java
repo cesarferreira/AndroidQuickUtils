@@ -42,7 +42,7 @@ public class DownloadImageTask<T> extends AsyncTask<Void, Void, T> {
         }
 
 
-        return (T)mBitmap;
+        return (T) mBitmap;
     }
 
     @Override

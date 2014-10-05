@@ -3,9 +3,14 @@ package quickutils.core;
 
 import android.content.Context;
 
+import quickutils.core.categories.view;
+import quickutils.core.exceptions.InitNotSetException;
+
 public abstract class QuickUtils {
 
-    public static String TAG = "DESIRED_TAG";
+    public static String TAG = "REPLACE_WITH_DESIRED_TAG";
+
+    private static Context mContext;
 
     public static final int VERBOSE = android.util.Log.VERBOSE;
     public static final int DEBUG = android.util.Log.DEBUG;
@@ -13,15 +18,13 @@ public abstract class QuickUtils {
     public static final int WARN = android.util.Log.WARN;
     public static final int ERROR = android.util.Log.ERROR;
 
-    public static final int REQUEST_CODE = 1234;
-    public static final int RESULT_OK = 1234;
-
     /**
      * Developer mode for Debugging purposes
      */
     public static final boolean DEVELOPER_MODE = true;
 
-    /**s
+    /**
+     * s
      * Production mode for Debugging purposes
      */
     public static final boolean PRODUCTION_MODE = !DEVELOPER_MODE;
@@ -34,14 +37,23 @@ public abstract class QuickUtils {
     private QuickUtils() {
     }
 
+    public static Context getContext() {
+
+        if (mContext == null) {
+            throw new InitNotSetException();
+        }
+        return mContext;
+    }
+
+
     /**
      * Initialize QuickUtils
-     *
      */
-    public static synchronized void init(String TAG, boolean debugMode) {
-        setDebugMode(debugMode);
-        setTAG(TAG);
+    public static synchronized void init(Context context) {
+        mContext = context;
+        setTAG(QuickUtils.system.getApplicationNameByContext());
     }
+
 
     /**
      * Set debug mode (default: QuickUtils.DEBUG_MODE). Set
@@ -62,40 +74,53 @@ public abstract class QuickUtils {
         TAG = tag;
     }
 
-    public static class log extends quickutils.core.log {}
 
-    public static class system extends quickutils.core.system {}
+    public static class log extends quickutils.core.categories.log {
+    }
 
-    public static class text extends quickutils.core.text {}
+    public static class system extends quickutils.core.categories.system {
+    }
 
-    public static class math extends quickutils.core.math {}
+    public static class text extends quickutils.core.categories.text {
+    }
 
-    public static class date extends quickutils.core.date {}
+    public static class math extends quickutils.core.categories.math {
+    }
 
-    public static class web extends quickutils.core.web {}
+    public static class date extends quickutils.core.categories.date {
+    }
 
-    public static class share extends quickutils.core.share {}
+    public static class web extends quickutils.core.categories.web {
+    }
 
-    public static class sdcard extends quickutils.core.sdcard {}
+    public static class share extends quickutils.core.categories.share {
+    }
 
-    public static class security extends quickutils.core.security {}
+    public static class sdcard extends quickutils.core.categories.sdcard {
+    }
 
-    //todo public static class voice extends quickutils.core.voice {}
+    public static class security extends quickutils.core.categories.security {
+    }
 
-    public static class animation extends quickutils.core.animation {}
+    public static class animation extends quickutils.core.categories.animation {
+    }
 
-    public static class image extends quickutils.core.image {}
+    public static class image extends quickutils.core.categories.image {
+    }
 
-    public static class fragment extends quickutils.core.fragment {}
+    public static class fragment extends quickutils.core.categories.fragment {
+    }
 
-    public static class collection extends quickutils.core.collection {}
+    public static class collection extends quickutils.core.categories.collection {
+    }
 
-    public static class prefs extends Prefs {
+    public static class prefs extends quickutils.core.categories.prefs {
         prefs(Context context) {
             super(context);
         }
     }
 
-    public static class views extends view {}
+    public static class views extends view {
+    }
 
 }
