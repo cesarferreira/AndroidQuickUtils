@@ -38,35 +38,22 @@ Quick Sample
 -------------------
 A small sample of the shared preferences wrapper to save/read data with only 1 line of code.
 
-#### Save data
+**Save data**
 
 ```JAVA
 QuickUtils.prefs.with(context).save(key, value);
 ```
 
-You can save:
+**Retrieve saved data**
 
-* String
-* int
-* float
-* long
-* boolean
-
-#### Retrieve saved data
 ```JAVA
 // String
 QuickUtils.prefs.with(context).getString(key, defValue);
-// boolean
-QuickUtils.prefs.with(context).getBoolean(key, defValue);
 // int
 QuickUtils.prefs.with(context).getInt(key, defValue);
-// float
-QuickUtils.prefs.with(context).getFloat(key, defValue);
-//long
-QuickUtils.prefs.with(context).getLong(key, defValue);
 
 ```
-#### Remove data
+**Remove data**
 
 ```JAVA
 QuickUtils.prefs.with(context).remove(key);
