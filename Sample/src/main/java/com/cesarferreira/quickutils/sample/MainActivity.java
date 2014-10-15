@@ -92,6 +92,12 @@ public class MainActivity extends Activity {
         QuickUtils.log.i("atan2 - (" + minFloatValue + "," + floatValue + ") = " + QuickUtils.math.atan2(minFloatValue, floatValue));
 
 
+        ///////////////////////////////////////////////////////////////////////
+        // TEXT CATEGORY
+        ///////////////////////////////////////////////////////////////////////
+
+        QuickUtils.log.i("Unaccent - " + QuickUtils.text.unAccent("ééééé çedilha"));
+
     }
 
     public void blurActivityClick(View view) {
