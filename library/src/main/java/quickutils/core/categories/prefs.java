@@ -21,47 +21,47 @@ public class prefs {
         editor = preferences.edit();
     }
 
-    public static prefs with(Context context) {
+    private static prefs with(Context context) {
         if (singleton == null) {
             singleton = new Builder(context).build();
         }
         return singleton;
     }
 
-    public void save(String key, boolean value) {
-        editor.putBoolean(key, value).apply();
+    public static void save(String key, boolean value) {
+        with(QuickUtils.getContext()).editor.putBoolean(key, value).apply();
     }
 
     public void save(String key, String value) {
-        editor.putString(key, value).apply();
+        with(QuickUtils.getContext()).editor.putString(key, value).apply();
     }
 
-    public void save(String key, int value) {
-        editor.putInt(key, value).apply();
+    public static void save(String key, int value) {
+        with(QuickUtils.getContext()).editor.putInt(key, value).apply();
     }
 
     public void save(String key, float value) {
-        editor.putFloat(key, value).apply();
+        with(QuickUtils.getContext()).editor.putFloat(key, value).apply();
     }
 
     public void save(String key, long value) {
-        editor.putLong(key, value).apply();
+        with(QuickUtils.getContext()).editor.putLong(key, value).apply();
     }
 
-    public boolean getBoolean(String key, boolean defaultValue) {
-        return preferences.getBoolean(key, defaultValue);
+    public static boolean getBoolean(String key, boolean defaultValue) {
+        return  with(QuickUtils.getContext()).preferences.getBoolean(key, defaultValue);
     }
 
     public String getString(String key, String defaultValue) {
-        return preferences.getString(key, defaultValue);
+        return  with(QuickUtils.getContext()).preferences.getString(key, defaultValue);
     }
 
-    public int getInt(String key, int defaultValue) {
-        return preferences.getInt(key, defaultValue);
+    public static int getInt(String key, int defaultValue) {
+        return  with(QuickUtils.getContext()).preferences.getInt(key, defaultValue);
     }
 
     public float getFloat(String key, float defaultValue) {
-        return preferences.getFloat(key, defaultValue);
+        return  with(QuickUtils.getContext()).preferences.getFloat(key, defaultValue);
     }
 
     public long getLong(String key, long defaultValue) {
@@ -69,7 +69,7 @@ public class prefs {
     }
 
     public void remove(String key) {
-        editor.remove(key).apply();
+        with(QuickUtils.getContext()).editor.remove(key).apply();
     }
 
     /**

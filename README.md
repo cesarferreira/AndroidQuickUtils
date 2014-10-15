@@ -41,16 +41,14 @@ A small sample of the shared preferences wrapper to save/read data with only 1 l
 **Save data**
 
 ```JAVA
-QuickUtils.prefs.with(context).save(key, value);
+QuickUtils.prefs.save(key, value);
 ```
 
 **Retrieve saved data**
 
 ```JAVA
-// String
-QuickUtils.prefs.with(context).getString(key, defValue);
-// int
-QuickUtils.prefs.with(context).getInt(key, defValue);
+QuickUtils.prefs.getString(key, defaultValue);
+QuickUtils.prefs.getInt(key, defaultValue);
 
 ```
 **Remove data**
@@ -66,22 +64,11 @@ Take a look at our [wiki](https://github.com/cesarferreira/AndroidQuickUtils/wik
 
 # Including in your project
 
-If you use Maven:
-
-```xml
-<dependency>
-  <groupId>com.cesarferreira.quickutils</groupId>
-  <artifactId>library</artifactId>
-  <version>1.2.3/version>
-  <type>aar</type>
-</dependency>
-```
-
-or Gradle:
+Via Gradle:
 
 ```groovy
 dependencies {
-    compile 'com.cesarferreira.quickutils:library:1.2.3'
+    compile 'com.cesarferreira.quickutils:library:2.0.0'
 }
 ```
 
