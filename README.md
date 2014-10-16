@@ -54,7 +54,7 @@ QuickUtils.prefs.getInt(key, defaultValue);
 **Remove data**
 
 ```JAVA
-QuickUtils.prefs.with(context).remove(key);
+QuickUtils.prefs.remove(key);
 ```
 
 
