@@ -115,7 +115,7 @@ public class log {
      */
     private static int logger(int level, String message, Throwable throwable) {
 
-        if (QuickUtils.DEBUG_MODE) {
+        if (QuickUtils.shouldShowLogs()) {
             switch (level) {
 
                 case QuickUtils.DEBUG:
@@ -141,11 +141,10 @@ public class log {
      *
      * @param level     level of the log message
      * @param message   log output
-     * @param throwable
      */
     private static int logger(int level, String message) {
 
-        if (QuickUtils.DEBUG_MODE) {
+        if (QuickUtils.shouldShowLogs()) {
             switch (level) {
 
                 case QuickUtils.DEBUG:

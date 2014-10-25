@@ -5,7 +5,7 @@ package quickutils.core.exceptions;
  */
 public class InitNotSetException extends RuntimeException {
     public InitNotSetException() {
-        super("You must Init the library first!");
+        super("You must Init the library first!!\n e.g: QuickUtils.init(context)");
     }
 
     public InitNotSetException(String detailMessage) {

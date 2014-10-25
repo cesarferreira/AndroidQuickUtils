@@ -3,10 +3,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.2'
+        classpath 'com.android.tools.build:gradle:0.12.+'
     }
 }
-apply plugin: 'com.android.library'
+apply plugin: 'android-library'
 
 repositories {
     mavenCentral()
@@ -29,9 +29,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:19.+'
-    compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.android.support:support-v13:19.+'
+    //compile 'com.android.support:appcompat-v7:21.0.0'
+    //compile 'com.android.support:support-v4:21.0.0'
+    //compile 'com.android.support:support-v13:19.1.0'
 }
 
 task clearJar(type: Delete) {

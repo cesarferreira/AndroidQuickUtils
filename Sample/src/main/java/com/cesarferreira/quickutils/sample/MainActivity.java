@@ -24,39 +24,8 @@ public class MainActivity extends Activity {
         ///////////////////////////////////////////////////////////////////////
 
         QuickUtils.system.toast("this is a toast");
+        QuickUtils.system.vibrate(50);
 
-        byte[] exampleByteArray = new byte[15000];
-        for (int i = 0; i < 14999; ++i)
-            exampleByteArray[i] = 'n';
-
-        exampleByteArray[14999] = '\n';   // and an end of line
-
-
-        String dir = QuickUtils.sdcard.getSDCardPath() + "myDirectory";
-
-        //create file
-        File file = new File(dir, "filename.txt");
-        file.mkdirs();
-        File zippedFile = new File(dir, "filename.zip");
-        zippedFile.mkdirs();
-        File decompressedFile = new File(dir, "decompressed.txt");
-        decompressedFile.mkdirs();
-
-        try {
-            QuickUtils.system.writeBytesToFile(file, exampleByteArray);
-            QuickUtils.log.i("Size File --> " + file.length());
-
-            QuickUtils.system.compress(file, zippedFile);
-            QuickUtils.log.i("Size File Zipped --> " + zippedFile.length());
-
-            QuickUtils.system.decompress(zippedFile, decompressedFile);
-            QuickUtils.log.i("Size File Decompressed--> " + decompressedFile.length());
-
-            QuickUtils.log.i("Read File Byte array --> " + QuickUtils.system.readBytesFromFile(file).length);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         ///////////////////////////////////////////////////////////////////////
         // PREFERENCES CATEGORY

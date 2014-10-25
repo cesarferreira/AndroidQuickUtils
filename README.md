@@ -68,7 +68,7 @@ Via Gradle:
 
 ```groovy
 dependencies {
-    compile 'com.cesarferreira.quickutils:library:2.0.0'
+    compile 'com.cesarferreira.quickutils:library:2.+'
 }
 ```
 

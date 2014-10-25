@@ -21,15 +21,8 @@ public abstract class QuickUtils {
     /**
      * Developer mode for Debugging purposes
      */
-    public static final boolean DEVELOPER_MODE = true;
+    private static Boolean showLogs = null;
 
-    /**
-     * s
-     * Production mode for Debugging purposes
-     */
-    public static final boolean PRODUCTION_MODE = !DEVELOPER_MODE;
-
-    public static boolean DEBUG_MODE = QuickUtils.DEVELOPER_MODE;
 
     /**
      * private constructor
@@ -37,6 +30,11 @@ public abstract class QuickUtils {
     private QuickUtils() {
     }
 
+    /**
+     * Getter for the context
+     *
+     * @return the context
+     */
     public static Context getContext() {
 
         if (mContext == null) {
@@ -54,17 +52,6 @@ public abstract class QuickUtils {
         setTAG(QuickUtils.system.getApplicationNameByContext());
     }
 
-
-    /**
-     * Set debug mode (default: QuickUtils.DEBUG_MODE). Set
-     * QuickUtils.PRODUCTION_MODE when you go to production
-     *
-     * @param debugMode the new developer mode value
-     */
-    public static void setDebugMode(boolean debugMode) {
-        DEBUG_MODE = debugMode;
-    }
-
     /**
      * Set the log TAG for debug purposes
      *
@@ -72,6 +59,19 @@ public abstract class QuickUtils {
      */
     public static void setTAG(String tag) {
         TAG = tag;
+    }
+
+    /**
+     * Should I show logs?
+     *
+     * @return true if you should
+     */
+    public static Boolean shouldShowLogs() {
+
+        if (showLogs == null) {
+            showLogs = QuickUtils.system.isDebuggable();
+        }
+        return showLogs;
     }
 
 
@@ -106,9 +106,6 @@ public abstract class QuickUtils {
     }
 
     public static class image extends quickutils.core.categories.image {
-    }
-
-    public static class fragment extends quickutils.core.categories.fragment {
     }
 
     public static class collection extends quickutils.core.categories.collection {
