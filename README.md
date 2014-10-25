@@ -26,6 +26,13 @@ It is intended to make application development easier and consistent throughout 
 - ...
 
 
+## Setup
+Init the library in your Application class for instance
+
+```java
+QuickUtils.init(context);
+```
+
 ## How to Use
 
 Really simple usage, you just need to specify the category and the method you want to use.
@@ -34,28 +41,33 @@ Really simple usage, you just need to specify the category and the method you wa
 QuickUtils.__category__.__method__
 ```
 
+e.g.
+```java
+QuickUtils.log.e("this is an error");
+QuickUtils.system.vibrate(1000);
+QuickUtils.math.poundsToKg(weight);
+QuickUtils.sdcard.exists(someFile);
+QuickUtils.security.encodeBase64(someString);
+// Etc.
+```
+
 Quick Sample
 -------------------
 A small sample of the shared preferences wrapper to save/read data with only 1 line of code.
 
-**Save data**
 
 ```JAVA
+// save data
 QuickUtils.prefs.save(key, value);
-```
 
-**Retrieve saved data**
-
-```JAVA
+// retrieve saved data
 QuickUtils.prefs.getString(key, defaultValue);
 QuickUtils.prefs.getInt(key, defaultValue);
 
-```
-**Remove data**
-
-```JAVA
+// remove
 QuickUtils.prefs.remove(key);
 ```
+
 
 
 More Documentation
