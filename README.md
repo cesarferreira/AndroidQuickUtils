@@ -6,7 +6,7 @@ QuickUtils is a development library for the Android platform.
 It is intended to make application development easier and consistent throughout your applications.
 
 
-![](http://i1.cdnds.net/13/44/618x464/tech-nexus-5-screenshot-6.png)
+![](https://d13yacurqjgara.cloudfront.net/users/5087/screenshots/1477221/android.png)
 
 ## Features
 
