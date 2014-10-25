@@ -97,5 +97,6 @@ Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
 ## Contributors <sup>([graph](https://github.com/cesarferreira/AndroidQuickUtils/graphs/contributors "link"))</sup>
 
 * [@cesarferreira](https://github.com/cesarferreira "link")
+* [@nunofeliciano](https://github.com/nunofeliciano "link")
 * [@luispereira](https://github.com/luispereira "link")
 * [@telmomarques](https://github.com/telmomarques "link")
