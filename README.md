@@ -41,10 +41,19 @@ dependencies {
 Init the library in your Application class for instance
 
 ```java
-QuickUtils.init(context);
+public class SampleApplication extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        QuickUtils.init(context);
+    }
+}
+
 ```
 
-Really simple usage, you just need to specify the category and the method you want to use.
+All you need to do is to specify the category and the method you want to use.
 
 ```java
 QuickUtils.__category__.__method__
@@ -52,30 +61,26 @@ QuickUtils.__category__.__method__
 
 e.g.
 ```java
+// Log something
 QuickUtils.log.e("this is an error");
+// make the smartphone vibrate for the amount of time you want
 QuickUtils.system.vibrate(1000);
+// convert pounds to KG
 QuickUtils.math.poundsToKg(weight);
+// Does that file exists?
 QuickUtils.sdcard.exists(someFile);
+// encode a string
 QuickUtils.security.encodeBase64(someString);
-// Etc.
-```
-
-Quick Sample
--------------------
-A small sample of the shared preferences wrapper to save/read data with only 1 line of code.
-
-
-```JAVA
 // save data
 QuickUtils.prefs.save(key, value);
-
 // retrieve saved data
 QuickUtils.prefs.getString(key, defaultValue);
 QuickUtils.prefs.getInt(key, defaultValue);
-
-// remove
+// remove save data
 QuickUtils.prefs.remove(key);
+//  Etc. (hundreds more srsly)
 ```
+<!--A small sample of the shared preferences wrapper to save/read data with only 1 line of code.-->
 
 More Documentation
 ------------------
