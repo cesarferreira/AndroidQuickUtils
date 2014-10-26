@@ -1,51 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SamplesQuickUtils</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">SampleQuickUtils</string>
-
-    <string-array name="categories_array">
-        <item>Log</item>
-        <item>Math</item>
-        <item>SDCard</item>
-        <item>Web</item>
-        <item>Date</item>
-        <item>Misc</item>
-        <item>Animation</item>
-    </string-array>
-    <string-array name="log_array">
-        <item>Production MODE</item>
-        <item>Development MODE</item>
-        <item>d</item>
-        <item>e</item>
-        <item>i</item>
-        <item>v</item>
-        <item>w</item>
-    </string-array>
-    <string-array name="math_array">
-        <item>isOdd</item>
-        <item>isEven</item>
-        <item>degreesToRadians</item>
-        <item>radiansToDegrees</item>
-        <item>exponencial</item>
-        <item>getRandomNumber</item>
-        <item>logarithm</item>
-        <item>max</item>
-        <item>min</item>
-        <item>abs</item>
-        <item>acos</item>
-        <item>asin</item>
-        <item>atan</item>
-        <item>atan2</item>
-        <item>tan</item>
-    </string-array>
-
-    <string name="title_activity_log_category">Log Category</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_math_category">MathCategory</string>
-    <string name="title_activity_animation_category">AnimationCategory</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_testing_blur">TestingBlur</string>
+    <string name="app_name">QuickUtils</string>
+    <string name="title_activity_main">QuickUtils</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.cesarferreira.quickutils.sample;
+package com.cesarferreira.quickutils.sample.activities;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.cesarferreira.quickutils.sample.R;
+
 import quickutils.core.QuickUtils;
 import quickutils.core.interfaces.OnEventListener;
 
-public class TestingBlur extends Activity {
+public class BlurActivity extends Activity {
 
     private ImageView imageView;
     private ImageView smalliImageView;

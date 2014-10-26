@@ -1,11 +1,10 @@
-package com.cesarferreira.quickutils.sample;
+package com.cesarferreira.quickutils.sample.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
-import java.io.File;
-import java.io.IOException;
+import com.cesarferreira.quickutils.sample.R;
 
 import quickutils.core.QuickUtils;
 
@@ -16,16 +15,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // init the library
-        QuickUtils.init(getApplicationContext());
-
         ///////////////////////////////////////////////////////////////////////
         // SYSTEM CATEGORY
         ///////////////////////////////////////////////////////////////////////
 
         QuickUtils.system.toast("this is a toast");
         QuickUtils.system.vibrate(50);
-
 
         ///////////////////////////////////////////////////////////////////////
         // PREFERENCES CATEGORY
@@ -106,6 +101,6 @@ public class MainActivity extends Activity {
     }
 
     public void blurActivityClick(View view) {
-        QuickUtils.system.navigateToActivity(this, TestingBlur.class);
+        QuickUtils.system.navigateToActivity(this, BlurActivity.class);
     }
 }

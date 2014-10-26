@@ -6,7 +6,7 @@ QuickUtils is a development library for the Android platform.
 It is intended to make application development easier and consistent throughout your applications.
 
 
-![](https://d13yacurqjgara.cloudfront.net/users/5087/screenshots/1477221/android.png)
+![Header](https://raw.github.com/cesarferreira/AndroidQuickUtils/master/images/header.png)
 
 ## Features
 
@@ -26,14 +26,23 @@ It is intended to make application development easier and consistent throughout 
 - ...
 
 
-## Setup
+## Installation
+
+Including in your project via Gradle:
+
+```groovy
+dependencies {
+    compile 'com.cesarferreira.quickutils:library:2.+'
+}
+```
+
+## Usage
+
 Init the library in your Application class for instance
 
 ```java
 QuickUtils.init(context);
 ```
-
-## How to Use
 
 Really simple usage, you just need to specify the category and the method you want to use.
 
@@ -68,22 +77,9 @@ QuickUtils.prefs.getInt(key, defaultValue);
 QuickUtils.prefs.remove(key);
 ```
 
-
-
 More Documentation
 ------------------
 Take a look at our [wiki](https://github.com/cesarferreira/AndroidQuickUtils/wiki).
-
-# Including in your project
-
-Via Gradle:
-
-```groovy
-dependencies {
-    compile 'com.cesarferreira.quickutils:library:2.+'
-}
-```
-
 
 
 # Contributing
@@ -91,7 +87,7 @@ Contributions welcome via Github pull requests.
 
 
 ## License
-Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
+QuickUtils is available under the MIT license. See the LICENSE file for more info.
 
 
 ## Contributors <sup>([graph](https://github.com/cesarferreira/AndroidQuickUtils/graphs/contributors "link"))</sup>
