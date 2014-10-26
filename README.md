@@ -7,7 +7,7 @@ It is intended to make application development easier and consistent throughout 
 
 
 ![Header](https://raw.github.com/cesarferreira/AndroidQuickUtils/master/images/header-crop.png)
-
+<!--
 ## Features
 
 - **More than 1000 preloaded Colors in the project** - check the list [here](https://github.com/cesarferreira/AndroidQuickUtils/wiki/Colors.xml)
@@ -24,7 +24,7 @@ It is intended to make application development easier and consistent throughout 
 - **Web Category** - has internet connection, change wireless state, GET requests, etc
 - **Image Views** - Top crop image views, circular image views etc.
 - ...
-
+-->
 
 ## Installation
 
@@ -59,26 +59,26 @@ All you need to do is to specify the category and the method you want to use.
 QuickUtils.__category__.__method__
 ```
 
-e.g.
+E.g.
 ```java
 // Log something
 QuickUtils.log.e("this is an error");
-// make the smartphone vibrate for the amount of time you want
+// Make the smartphone vibrate for the amount of time you want
 QuickUtils.system.vibrate(1000);
-// convert pounds to KG
+// Convert pounds to KG
 QuickUtils.math.poundsToKg(weight);
 // Does that file exists?
 QuickUtils.sdcard.exists(someFile);
-// encode a string
+// Encode a string
 QuickUtils.security.encodeBase64(someString);
-// save data
+// Save data
 QuickUtils.prefs.save(key, value);
-// retrieve saved data
+// Retrieve saved data
 QuickUtils.prefs.getString(key, defaultValue);
 QuickUtils.prefs.getInt(key, defaultValue);
-// remove save data
+// Remove saved data
 QuickUtils.prefs.remove(key);
-//  Etc. (hundreds more srsly)
+//  Etc. (hundreds more methods)
 ```
 <!--A small sample of the shared preferences wrapper to save/read data with only 1 line of code.-->
 
@@ -86,10 +86,8 @@ More Documentation
 ------------------
 Take a look at our [wiki](https://github.com/cesarferreira/AndroidQuickUtils/wiki).
 
-
 # Contributing
 Contributions welcome via Github pull requests.
-
 
 ## License
 QuickUtils is available under the MIT license. See the LICENSE file for more info.
