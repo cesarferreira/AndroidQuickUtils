@@ -18,6 +18,23 @@ public abstract class QuickUtils {
     public static final int WARN = android.util.Log.WARN;
     public static final int ERROR = android.util.Log.ERROR;
 
+    // Network responses
+    public final static int REQUEST_RESPONSE_OK = 200;
+    public final static int REQUEST_RESPONSE_CREATED = 201;
+    public final static int REQUEST_RESPONSE_ACCEPTED = 202;
+    public final static int REQUEST_RESPONSE_NO_CONTENT = 204;
+    public final static int REQUEST_RESPONSE_BAD_REQUEST = 400;
+    public final static int REQUEST_RESPONSE_UNAUTHORIZED = 401;
+    public final static int REQUEST_RESPONSE_FORBIDDEN = 403;
+    public final static int REQUEST_RESPONSE_PAYMENT_REQUIRED = 402;
+    public final static int REQUEST_RESPONSE_NOT_FOUND = 404;
+    public final static int REQUEST_RESPONSE_GONE = 410;
+    public final static int REQUEST_RESPONSE_UNPROCESSABLE_ENTITY = 422;
+    public final static int REQUEST_RESPONSE_INTERNAL_SERVER_ERROR = 500;
+    public final static int REQUEST_RESPONSE_SERVICE_UNAVAILABLE = 503;
+    public final static int REQUEST_RESPONSE_MULTIPLE_DEVICE = 429;
+    public final static int REQUEST_RESPONSE_NOT_PERMITTED = 301;
+    public final static int REQUEST_RESPONSE_RESET_PASSWORD_SUCCESS = 204;
     /**
      * Developer mode for Debugging purposes
      */
@@ -49,7 +66,12 @@ public abstract class QuickUtils {
      */
     public static synchronized void init(Context context) {
         mContext = context;
+
+        // Set the appropriate log TAG
         setTAG(QuickUtils.system.getApplicationNameByContext());
+
+        // resets all timestamps
+        QuickUtils.timer.resetAllTimestamps();
     }
 
     /**
@@ -117,7 +139,9 @@ public abstract class QuickUtils {
         }
     }
 
-    public static class views extends view {
+    public static class views extends quickutils.core.categories.view {
     }
 
+    public static class timer extends quickutils.core.categories.timer {
+    }
 }

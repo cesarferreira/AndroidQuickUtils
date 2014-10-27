@@ -3,6 +3,8 @@ package quickutils.core.categories;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Map;
+
 import quickutils.core.QuickUtils;
 
 /**
@@ -32,7 +34,7 @@ public class prefs {
         with(QuickUtils.getContext()).editor.putBoolean(key, value).apply();
     }
 
-    public void save(String key, String value) {
+    public static void save(String key, String value) {
         with(QuickUtils.getContext()).editor.putString(key, value).apply();
     }
 
@@ -40,11 +42,11 @@ public class prefs {
         with(QuickUtils.getContext()).editor.putInt(key, value).apply();
     }
 
-    public void save(String key, float value) {
+    public static void save(String key, float value) {
         with(QuickUtils.getContext()).editor.putFloat(key, value).apply();
     }
 
-    public void save(String key, long value) {
+    public static void save(String key, long value) {
         with(QuickUtils.getContext()).editor.putLong(key, value).apply();
     }
 
@@ -52,7 +54,7 @@ public class prefs {
         return  with(QuickUtils.getContext()).preferences.getBoolean(key, defaultValue);
     }
 
-    public String getString(String key, String defaultValue) {
+    public static String getString(String key, String defaultValue) {
         return  with(QuickUtils.getContext()).preferences.getString(key, defaultValue);
     }
 
@@ -60,17 +62,22 @@ public class prefs {
         return  with(QuickUtils.getContext()).preferences.getInt(key, defaultValue);
     }
 
-    public float getFloat(String key, float defaultValue) {
-        return  with(QuickUtils.getContext()).preferences.getFloat(key, defaultValue);
+    public static float getFloat(String key, float defaultValue) {
+        return with(QuickUtils.getContext()).preferences.getFloat(key, defaultValue);
     }
 
-    public long getLong(String key, long defaultValue) {
-        return preferences.getLong(key, defaultValue);
+    public static long getLong(String key, long defaultValue) {
+        return with(QuickUtils.getContext()).preferences.getLong(key, defaultValue);
     }
 
-    public void remove(String key) {
+    public static void remove(String key) {
         with(QuickUtils.getContext()).editor.remove(key).apply();
     }
+
+    public static Map<String, ?> getAll() {
+        return with(QuickUtils.getContext()).preferences.getAll();
+    }
+
 
     /**
      * Builder class

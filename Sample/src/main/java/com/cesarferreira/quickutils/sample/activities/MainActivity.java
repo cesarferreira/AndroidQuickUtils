@@ -20,7 +20,31 @@ public class MainActivity extends Activity {
         ///////////////////////////////////////////////////////////////////////
 
         QuickUtils.system.toast("this is a toast");
+
         QuickUtils.system.vibrate(50);
+
+
+        ///////////////////////////////////////////////////////////////////////
+        // TIMER CATEGORY
+        ///////////////////////////////////////////////////////////////////////
+        String timerTag = "test";
+
+        // start the timer
+        QuickUtils.timer.start(timerTag);
+
+        for (int i=0;i<100;i++) {
+            // Sleep just for
+            QuickUtils.system.sleep(1);
+            if (i%10==0) {
+                QuickUtils.log.i("more 10% took: "+QuickUtils.timer.tick(timerTag)+" ms");
+            }
+        }
+
+        // stop the timer
+        long difference = QuickUtils.timer.stop(timerTag);
+
+        QuickUtils.log.i("time past: "+difference+" ms");
+
 
         ///////////////////////////////////////////////////////////////////////
         // PREFERENCES CATEGORY
