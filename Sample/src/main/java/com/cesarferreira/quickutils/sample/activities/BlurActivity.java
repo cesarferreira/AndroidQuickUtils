@@ -14,14 +14,12 @@ import quickutils.core.interfaces.OnEventListener;
 public class BlurActivity extends Activity {
 
     private ImageView imageView;
-    private ImageView smalliImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing_blur);
         imageView = (ImageView) findViewById(R.id.imageView);
-        smalliImageView = (ImageView) findViewById(R.id.smallImageView);
     }
 
 

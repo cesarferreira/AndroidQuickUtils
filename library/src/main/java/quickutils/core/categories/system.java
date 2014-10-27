@@ -502,4 +502,7 @@ public class system {
         return debuggable;
     }
 
+    public static String getCurrentMethodName() {
+        return new Exception().getStackTrace()[0].getMethodName();
+    }
 }
