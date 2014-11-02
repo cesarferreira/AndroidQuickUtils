@@ -23,5 +23,15 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rest Request"
+        android:id="@+id/button2"
+        android:layout_above="@+id/button"
+        android:onClick="restRequest"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>

@@ -3,17 +3,25 @@ package com.cesarferreira.quickutils.sample.activities;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.cesarferreira.quickutils.sample.R;
+import com.cesarferreira.quickutils.sample.entities.WeatherEntity;
 
 import quickutils.core.QuickUtils;
+import quickutils.core.interfaces.RequestCallback;
+import quickutils.core.rest.RequestError;
 
 public class MainActivity extends Activity {
+
+    private TextView textView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        textView = (TextView)findViewById(R.id.textView);
 
         ///////////////////////////////////////////////////////////////////////
         // SYSTEM CATEGORY
@@ -126,5 +134,31 @@ public class MainActivity extends Activity {
 
     public void blurActivityClick(View view) {
         QuickUtils.system.navigateToActivity(this, BlurActivity.class);
+    }
+
+    public void restRequest(View view) {
+
+        String REQUEST_TAG = "tag";
+
+        QuickUtils.rest.connect()
+                .createRequest()
+                .get()
+                .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
+                .fromJsonObject()
+                .mappingInto(WeatherEntity.class)
+                .execute(REQUEST_TAG, new RequestCallback() {
+                    @Override
+                    public void onRequestSuccess(Object o) {
+                        WeatherEntity objc = (WeatherEntity) o;
+                        QuickUtils.log.i(objc.toString());
+
+                        textView.setText(objc.toString());
+                    }
+
+                    @Override
+                    public void onRequestError(RequestError error) {
+                        QuickUtils.log.i("error " + error.getErrorCode());
+                    }
+                });
     }
 }

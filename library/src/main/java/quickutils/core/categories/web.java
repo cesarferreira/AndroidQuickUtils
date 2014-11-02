@@ -377,7 +377,7 @@ public class web {
     public static boolean checkServerConnection(String serverURL) {
         boolean value = false;
         try {
-            value = new RetreiveCheckServerConnectionString().execute(serverURL).get();
+            value = new RetrieveCheckServerConnectionString().execute(serverURL).get();
         } catch (InterruptedException e) {
             QuickUtils.log.e("InterruptedException", e);
         } catch (ExecutionException e) {
@@ -392,7 +392,7 @@ public class web {
      *
      * @author Pereira
      */
-    private static class RetreiveCheckServerConnectionString extends AsyncTask<String, Void, Boolean> {
+    private static class RetrieveCheckServerConnectionString extends AsyncTask<String, Void, Boolean> {
 
         private Exception exception;
 

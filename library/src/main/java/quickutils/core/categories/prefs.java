@@ -74,6 +74,11 @@ public class prefs {
         with(QuickUtils.getContext()).editor.remove(key).apply();
     }
 
+    public boolean hasPreference(String key) {
+        return with(QuickUtils.getContext()).preferences.contains(key);
+    }
+
+
     public static Map<String, ?> getAll() {
         return with(QuickUtils.getContext()).preferences.getAll();
     }
