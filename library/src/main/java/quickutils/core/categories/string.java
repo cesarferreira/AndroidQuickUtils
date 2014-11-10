@@ -437,8 +437,7 @@ public class string {
      * Turns a camel case string into an underscored one, e.g. "HelloWorld"
      * becomes "hello_world".
      *
-     * @param camelCaseString
-     *        the string to underscore
+     * @param camelCaseString the string to underscore
      * @return the underscored string
      */
     public static String underscore(String camelCaseString) {
@@ -448,7 +447,7 @@ public class string {
 
 
     /**
-     * <p>
+     * <p/>
      * Splits a String by Character type as returned by
      * <code>java.lang.Character.getType(char)</code>. Groups of contiguous
      * characters of the same type are returned as complete tokens, with the
@@ -457,7 +456,7 @@ public class string {
      * token of type <code>Character.LOWERCASE_LETTER</code> will belong to the
      * following token rather than to the preceding, if any,
      * <code>Character.UPPERCASE_LETTER</code> token.
-     *
+     * <p/>
      * <pre>
      * StringUtils.splitByCharacterTypeCamelCase(null)         = null
      * StringUtils.splitByCharacterTypeCamelCase("")           = []
@@ -470,10 +469,9 @@ public class string {
      * StringUtils.splitByCharacterTypeCamelCase("ASFRules")   = ["ASF", "Rules"]
      * </pre>
      *
-     * @param str
-     *        the String to split, may be <code>null</code>
+     * @param str the String to split, may be <code>null</code>
      * @return an array of parsed Strings, <code>null</code> if null String
-     *         input
+     * input
      * @since 2.4
      */
     public static String[] splitByCharacterTypeCamelCase(String str) {
@@ -481,7 +479,7 @@ public class string {
     }
 
     /**
-     * <p>
+     * <p/>
      * Splits a String by Character type as returned by
      * <code>java.lang.Character.getType(char)</code>. Groups of contiguous
      * characters of the same type are returned as complete tokens, with the
@@ -492,12 +490,10 @@ public class string {
      * token rather than to the preceding, if any,
      * <code>Character.UPPERCASE_LETTER</code> token.
      *
-     * @param str
-     *        the String to split, may be <code>null</code>
-     * @param camelCase
-     *        whether to use so-called "camel-case" for letter types
+     * @param str       the String to split, may be <code>null</code>
+     * @param camelCase whether to use so-called "camel-case" for letter types
      * @return an array of parsed Strings, <code>null</code> if null String
-     *         input
+     * input
      * @since 2.4
      */
     private static String[] splitByCharacterType(String str, boolean camelCase) {

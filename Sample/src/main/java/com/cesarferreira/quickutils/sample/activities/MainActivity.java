@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cesarferreira.quickutils.sample.R;
+import com.cesarferreira.quickutils.sample.entities.WeatherEntity;
 
 import quickutils.core.QuickUtils;
 import quickutils.core.image.cache.ImageLoader;
@@ -166,6 +167,7 @@ public class MainActivity extends Activity {
                     public void onRequestSuccess(Object o) {
                         WeatherEntity objc = (WeatherEntity) o;
                         QuickUtils.log.i(objc.toString());
+
                         textView.setText(objc.toString());
                     }
 

@@ -1,5 +1,8 @@
 package quickutils.core.categories;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
@@ -8,15 +11,25 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StatFs;
 import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -32,6 +45,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -39,6 +53,7 @@ import java.util.zip.ZipOutputStream;
 import javax.security.auth.x500.X500Principal;
 
 import quickutils.core.QuickUtils;
+import quickutils.core.collections.Lists;
 
 public class system {
 
@@ -279,55 +294,8 @@ public class system {
         return (int) size;
     }
 
-    /**
-     * Returns the version name of the current app
-     *
-     * @return the version name or "unknown" if the package name (of this current app) is not found
-     */
-    public static String getVersionName() {
-        String versionName = "unknown";
-        try {
-            versionName = QuickUtils.getContext().getPackageManager().getPackageInfo(QuickUtils.getContext().getPackageName(), PackageManager.GET_ACTIVITIES).versionName;
-        } catch (PackageManager.NameNotFoundException ignore) {
-            QuickUtils.log.d(ignore.getMessage());
-        }
-        return versionName;
-    }
 
-    /**
-     * Returns the version code of the current app
-     *
-     * @return the version name or "-1" if the package name (of this current app) is not found
-     */
-    public static int getVersionCode() {
-        int versionName = -1;
-        try {
-            versionName = QuickUtils.getContext().getPackageManager().getPackageInfo(QuickUtils.getContext().getPackageName(), PackageManager.GET_ACTIVITIES).versionCode;
-        } catch (PackageManager.NameNotFoundException ignore) {
-            QuickUtils.log.d(ignore.getMessage());
-        }
-        return versionName;
-    }
 
-    /**
-     * Current device DPI
-     *
-     * @return amount of DPIs
-     */
-    public static int deviceDPI() {
-        return QuickUtils.getContext().getResources().getDisplayMetrics().densityDpi;
-    }
-
-    /**
-     * Current device resolution
-     *
-     * @param c context
-     * @return the resolution
-     */
-    public static String deviceResolution() {
-        DisplayMetrics metrics = QuickUtils.getContext().getResources().getDisplayMetrics();
-        return String.valueOf(metrics.widthPixels) + "x" + metrics.heightPixels;
-    }
 
     /**
      * Is this service running?
@@ -502,7 +470,236 @@ public class system {
         return debuggable;
     }
 
-    public static String getCurrentMethodName() {
-        return new Exception().getStackTrace()[0].getMethodName();
+
+
+    // todo analyse
+
+    public static Boolean isEmulator() {
+        return "google_sdk".equals(Build.PRODUCT);
+    }
+
+    public static String getAndroidId() {
+        return Settings.Secure.getString(QuickUtils.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
+
+    /**
+     * @return The version name of the application
+     */
+    public static String getVersionName() {
+        return getPackageInfo().versionName;
+    }
+
+    /**
+     * @return The version code of the application
+     */
+    public static Integer getVersionCode() {
+        return getPackageInfo().versionCode;
+    }
+
+    /**
+     * @return The package name of the application
+     */
+    public static String getPackageName() {
+        return getPackageInfo().packageName;
+    }
+
+    /**
+     * @return The name of the application
+     */
+    public static String getApplicationName() {
+        Context context = QuickUtils.getContext();
+        ApplicationInfo applicationInfo = getApplicationInfo();
+        return context.getPackageManager().getApplicationLabel(applicationInfo).toString();
+    }
+
+    public static PackageInfo getPackageInfo() {
+        PackageInfo info = null;
+        try {
+            Context context = QuickUtils.getContext();
+            info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        } catch (NameNotFoundException e) {
+            // Do Nothing
+        }
+        return info;
+    }
+
+    public static ApplicationInfo getApplicationInfo() {
+        ApplicationInfo info = null;
+        try {
+            Context context = QuickUtils.getContext();
+            info = context.getPackageManager().getApplicationInfo(context.getPackageName(),
+                    PackageManager.GET_META_DATA);
+        } catch (NameNotFoundException e) {
+            // Do Nothing
+        }
+        return info;
+    }
+
+    public static void showSoftInput(Activity activity) {
+        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+    }
+
+    public static void hideSoftInput(View view) {
+        ((InputMethodManager)QuickUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                view.getWindowToken(), 0);
+    }
+
+    public static void scrollToBottom(final ScrollView scroll) {
+        if (scroll != null) {
+            scroll.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    scroll.fullScroll(View.FOCUS_DOWN);
+                }
+            });
+        }
+    }
+
+    public static String getNetworkOperatorName() {
+        TelephonyManager manager = (TelephonyManager)QuickUtils.getContext().getSystemService(
+                Context.TELEPHONY_SERVICE);
+        return manager.getNetworkOperatorName();
+    }
+
+    public static String getSimOperatorName() {
+        TelephonyManager manager = (TelephonyManager)QuickUtils.getContext().getSystemService(
+                Context.TELEPHONY_SERVICE);
+        return manager.getSimOperatorName();
+    }
+
+    /**
+     * @return The HEAP size in MegaBytes
+     */
+    public static Integer getHeapSize() {
+        return ((ActivityManager)QuickUtils.getContext().getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
+    }
+
+    /**
+     * @return The available storage in MegaBytes
+     */
+    @SuppressWarnings("deprecation")
+    public static Long getAvailableInternalDataSize() {
+        StatFs stat = new StatFs(Environment.getDataDirectory().getPath());
+        long size = (long)stat.getAvailableBlocks() * (long)stat.getBlockSize();
+        return size / sdcard.BYTES_TO_MB;
+    }
+
+    /**
+     * @return The total storage in MegaBytes
+     */
+    @SuppressWarnings("deprecation")
+    public static Long getTotalInternalDataSize() {
+        StatFs stat = new StatFs(Environment.getDataDirectory().getPath());
+        long size = (long)stat.getBlockCount() * (long)stat.getBlockSize();
+        return size / sdcard.BYTES_TO_MB;
+    }
+
+    /**
+     * Checks if the application is installed on the SD card.
+     *
+     * @return <code>true</code> if the application is installed on the sd card
+     */
+    public static Boolean isInstalledOnSdCard() {
+        return (getPackageInfo().applicationInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) == ApplicationInfo.FLAG_EXTERNAL_STORAGE;
+    }
+
+    public static Boolean isMediaMounted() {
+        return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+    }
+
+    public static String getDeviceModel() {
+        return android.os.Build.MODEL;
+    }
+
+    public static String getDeviceManufacturer() {
+        return android.os.Build.MANUFACTURER;
+    }
+
+    public static Integer getApiLevel() {
+        return android.os.Build.VERSION.SDK_INT;
+    }
+
+    public static Boolean isPreKitkat() {
+        return android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT;
+    }
+
+    public static String getPlatformVersion() {
+        return android.os.Build.VERSION.RELEASE;
+    }
+
+    public static Boolean hasCamera() {
+        return isIntentAvailable(MediaStore.ACTION_IMAGE_CAPTURE);
+    }
+
+    public static String getDeviceName() {
+        String manufacturer = getDeviceManufacturer();
+        String model = getDeviceModel();
+        if ((model != null) && model.startsWith(manufacturer)) {
+            return string.capitalize(model);
+        } else if (manufacturer != null) {
+            return string.capitalize(manufacturer) + " " + model;
+        } else {
+            return "Unknown";
+        }
+    }
+
+    public static List<String> getAccountsEmails() {
+        List<String> emails = Lists.newArrayList();
+        for (Account account : AccountManager.get(QuickUtils.getContext()).getAccounts()) {
+            if (validation.isValidEmail(account.name) && !emails.contains(account.name)) {
+                emails.add(account.name);
+            }
+        }
+        return emails;
+    }
+
+    public static String getMacAddress() {
+        WifiManager wimanager = (WifiManager)QuickUtils.getContext().getSystemService(Context.WIFI_SERVICE);
+        return wimanager.getConnectionInfo().getMacAddress();
+    }
+
+    public static String getDeviceType() {
+        if (screen.is10Inches()) {
+            return "10\" tablet";
+        } else if (screen.isBetween7And10Inches()) {
+            return "7\" tablet";
+        } else {
+            return "phone";
+        }
+    }
+
+
+    /**
+     * Indicates whether the specified action can be used as an intent. This method queries the package manager for
+     * installed packages that can respond to an intent with the specified action. If no suitable package is found, this
+     * method returns false.
+     *
+     * @param action The Intent action to check for availability.
+     *
+     * @return True if an Intent with the specified action can be sent and responded to, false otherwise.
+     */
+    public static boolean isIntentAvailable(String action) {
+        return isIntentAvailable(new Intent(action));
+    }
+
+    /**
+     * Indicates whether the specified intent can be used. This method queries the package manager for installed
+     * packages that can respond to the specified intent. If no suitable package is found, this method returns false.
+     *
+     * @param intent The Intent to check for availability.
+     *
+     * @return True if the specified Intent can be sent and responded to, false otherwise.
+     */
+    public static boolean isIntentAvailable(Intent intent) {
+        List<ResolveInfo> list = QuickUtils.getContext().getPackageManager().queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        return !list.isEmpty();
+    }
+
+    public static void startUrl(Activity activity, String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        activity.startActivity(intent);
     }
 }
