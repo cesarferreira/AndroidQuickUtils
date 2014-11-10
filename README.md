@@ -2,8 +2,7 @@ QuickUtils
 ============
 [![QuickUtils Maven Central](http://img.shields.io/badge/QuickUtils%20Maven%20Central-0.2.0-brightgreen.svg?style=flat)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.cesarferreira.quickutils%22) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AndroidQuickUtils-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/870)
 
-QuickUtils is a development library for the Android platform.
-It is intended to make application development easier and consistent throughout your applications.
+This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework. Intended to help you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that’s involved when writing Android apps.
 
 
 ![Header](https://raw.github.com/cesarferreira/AndroidQuickUtils/master/images/header-crop.png)
