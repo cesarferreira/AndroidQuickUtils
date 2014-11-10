@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.cesarferreira.quickutils.sample.R;
+import com.cesarferreira.quickutils.sample.views.Utils;
 
 import quickutils.core.QuickUtils;
 import quickutils.core.interfaces.OnEventListener;
@@ -29,8 +30,8 @@ public class BlurActivity extends Activity {
     }
 
     public void blurRemoteImage(View view) {
-        String imageURL = "http://cesarferreira.com/images/photo.jpg";
-        QuickUtils.image.getBitmapByImageURL(imageURL, new OnEventListener<Bitmap>() {
+
+        QuickUtils.image.getBitmapByImageURL(Utils.IMAGE_URL, new OnEventListener<Bitmap>() {
             @Override
             public void onSuccess(Bitmap bitmap) {
                 imageView.setImageBitmap(QuickUtils.image.blur(bitmap, 19));

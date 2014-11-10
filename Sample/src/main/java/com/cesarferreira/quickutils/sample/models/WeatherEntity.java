@@ -1,4 +1,4 @@
-package com.cesarferreira.quickutils.sample.entities;
+package com.cesarferreira.quickutils.sample.models;
 
 import com.google.gson.annotations.SerializedName;
 

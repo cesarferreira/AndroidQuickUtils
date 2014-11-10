@@ -1,4 +1,4 @@
-package com.cesarferreira.quickutils.sample;
+package com.cesarferreira.quickutils.sample.managers;
 
 import android.app.Application;
 

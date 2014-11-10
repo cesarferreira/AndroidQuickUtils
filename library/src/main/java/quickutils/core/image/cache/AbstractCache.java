@@ -166,10 +166,10 @@ public abstract class AbstractCache<KeyT, ValT> implements Map<KeyT, ValT> {
         if (!isDiskCacheEnabled) {
             Log.w(LOG_TAG, "Failed creating disk cache directory " + diskCacheDirectory);
         } else {
-            Log.d(name, "enabled write through to " + diskCacheDirectory);
+            //Log.d(name, "enabled write through to " + diskCacheDirectory);
 
             // sanitize disk cache
-            Log.d(name, "sanitize DISK cache");
+            //Log.d(name, "sanitize DISK cache");
             sanitizeDiskCache();
         }
 
@@ -177,7 +177,7 @@ public abstract class AbstractCache<KeyT, ValT> implements Map<KeyT, ValT> {
     }
 
     private void setRootDir(String rootDir) {
-        this.diskCacheDirectory = rootDir + "/cachefu/"
+        this.diskCacheDirectory = rootDir + "/cache-qu/"
                 + string.underscore(name.replaceAll("\\s", ""));
     }
 

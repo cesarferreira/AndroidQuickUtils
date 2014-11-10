@@ -7,10 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cesarferreira.quickutils.sample.R;
-import com.cesarferreira.quickutils.sample.entities.WeatherEntity;
+import com.cesarferreira.quickutils.sample.activities.BlurActivity;
+import com.cesarferreira.quickutils.sample.models.WeatherEntity;
+import com.cesarferreira.quickutils.sample.views.Utils;
 
 import quickutils.core.QuickUtils;
-import quickutils.core.image.cache.ImageLoader;
 import quickutils.core.interfaces.RequestCallback;
 import quickutils.core.rest.RequestError;
 
@@ -32,11 +33,7 @@ public class MainActivity extends Activity {
         // IMAGE CATEGORY
         ///////////////////////////////////////////////////////////////////////
 
-        String imageUrl = "http://cesarferreira.com/images/photo.jpg";
-
-        ImageLoader.initialize(getApplicationContext());
-
-        ImageLoader.start(imageUrl, imageView);
+        QuickUtils.imageCache.load(Utils.IMAGE_URL, imageView);
 
         ///////////////////////////////////////////////////////////////////////
         // SYSTEM CATEGORY

@@ -8,6 +8,8 @@ import quickutils.core.categories.string;
 import quickutils.core.categories.validation;
 import quickutils.core.categories.view;
 import quickutils.core.exceptions.InitNotSetException;
+import quickutils.core.image.cache.ImageLoader;
+import quickutils.core.image.cache.ImageLoaderHandler;
 import quickutils.core.rest.Rest;
 
 public abstract class QuickUtils {
@@ -62,6 +64,9 @@ public abstract class QuickUtils {
 
         // init Rest
         QuickUtils.rest.init();
+
+        // init image cache
+        QuickUtils.imageCache.initialize(context);
     }
 
     /**
@@ -145,4 +150,13 @@ public abstract class QuickUtils {
             super();
         }
     }
-}
+
+    public static class imageCache extends ImageLoader {
+        private imageCache(String imageUrl, ImageLoaderHandler handler) {
+            super(imageUrl, handler);
+        }
+    }
+
+
+
+    }
