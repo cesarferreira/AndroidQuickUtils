@@ -26,12 +26,23 @@ android {
         renderscriptSupportMode true
     }
 
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
 }
 
 dependencies {
-    //compile 'com.android.support:appcompat-v7:21.0.0'
-    //compile 'com.android.support:support-v4:21.0.0'
-    //compile 'com.android.support:support-v13:19.1.0'
+    compile 'com.android.support:appcompat-v7:19.1.0'
+
+    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.squareup.okio:okio:1.0.1'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
 }
 
 task clearJar(type: Delete) {

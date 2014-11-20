@@ -3,17 +3,37 @@ package com.cesarferreira.quickutils.sample.activities;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cesarferreira.quickutils.sample.R;
+import com.cesarferreira.quickutils.sample.activities.BlurActivity;
+import com.cesarferreira.quickutils.sample.models.WeatherEntity;
+import com.cesarferreira.quickutils.sample.views.Utils;
 
 import quickutils.core.QuickUtils;
+import quickutils.core.interfaces.RequestCallback;
+import quickutils.core.rest.RequestError;
 
 public class MainActivity extends Activity {
+
+    private TextView textView;
+    private ImageView imageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // inject dependency
+        textView = (TextView) findViewById(R.id.textView);
+        imageView = (ImageView) findViewById(R.id.imageView);
+
+        ///////////////////////////////////////////////////////////////////////
+        // IMAGE CATEGORY
+        ///////////////////////////////////////////////////////////////////////
+
+        QuickUtils.imageCache.load(Utils.IMAGE_URL, imageView);
 
         ///////////////////////////////////////////////////////////////////////
         // SYSTEM CATEGORY
@@ -27,23 +47,24 @@ public class MainActivity extends Activity {
         ///////////////////////////////////////////////////////////////////////
         // TIMER CATEGORY
         ///////////////////////////////////////////////////////////////////////
+
         String timerTag = "test";
 
         // start the timer
         QuickUtils.timer.start(timerTag);
 
-        for (int i=0;i<100;i++) {
+        for (int i = 0; i < 100; i++) {
             // Sleep just for
             QuickUtils.system.sleep(1);
-            if (i%10==0) {
-                QuickUtils.log.i("more 10% took: "+QuickUtils.timer.tick(timerTag)+" ms");
+            if (i % 10 == 0) {
+                QuickUtils.log.i("more 10% took: " + QuickUtils.timer.tick(timerTag) + " ms");
             }
         }
 
         // stop the timer
         long difference = QuickUtils.timer.stop(timerTag);
 
-        QuickUtils.log.i("time past: "+difference+" ms");
+        QuickUtils.log.i("time past: " + difference + " ms");
 
 
         ///////////////////////////////////////////////////////////////////////
@@ -126,5 +147,31 @@ public class MainActivity extends Activity {
 
     public void blurActivityClick(View view) {
         QuickUtils.system.navigateToActivity(this, BlurActivity.class);
+    }
+
+    public void restRequest(View view) {
+
+        String REQUEST_TAG = "tag";
+
+        QuickUtils.rest.connect()
+                .createRequest()
+                .get()
+                .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
+                .fromJsonObject()
+                .mappingInto(WeatherEntity.class)
+                .execute(REQUEST_TAG, new RequestCallback() {
+                    @Override
+                    public void onRequestSuccess(Object o) {
+                        WeatherEntity objc = (WeatherEntity) o;
+                        QuickUtils.log.i(objc.toString());
+
+                        textView.setText(objc.toString());
+                    }
+
+                    @Override
+                    public void onRequestError(RequestError error) {
+                        QuickUtils.log.i("error " + error.getErrorCode());
+                    }
+                });
     }
 }
