@@ -1,3 +1,99 @@
 <resources>
     <string name="app_name">QuickUtils</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="noResults">There are no results available</string>
+    <string name="zeroPercent">0%</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="finish">Finish</string>
+    <string name="refresh">Refresh</string>
+    <string name="logout">Logout</string>
+    <string name="revokeAccess">Revoke</string>
+    <string name="signIn">Sign in</string>
+    <string name="retry">Retry</string>
+    <string name="removeAdsNow">Remove ads now!</string>
+
+    <!-- Navigation Drawer -->
+    <string name="drawerOpen">Open navigation drawer</string>
+    <string name="drawerClose">Close navigation drawer</string>
+
+    <!-- Errors -->
+    <string name="internalError">Oops! We\'re having technical problems. Please try again later.</string>
+    <string name="serverError">Oops! We\'re having technical problems. Please try again later.</string>
+    <string name="connectionError">Please check your internet connection and try again.</string>
+    <string name="connectionErrorTitle">Connection Error</string>
+    <string name="facebookError">There was a problem connecting to Facebook. Please try again later.</string>
+    <string name="notSupportedInAppBillingError">Your device doesn\'t support in app billing.</string>
+    <string name="failedToLoadPurchases">We could\'t load the items to purchase. Please try again later.</string>
+    <string name="exceptionReportDialogTitle">%1$s error</string>
+    <string name="invalidCredentials">Invalid Credentials</string>
+
+    <!-- Google Play Utils -->
+    <string name="updateAppTitle">Update required</string>
+    <string name="updateAppMessage">You are using an outdated version of this app. Please update it and try again.</string>
+    <string name="installAppTitle">%1$s required</string>
+    <string name="installAppMessage">You need to install the %1$s application to continue. Would you like to download it?</string>
+
+    <!-- Abstract Search Activity -->
+    <string name="typeHere">Type Here</string>
+    <string name="noResultsSearch">Your search did not match any result.</string>
+    <string name="requiredSearchTerm">Search term is required</string>
+
+    <!-- Time Picker Dialog Fragment -->
+    <string name="selectTime">Select Time</string>
+
+    <!-- Picture Dialog Fragment -->
+    <string name="selectPhoto">Photo Source</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+
+    <!-- Rate me -->
+    <string name="rateMeTitle">Did you like %1$s?</string>
+    <string name="rateMeDescription">Rate it now !</string>
+
+    <!-- About Dialog -->
+    <string name="about">About</string>
+    <string name="version">Version %1$s</string>
+    <string name="contactUs">Contact Us</string>
+    <string name="share">Share</string>
+    <string name="copyright">© %1$s %2$s</string>
+    <string name="allRightsReservedLegend">All Rights Reserved</string>
+    <string name="followUs">Follow us</string>
+
+    <!-- External Apps -->
+    <string name="barcodeScanner">Barcode Scanner</string>
+    <string name="voiceSearch">Voice Search</string>
+
+    <!-- Sharing -->
+    <string name="sharingFailed">The sharing failed</string>
+
+    <!-- Facebook -->
+    <string name="facebook">Facebook</string>
+
+    <!-- Google+ -->
+    <string name="googlePlus">Google+</string>
+
+    <!-- Map -->
+    <string name="driving">Driving</string>
+    <string name="walking">Walking</string>
+    <string name="updateGooglePlayServices">Please update the Google Play Services app to see the maps.</string>
+
+
+    <!-- Info View -->
+    <string name="packageName">Package Name: %1$s</string>
+    <string name="environmentName">Environment Name: %1$s</string>
+    <string name="analyticsEnabled">Analytics Enabled: %1$s</string>
+    <string name="smallestScreenWidthDp">Smallest Screen Width: %1$sdp</string>
+    <string name="screenDensity">Screen Density: %1$s</string>
+    <string name="networkOperatorName">Network Operator Name: %1$s</string>
+    <string name="simOperatorName">SIM Operator Name: %1$s</string>
+    <string name="branch">Branch: %1$s</string>
+    <string name="commitId">Commit Id: %1$s</string>
+    <string name="commitTime">Commit Time: %1$s</string>
+    <string name="buildTime">Build Time: %1$s</string>
+
 </resources>

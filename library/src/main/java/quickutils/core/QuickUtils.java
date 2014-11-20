@@ -3,8 +3,14 @@ package quickutils.core;
 
 import android.content.Context;
 
+import quickutils.core.categories.screen;
+import quickutils.core.categories.string;
+import quickutils.core.categories.validation;
 import quickutils.core.categories.view;
 import quickutils.core.exceptions.InitNotSetException;
+import quickutils.core.image.cache.ImageLoader;
+import quickutils.core.image.cache.ImageLoaderHandler;
+import quickutils.core.rest.Rest;
 
 public abstract class QuickUtils {
 
@@ -18,23 +24,6 @@ public abstract class QuickUtils {
     public static final int WARN = android.util.Log.WARN;
     public static final int ERROR = android.util.Log.ERROR;
 
-    // Network responses
-    public final static int REQUEST_RESPONSE_OK = 200;
-    public final static int REQUEST_RESPONSE_CREATED = 201;
-    public final static int REQUEST_RESPONSE_ACCEPTED = 202;
-    public final static int REQUEST_RESPONSE_NO_CONTENT = 204;
-    public final static int REQUEST_RESPONSE_BAD_REQUEST = 400;
-    public final static int REQUEST_RESPONSE_UNAUTHORIZED = 401;
-    public final static int REQUEST_RESPONSE_FORBIDDEN = 403;
-    public final static int REQUEST_RESPONSE_PAYMENT_REQUIRED = 402;
-    public final static int REQUEST_RESPONSE_NOT_FOUND = 404;
-    public final static int REQUEST_RESPONSE_GONE = 410;
-    public final static int REQUEST_RESPONSE_UNPROCESSABLE_ENTITY = 422;
-    public final static int REQUEST_RESPONSE_INTERNAL_SERVER_ERROR = 500;
-    public final static int REQUEST_RESPONSE_SERVICE_UNAVAILABLE = 503;
-    public final static int REQUEST_RESPONSE_MULTIPLE_DEVICE = 429;
-    public final static int REQUEST_RESPONSE_NOT_PERMITTED = 301;
-    public final static int REQUEST_RESPONSE_RESET_PASSWORD_SUCCESS = 204;
     /**
      * Developer mode for Debugging purposes
      */
@@ -72,6 +61,12 @@ public abstract class QuickUtils {
 
         // resets all timestamps
         QuickUtils.timer.resetAllTimestamps();
+
+        // init Rest
+        QuickUtils.rest.init();
+
+        // init image cache
+        QuickUtils.imageCache.initialize(context);
     }
 
     /**
@@ -142,6 +137,26 @@ public abstract class QuickUtils {
     public static class views extends quickutils.core.categories.view {
     }
 
-    public static class timer extends quickutils.core.categories.timer {
+    public static class timer extends quickutils.core.categories.timer {}
+
+    public static class string extends quickutils.core.categories.string {}
+
+    public static class validation extends quickutils.core.categories.validation {}
+
+    public static class screen extends quickutils.core.categories.screen {}
+
+    public static class rest extends Rest {
+        public rest() {
+            super();
+        }
     }
-}
+
+    public static class imageCache extends ImageLoader {
+        private imageCache(String imageUrl, ImageLoaderHandler handler) {
+            super(imageUrl, handler);
+        }
+    }
+
+
+
+    }
