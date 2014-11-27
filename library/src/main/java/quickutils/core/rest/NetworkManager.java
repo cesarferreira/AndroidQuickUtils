@@ -95,8 +95,12 @@ public final class NetworkManager {
             public void onErrorResponse(VolleyError error) {
                 if (requestCallback != null) {
                     NetworkResponse response = error.networkResponse;
-                    if (response != null)
+                    if (response != null) {
                         requestCallback.onRequestError(new RequestError(response));
+                    } else {
+                        requestCallback.onRequestError(new RequestError(error.toString()));
+
+                    }
                 }
             }
         }) {

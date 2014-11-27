@@ -159,10 +159,10 @@ public class MainActivity extends Activity {
                 .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
                 .fromJsonObject()
                 .mappingInto(WeatherEntity.class)
-                .execute(REQUEST_TAG, new RequestCallback() {
+                .execute(REQUEST_TAG, new RequestCallback<WeatherEntity>() {
                     @Override
-                    public void onRequestSuccess(Object o) {
-                        WeatherEntity objc = (WeatherEntity) o;
+                    public void onRequestSuccess(WeatherEntity objc) {
+
                         QuickUtils.log.i(objc.toString());
 
                         textView.setText(objc.toString());

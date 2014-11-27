@@ -4,7 +4,10 @@ import com.android.volley.NetworkResponse;
 
 import java.util.Map;
 
+import quickutils.core.QuickUtils;
+
 public class RequestError extends Exception {
+    public final static int REQUEST_RESPONSE_NOT_OK = -1;
     public final static int REQUEST_RESPONSE_OK = 200;
     public final static int REQUEST_RESPONSE_CREATED = 201;
     public final static int REQUEST_RESPONSE_ACCEPTED = 202;
@@ -23,11 +26,21 @@ public class RequestError extends Exception {
     public final static int REQUEST_RESPONSE_RESET_PASSWORD_SUCCESS = 204;
 
     final int errorCode;
-    final Map<String,String> headers;
+    final Map<String, String> headers;
 
     RequestError(NetworkResponse response) {
         this.errorCode = response.statusCode;
         this.headers = response.headers;
+        this.errorMessage = response.toString();
+    }
+
+    private String errorMessage;
+
+    RequestError(String response) {
+        this.errorCode = REQUEST_RESPONSE_NOT_OK;
+        this.headers = null;
+        this.errorMessage = response;
+        QuickUtils.log.e("ATTENTION: " + this.errorMessage);
     }
 
     public int getErrorCode() {
