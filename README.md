@@ -66,12 +66,26 @@ REST
 Simple REST requests and automatic parse
 
 ```java
+// the entity
+public class Weather {
+
+    @SerializedName("description")
+    public String description;
+    
+    @SerializedName("lon")
+    public long longitude;
+    
+    @SerializedName("lat")
+    public long latitude;
+}
+
+// the request
 QuickUtils.rest.connect()
             .createRequest()
             .get()
             .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
             .fromJsonObject()
-            .mappingInto(WeatherEntity.class)
+            .mappingInto(Weather.class)
             .execute(REQUEST_TAG, new RequestCallback<Weather>() {
                 @Override
                 public void onRequestSuccess(Weather weather) {
@@ -84,21 +98,6 @@ QuickUtils.rest.connect()
             });
 ```
 
-Seamlessly use your own Java classes with Gson
----------------------
-```java
-public class Weather {
-
-    @SerializedName("description")
-    public String description;
-    
-    @SerializedName("lon")
-    public long longitude;
-    
-    @SerializedName("lat")
-    public long latitude;
-}
-```
 
 Load your images async
 ---------------------
