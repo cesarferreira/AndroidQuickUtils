@@ -12,6 +12,7 @@ import com.cesarferreira.quickutils.sample.models.WeatherEntity;
 import com.cesarferreira.quickutils.sample.views.Utils;
 
 import quickutils.core.QuickUtils;
+import quickutils.core.image.cache.ImageLoaderHandler;
 import quickutils.core.interfaces.RequestCallback;
 import quickutils.core.rest.RequestError;
 
@@ -34,6 +35,7 @@ public class MainActivity extends Activity {
         ///////////////////////////////////////////////////////////////////////
 
         QuickUtils.imageCache.load(Utils.IMAGE_URL, imageView);
+        QuickUtils.imageCache.load(Utils.IMAGE_URL, imageView, R.drawable.dummy, R.drawable.error);
 
         ///////////////////////////////////////////////////////////////////////
         // SYSTEM CATEGORY

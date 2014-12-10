@@ -141,6 +141,24 @@ public class ImageLoader implements Runnable {
     }
 
     /**
+     * Triggers the image loader for the given image and view and sets a dummy image while waiting
+     * for the download to finish. The image loading will be performed concurrently to the UI main
+     * thread, using a fixed size thread pool. The loaded image will be posted back to the given
+     * ImageView upon completion.
+     *
+     * @param imageUrl      the URL of the image to download
+     * @param imageView     the ImageView which should be updated with the new image
+     * @param dummyDrawable the Drawable set to the ImageView while waiting for the image to be downloaded
+     * @param errorDrawable the Drawable set to the ImageView if a download error occurs
+     */
+    public static void load(String imageUrl, ImageView imageView, int dummyDrawable, int errorDrawable) {
+        Drawable dummy = QuickUtils.getContext().getResources().getDrawable(dummyDrawable);
+        Drawable error = QuickUtils.getContext().getResources().getDrawable(errorDrawable);
+
+        load(imageUrl, imageView, new ImageLoaderHandler(imageView, imageUrl, error), dummy, error);
+    }
+
+    /**
      * Triggers the image loader for the given image and handler. The image loading will be
      * performed concurrently to the UI main thread, using a fixed size thread pool. The loaded
      * image will not be automatically posted to an ImageView; instead, you can pass a custom
@@ -167,12 +185,12 @@ public class ImageLoader implements Runnable {
      * @param errorDrawable the Drawable set to the ImageView if a download error occurs
      */
     public static void load(String imageUrl, ImageLoaderHandler handler, Drawable dummyDrawable,
-                             Drawable errorDrawable) {
+                            Drawable errorDrawable) {
         load(imageUrl, handler.getImageView(), handler, dummyDrawable, errorDrawable);
     }
 
     private static void load(String imageUrl, ImageView imageView, ImageLoaderHandler handler,
-                              Drawable dummyDrawable, Drawable errorDrawable) {
+                             Drawable dummyDrawable, Drawable errorDrawable) {
         if (imageView != null) {
             if (imageUrl == null) {
                 // In a ListView views are reused, so we must be sure to remove the tag that could
