@@ -4,26 +4,7 @@ QuickUtils
 
 This repository offers a set of random useful classes to deal with repetitive tasks in the Android Framework. Intended to help you getting your Android applications off the ground quickly, by offering ready-to-use components and utility classes that wrap a lot of the boilerplate that’s involved when writing Android apps.
 
-
 ![Header](https://raw.github.com/cesarferreira/AndroidQuickUtils/master/images/header-crop.png)
-<!--
-## Features
-
-- **More than 1000 preloaded Colors in the project** - check the list [here](https://github.com/cesarferreira/AndroidQuickUtils/wiki/Colors.xml)
-- **Log Category** - Write logs without needing tags, etc.
-- **TextViews** - TypeWriter effect, Roboto bold, thin, condensed, etc.
-- **Animation Category** - With classes for blinking views, etc.
-- **Math Category** - Sin, arcsin, tang, random numbers, etc.
-- **SDCard Category** - SDCard availability, write files, etc.
-- **Security Category** - EncodeBase64, DecodeBase64, Sha1, MD5, etc.
-- **System Category** - Sleep, vibrate, toasts, navigate to activity, etc.
-- **Voice Category** - Get speech recognition results, etc.
-- **Date Category** - Get current time in seconds and miliseconds, etc.
-- **Image Category** - Apply blur to a bitmap, image brightness, etc.
-- **Web Category** - has internet connection, change wireless state, GET requests, etc
-- **Image Views** - Top crop image views, circular image views etc.
-- ...
--->
 
 ## Installation
 
@@ -79,7 +60,56 @@ QuickUtils.prefs.getInt(key, defaultValue);
 QuickUtils.prefs.remove(key);
 //  Etc. (hundreds more methods)
 ```
-<!--A small sample of the shared preferences wrapper to save/read data with only 1 line of code.-->
+
+REST
+------------------
+Simple REST requests and automatic parse
+
+```java
+// the entity
+public class Weather {
+
+    @SerializedName("description")
+    public String description;
+    
+    @SerializedName("lon")
+    public long longitude;
+    
+    @SerializedName("lat")
+    public long latitude;
+}
+
+// the request
+QuickUtils.rest.connect()
+            .createRequest()
+            .get()
+            .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
+            .fromJsonObject()
+            .mappingInto(Weather.class)
+            .execute(REQUEST_TAG, new RequestCallback<Weather>() {
+                @Override
+                public void onRequestSuccess(Weather weather) {
+                    QuickUtils.log.i(weather.description);
+                }
+                @Override
+                public void onRequestError(RequestError error) {
+                    QuickUtils.log.i("error " + error.getErrorCode());
+                }
+            });
+```
+
+
+Load your images async
+---------------------
+Image downloading and caching
+```java
+// Simple
+QuickUtils.imageCache.load(IMAGE_URL, imageView);
+
+// or complex
+QuickUtils.imageCache.load(Utils.IMAGE_URL, imageView, R.drawable.dummy, R.drawable.error);
+```
+
 
 More Documentation
 ------------------
