@@ -3,6 +3,7 @@ package quickutils.core;
 
 import android.content.Context;
 
+import quickutils.core.categories.location;
 import quickutils.core.categories.screen;
 import quickutils.core.categories.string;
 import quickutils.core.categories.validation;
@@ -157,6 +158,7 @@ public abstract class QuickUtils {
         }
     }
 
-
+    public static class location extends quickutils.core.categories.location {
+    }
 
     }

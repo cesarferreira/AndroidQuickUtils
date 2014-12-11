@@ -14,6 +14,7 @@ import com.cesarferreira.quickutils.sample.views.Utils;
 import quickutils.core.QuickUtils;
 import quickutils.core.image.cache.ImageLoaderHandler;
 import quickutils.core.interfaces.RequestCallback;
+import quickutils.core.models.LocationModel;
 import quickutils.core.rest.RequestError;
 
 public class MainActivity extends Activity {
@@ -145,6 +146,16 @@ public class MainActivity extends Activity {
 
         QuickUtils.log.i("Unaccent - " + QuickUtils.text.unAccent("ééééé çedilha"));
 
+        ///////////////////////////////////////////////////////////////////////
+        // LOCATION CATEGORY
+        ///////////////////////////////////////////////////////////////////////
+        LocationModel locationModel = QuickUtils.location.getLocationByCoordinates(38.7471236,-9.1532266);
+        QuickUtils.log.i("Location: ");
+        QuickUtils.log.i("latitude --> " + locationModel.latitude);
+        QuickUtils.log.i("longitude --> " + locationModel.longitude);
+        QuickUtils.log.i("address --> " + locationModel.address);
+        QuickUtils.log.i("city --> " + locationModel.city);
+        QuickUtils.log.i("country --> " + locationModel.country);
     }
 
     public void blurActivityClick(View view) {
