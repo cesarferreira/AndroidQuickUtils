@@ -44,20 +44,15 @@ Simple REST requests and automatic parse
 public class Weather {
     @SerializedName("description")
     public String description;
-    @SerializedName("lon")
-    public long longitude;
-    @SerializedName("lat")
-    public long latitude;
 }
 
 // the request
 QuickUtils.rest.connect()
-            .createRequest()
-            .get()
-            .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
+            .GET()
+            .url("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
             .fromJsonObject()
             .mappingInto(Weather.class)
-            .execute("some tag", new RequestCallback<Weather>() {
+            .execute(new RequestCallback<Weather>() {
                 @Override
                 public void onRequestSuccess(Weather weather) {
                     QuickUtils.log.i(weather.description);
@@ -80,28 +75,34 @@ public class Tweet {
 
 // the request
  QuickUtils.rest.connect()
-                .createRequest()
-                .get()
-                .pathUrl("https://path/to/the/tweets")
+                .GET()
+                .url("https://path/to/the/tweets")
                 .fromJsonArray()
-                .mappingInto(new TypeToken<List<Tweet>>() {
-                })
-                .execute("another tag", new RequestCallback<List<Tweet>>() {
-                    @Override
-                    public void onRequestSuccess(List<Tweet> tweets) {
-
-                        if (tweets != null) {
-                            for (Tweet tweet : tweets)
-                                QuickUtils.log.i(tweet.title);
-                        }
-                    }
-
-                    @Override
-                    public void onRequestError(RequestError error) {
-                        QuickUtils.log.i("error " + error.getErrorCode());
-                    }
-                });
+                .mappingInto(new TypeToken<List<Tweet>>() {})
+                .execute(callback);
     }
+```
+
+### Post with Header and Body params
+
+```java
+Header requestHeader = new Header.Builder()
+                .add("Authorization", "Bearer Jhahdau2819ajsbdkasdkasdkashjdkahs")
+                .build();
+
+Body requestBody = new Body.Builder()
+            .add(DEVICE_TYPE_KEY, "")
+            .add(DEVICE_OS_KEY, "")
+            .add(DEVICE_UUID_KEY, "")
+            .add(DEVICE_PUSH_TOKEN, "")
+            .build();
+
+QuickUtils.rest.connect()
+            .POST(requestHeader, requestBody)
+            .url(url)
+            .fromJsonArray()
+            .mappingInto(new TypeToken<List<PostEntity>>() {})
+            .execute(callback);
 ```
 
 
