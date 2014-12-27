@@ -27,38 +27,10 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        QuickUtils.init(context);
+        QuickUtils.init(this);
     }
 }
 
-```
-
-All you need to do is to specify the category and the method you want to use.
-
-```java
-QuickUtils.__category__.__method__
-```
-
-E.g.
-```java
-// Log something
-QuickUtils.log.e("this is an error");
-// Make the smartphone vibrate for the amount of time you want
-QuickUtils.system.vibrate(1000);
-// Convert pounds to KG
-QuickUtils.math.poundsToKg(weight);
-// Does that file exists?
-QuickUtils.sdcard.exists(someFile);
-// Encode a string
-QuickUtils.security.encodeBase64(someString);
-// Save data
-QuickUtils.prefs.save(key, value);
-// Retrieve saved data
-QuickUtils.prefs.getString(key, defaultValue);
-QuickUtils.prefs.getInt(key, defaultValue);
-// Remove saved data
-QuickUtils.prefs.remove(key);
-//  Etc. (hundreds more methods)
 ```
 
 REST
@@ -85,7 +57,7 @@ QuickUtils.rest.connect()
             .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
             .fromJsonObject()
             .mappingInto(Weather.class)
-            .execute(REQUEST_TAG, new RequestCallback<Weather>() {
+            .execute("some tag", new RequestCallback<Weather>() {
                 @Override
                 public void onRequestSuccess(Weather weather) {
                     QuickUtils.log.i(weather.description);
@@ -140,8 +112,38 @@ Image downloading and caching
 // Simple
 QuickUtils.imageCache.load(IMAGE_URL, imageView);
 
-// or complex
+// or more complete
 QuickUtils.imageCache.load(Utils.IMAGE_URL, imageView, R.drawable.dummy, R.drawable.error);
+```
+
+## Using the util methods
+
+All you need to do is to specify the category and the method you want to use.
+
+```java
+QuickUtils.__category__.__method__
+```
+
+E.g.
+```java
+// Log something
+QuickUtils.log.e("this is an error");
+// Make the smartphone vibrate for the amount of time you want
+QuickUtils.system.vibrate(1000);
+// Convert pounds to KG
+QuickUtils.math.poundsToKg(weight);
+// Does that file exists?
+QuickUtils.sdcard.exists(someFile);
+// Encode a string
+QuickUtils.security.encodeBase64(someString);
+// Save data
+QuickUtils.prefs.save(key, value);
+// Retrieve saved data
+QuickUtils.prefs.getString(key, defaultValue);
+QuickUtils.prefs.getInt(key, defaultValue);
+// Remove saved data
+QuickUtils.prefs.remove(key);
+//  Etc. (hundreds more methods)
 ```
 
 
