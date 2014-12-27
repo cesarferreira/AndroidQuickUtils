@@ -113,7 +113,10 @@ public final class NetworkManager {
         networkHelper.addToRequestQueue(request, requestTag);
     }
 
-    public void execute(String requestTag, RequestCallback callback) {
+    public void execute(RequestCallback callback) {
+
+        String requestTag = Rest.DEFAULT_TAG;
+
         if (resultType == null) {
             throw new IllegalArgumentException("result type must not be null.");
         }
@@ -166,7 +169,7 @@ public final class NetworkManager {
         }
 
         @Override
-        public INetworkManagerBuilder pathUrl(String pathUrl) {
+        public INetworkManagerBuilder url(String pathUrl) {
             this.pathUrl = pathUrl;
             return this;
         }
@@ -201,7 +204,7 @@ public final class NetworkManager {
          * @param pathUrl
          * @return
          */
-        public INetworkManagerBuilder pathUrl(String pathUrl);
+        public INetworkManagerBuilder url(String pathUrl);
 
         public INetworkManagerBuilder fromJsonObject();
 

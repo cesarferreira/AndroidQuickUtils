@@ -173,13 +173,13 @@ public class MainActivity extends Activity {
     public void restRequest(View view) {
 
         // single object
-        QuickUtils.rest.connect()
-                .createRequest()
-                .get()
-                .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
+        QuickUtils.rest
+                .connect()
+                .GET()
+                .url("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
                 .fromJsonObject()
                 .mappingInto(WeatherEntity.class)
-                .execute("some tag", new RequestCallback<WeatherEntity>() {
+                .execute(new RequestCallback<WeatherEntity>() {
                     @Override
                     public void onRequestSuccess(WeatherEntity weatherEntity) {
                         QuickUtils.log.i(weatherEntity.toString());
@@ -194,14 +194,14 @@ public class MainActivity extends Activity {
 
 
         // Array of objects
-        QuickUtils.rest.connect()
-                .createRequest()
-                .get()
-                .pathUrl("https://redcarpetws.herokuapp.com/posts/1")
+        QuickUtils.rest
+                .connect()
+                .GET()
+                .url("https://redcarpetws.herokuapp.com/posts/1")
                 .fromJsonArray()
                 .mappingInto(new TypeToken<List<PostEntity>>() {
                 })
-                .execute("another tag", new RequestCallback<List<PostEntity>>() {
+                .execute(new RequestCallback<List<PostEntity>>() {
                     @Override
                     public void onRequestSuccess(List<PostEntity> posts) {
                         if (posts != null) {
@@ -232,13 +232,12 @@ public class MainActivity extends Activity {
                 .build();
 
         QuickUtils.rest.connect()
-                .createRequest()
-                .post(requestHeader, requestBody)
-                .pathUrl("https://redcarpetws.herokuapp.com/posts/1")
+                .POST(requestHeader, requestBody)
+                .url("https://redcarpetws.herokuapp.com/posts/1")
                 .fromJsonArray()
                 .mappingInto(new TypeToken<List<PostEntity>>() {
                 })
-                .execute("another tag", new RequestCallback<List<PostEntity>>() {
+                .execute(new RequestCallback<List<PostEntity>>() {
                     @Override
                     public void onRequestSuccess(List<PostEntity> posts) {
 

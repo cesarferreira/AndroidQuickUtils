@@ -16,14 +16,14 @@ public final class NetworkCreator {
     /**
      * @param headers Headers request, it can be null
      */
-    public NetworkManager.INetworkManagerBuilder get(Header headers) {
+    public NetworkManager.INetworkManagerBuilder GET(Header headers) {
         return new NetworkManager.Builder().setMethod(Request.Method.GET).setHeaders(headers.getHeaders());
     }
 
     /**
      *
      */
-    public NetworkManager.INetworkManagerBuilder get() {
+    public NetworkManager.INetworkManagerBuilder GET() {
         return new NetworkManager.Builder().setMethod(Request.Method.GET);
     }
 
@@ -32,7 +32,7 @@ public final class NetworkCreator {
      * @param bodyObject Body request, it not null
      * @return
      */
-    public NetworkManager.INetworkManagerBuilder post(Header headers, Object bodyObject) {
+    public NetworkManager.INetworkManagerBuilder POST(Header headers, Object bodyObject) {
         return new NetworkManager.Builder().setMethod(Request.Method.POST).setBodyRequest(generateBodyRequest(bodyObject)).setHeaders(headers.getHeaders());
     }
 
@@ -42,7 +42,7 @@ public final class NetworkCreator {
      * @param bodyRequest Body request, it not null
      * @return
      */
-    public NetworkManager.INetworkManagerBuilder post(Header headers, Body bodyRequest) {
+    public NetworkManager.INetworkManagerBuilder POST(Header headers, Body bodyRequest) {
         return new NetworkManager.Builder().setMethod(Request.Method.POST).setBodyRequest(bodyRequest.getBody()).setHeaders(headers.getHeaders());
     }
 
@@ -50,7 +50,7 @@ public final class NetworkCreator {
      * @param bodyObject Body request, it not null
      * @return
      */
-    public NetworkManager.INetworkManagerBuilder post(Object bodyObject) {
+    public NetworkManager.INetworkManagerBuilder POST(Object bodyObject) {
         return new NetworkManager.Builder().setMethod(Request.Method.POST).setBodyRequest(generateBodyRequest(bodyObject));
     }
 
@@ -58,7 +58,7 @@ public final class NetworkCreator {
      * @param bodyRequest Body request, it not null
      * @return
      */
-    public NetworkManager.INetworkManagerBuilder post(Body bodyRequest) {
+    public NetworkManager.INetworkManagerBuilder POST(Body bodyRequest) {
         return new NetworkManager.Builder().setMethod(Request.Method.POST).setBodyRequest(bodyRequest.getBody());
     }
 
@@ -67,7 +67,7 @@ public final class NetworkCreator {
      * @param bodyObject Body request, it not null
      * @return
      */
-    public NetworkManager.INetworkManagerBuilder put(Header headers, Object bodyObject) {
+    public NetworkManager.INetworkManagerBuilder PUT(Header headers, Object bodyObject) {
         return new NetworkManager.Builder().setMethod(Request.Method.PUT).setBodyRequest(generateBodyRequest(generateBodyRequest(bodyObject))).setHeaders(headers.getHeaders());
     }
 
@@ -76,7 +76,7 @@ public final class NetworkCreator {
      * @param bodyRequest Body request, it not null
      * @return
      */
-    public NetworkManager.INetworkManagerBuilder put(Header headers, Body bodyRequest) {
+    public NetworkManager.INetworkManagerBuilder PUT(Header headers, Body bodyRequest) {
         return new NetworkManager.Builder().setMethod(Request.Method.PUT).setBodyRequest(generateBodyRequest(bodyRequest.getBody())).setHeaders(headers.getHeaders());
     }
 
@@ -84,7 +84,7 @@ public final class NetworkCreator {
      * @param bodyObject Body request, it not null
      * @return
      */
-    public NetworkManager.INetworkManagerBuilder put(Object bodyObject) {
+    public NetworkManager.INetworkManagerBuilder PUT(Object bodyObject) {
         return new NetworkManager.Builder().setMethod(Request.Method.PUT).setBodyRequest(generateBodyRequest(bodyObject));
     }
 
@@ -92,7 +92,7 @@ public final class NetworkCreator {
      * @param bodyRequest Body request, it not null
      * @return
      */
-    public NetworkManager.INetworkManagerBuilder put(Body bodyRequest) {
+    public NetworkManager.INetworkManagerBuilder PUT(Body bodyRequest) {
         return new NetworkManager.Builder().setMethod(Request.Method.PUT).setBodyRequest(bodyRequest.getBody());
     }
 
@@ -100,7 +100,7 @@ public final class NetworkCreator {
      * @param headers Headers request, it can be null
      * @return
      */
-    public NetworkManager.INetworkManagerBuilder delete(Header headers) {
+    public NetworkManager.INetworkManagerBuilder DELETE(Header headers) {
         return new NetworkManager.Builder().setMethod(Request.Method.DELETE).setHeaders(headers.getHeaders());
     }
 

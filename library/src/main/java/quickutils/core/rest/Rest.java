@@ -5,6 +5,8 @@ import quickutils.core.QuickUtils;
 public class Rest {
     static Rest singleton = null;
 
+    public static final String DEFAULT_TAG = "resttag";
+
     public Rest() {
     }
 
@@ -15,15 +17,15 @@ public class Rest {
         return singleton;
     }
 
-    public synchronized static Rest connect() {
+    public synchronized static NetworkCreator connect() {
         if (singleton == null) {
             throw new IllegalArgumentException("QuickUtils not instantiated yet.");
         }
-        return singleton;
+        return singleton.createRequest();
     }
 
-    public void cancelRequest(String tag) {
-        NetworkHelper.getInstance(QuickUtils.getContext()).cancelPendingRequests(tag);
+    public void cancelRequests() {
+        NetworkHelper.getInstance(QuickUtils.getContext()).cancelPendingRequests(Rest.DEFAULT_TAG);
     }
 
     public NetworkCreator createRequest() {
