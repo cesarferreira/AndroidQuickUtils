@@ -7,18 +7,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cesarferreira.quickutils.sample.R;
-import com.cesarferreira.quickutils.sample.activities.BlurActivity;
+import com.cesarferreira.quickutils.sample.models.PostEntity;
 import com.cesarferreira.quickutils.sample.models.WeatherEntity;
 import com.cesarferreira.quickutils.sample.views.Utils;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
 
 import quickutils.core.QuickUtils;
-import quickutils.core.image.cache.ImageLoaderHandler;
 import quickutils.core.interfaces.RequestCallback;
 import quickutils.core.models.LocationModel;
+import quickutils.core.rest.Body;
+import quickutils.core.rest.Header;
 import quickutils.core.rest.RequestError;
 
 public class MainActivity extends Activity {
 
+    private static final String DEVICE_TYPE_KEY = "";
+    private static final String DEVICE_OS_KEY = "";
+    private static final String DEVICE_UUID_KEY = "";
+    private static final String DEVICE_PUSH_TOKEN = "";
     private TextView textView;
     private ImageView imageView;
 
@@ -30,6 +38,7 @@ public class MainActivity extends Activity {
         // inject dependency
         textView = (TextView) findViewById(R.id.textView);
         imageView = (ImageView) findViewById(R.id.imageView);
+
 
         ///////////////////////////////////////////////////////////////////////
         // IMAGE CATEGORY
@@ -45,7 +54,6 @@ public class MainActivity extends Activity {
         QuickUtils.system.toast("this is a toast");
 
         QuickUtils.system.vibrate(50);
-
 
         ///////////////////////////////////////////////////////////////////////
         // TIMER CATEGORY
@@ -149,7 +157,7 @@ public class MainActivity extends Activity {
         ///////////////////////////////////////////////////////////////////////
         // LOCATION CATEGORY
         ///////////////////////////////////////////////////////////////////////
-        LocationModel locationModel = QuickUtils.location.getLocationByCoordinates(38.7471236,-9.1532266);
+        LocationModel locationModel = QuickUtils.location.getLocationByCoordinates(38.7471236, -9.1532266);
         QuickUtils.log.i("Location: ");
         QuickUtils.log.i("latitude --> " + locationModel.latitude);
         QuickUtils.log.i("longitude --> " + locationModel.longitude);
@@ -164,21 +172,80 @@ public class MainActivity extends Activity {
 
     public void restRequest(View view) {
 
-        String REQUEST_TAG = "tag";
-
+        // single object
         QuickUtils.rest.connect()
                 .createRequest()
                 .get()
                 .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
                 .fromJsonObject()
                 .mappingInto(WeatherEntity.class)
-                .execute(REQUEST_TAG, new RequestCallback<WeatherEntity>() {
+                .execute("some tag", new RequestCallback<WeatherEntity>() {
                     @Override
-                    public void onRequestSuccess(WeatherEntity objc) {
+                    public void onRequestSuccess(WeatherEntity weatherEntity) {
+                        QuickUtils.log.i(weatherEntity.toString());
+                        textView.setText(weatherEntity.toString());
+                    }
 
-                        QuickUtils.log.i(objc.toString());
+                    @Override
+                    public void onRequestError(RequestError error) {
+                        QuickUtils.log.i("error " + error.getErrorCode());
+                    }
+                });
 
-                        textView.setText(objc.toString());
+
+        // Array of objects
+        QuickUtils.rest.connect()
+                .createRequest()
+                .get()
+                .pathUrl("https://redcarpetws.herokuapp.com/posts/1")
+                .fromJsonArray()
+                .mappingInto(new TypeToken<List<PostEntity>>() {
+                })
+                .execute("another tag", new RequestCallback<List<PostEntity>>() {
+                    @Override
+                    public void onRequestSuccess(List<PostEntity> posts) {
+                        if (posts != null) {
+                            for (PostEntity post : posts)
+                                QuickUtils.log.i(post.name);
+                        }
+                    }
+
+                    @Override
+                    public void onRequestError(RequestError error) {
+                        QuickUtils.log.i("error " + error.getErrorCode());
+                    }
+                });
+
+        ////////////////////////////////////////////////////////////////////
+        // POST
+        ////////////////////////////////////////////////////////////////////
+
+        Header requestHeader = new Header.Builder()
+                .add("Authorization", "Bearer Jhahdau2819ajsbdkasdkasdkashjdkahs")
+                .build();
+
+        Body requestBody = new Body.Builder()
+                .add(DEVICE_TYPE_KEY, "")
+                .add(DEVICE_OS_KEY, "")
+                .add(DEVICE_UUID_KEY, "")
+                .add(DEVICE_PUSH_TOKEN, "")
+                .build();
+
+        QuickUtils.rest.connect()
+                .createRequest()
+                .post(requestHeader, requestBody)
+                .pathUrl("https://redcarpetws.herokuapp.com/posts/1")
+                .fromJsonArray()
+                .mappingInto(new TypeToken<List<PostEntity>>() {
+                })
+                .execute("another tag", new RequestCallback<List<PostEntity>>() {
+                    @Override
+                    public void onRequestSuccess(List<PostEntity> posts) {
+
+                        if (posts != null) {
+                            for (PostEntity post : posts)
+                                QuickUtils.log.i(post.name);
+                        }
                     }
 
                     @Override

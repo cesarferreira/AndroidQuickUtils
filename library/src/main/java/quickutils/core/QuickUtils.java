@@ -3,11 +3,7 @@ package quickutils.core;
 
 import android.content.Context;
 
-import quickutils.core.categories.location;
-import quickutils.core.categories.screen;
-import quickutils.core.categories.string;
-import quickutils.core.categories.validation;
-import quickutils.core.categories.view;
+import quickutils.core.categories.IntentLogger;
 import quickutils.core.exceptions.InitNotSetException;
 import quickutils.core.image.cache.ImageLoader;
 import quickutils.core.image.cache.ImageLoaderHandler;
@@ -138,13 +134,17 @@ public abstract class QuickUtils {
     public static class views extends quickutils.core.categories.view {
     }
 
-    public static class timer extends quickutils.core.categories.timer {}
+    public static class timer extends quickutils.core.categories.timer {
+    }
 
-    public static class string extends quickutils.core.categories.string {}
+    public static class string extends quickutils.core.categories.string {
+    }
 
-    public static class validation extends quickutils.core.categories.validation {}
+    public static class validation extends quickutils.core.categories.validation {
+    }
 
-    public static class screen extends quickutils.core.categories.screen {}
+    public static class screen extends quickutils.core.categories.screen {
+    }
 
     public static class rest extends Rest {
         public rest() {
@@ -159,6 +159,12 @@ public abstract class QuickUtils {
     }
 
     public static class location extends quickutils.core.categories.location {
+        private location() {}
     }
 
+    public static class intentLogger extends IntentLogger {
+        private intentLogger() {}
+
     }
+
+}

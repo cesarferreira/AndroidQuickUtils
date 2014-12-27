@@ -27,20 +27,20 @@ android {
         renderscriptSupportModeEnabled
 
     }
-
+/*
     buildTypes {
         release {
             minifyEnabled false
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
         }
-    }
+    }*/
 
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.squareup.okio:okio:1.0.1'
@@ -61,4 +61,5 @@ task makeJar(type: Copy) {
 
 makeJar.dependsOn(clearJar, build)
 
-apply from: '../maven_push.gradle'
+//apply from: '../maven_push.gradle'
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
