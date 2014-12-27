@@ -150,7 +150,6 @@ public class text {
      *
      * @param startLorem whether to start with standard lorem ipsum text or not
      * @return generated sentence, with punctuation
-     * @see LoremIpsum#getSentence(int, boolean) getSentence(int, boolean)
      */
     public static String getSentence(boolean startLorem) {
         return getSentence(13, startLorem);
@@ -206,7 +205,6 @@ public class text {
      * @param startLorem whether to start first paragraph with standard lorem ipsum
      *                   text or not.
      * @return generated paragraph
-     * @see LoremIpsum#getParagraph(int, boolean) getParagraph(int, boolean)
      */
     public static String getParagraph(boolean startLorem) {
         return getParagraph(4, startLorem);

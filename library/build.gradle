@@ -61,5 +61,5 @@ task makeJar(type: Copy) {
 
 makeJar.dependsOn(clearJar, build)
 
-//apply from: '../maven_push.gradle'
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply from: '../maven_push.gradle'
+//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
