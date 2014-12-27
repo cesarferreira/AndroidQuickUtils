@@ -113,7 +113,7 @@ Image downloading and caching
 QuickUtils.imageCache.load(IMAGE_URL, imageView);
 
 // or more complete
-QuickUtils.imageCache.load(Utils.IMAGE_URL, imageView, R.drawable.dummy, R.drawable.error);
+QuickUtils.imageCache.load(IMAGE_URL, imageView, R.drawable.dummy, R.drawable.error);
 ```
 
 ## Using the util methods
