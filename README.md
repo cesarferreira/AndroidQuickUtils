@@ -65,16 +65,15 @@ REST
 ------------------
 Simple REST requests and automatic parse
 
+### One Object
+
 ```java
 // the entity
 public class Weather {
-
     @SerializedName("description")
     public String description;
-    
     @SerializedName("lon")
     public long longitude;
-    
     @SerializedName("lat")
     public long latitude;
 }
@@ -98,8 +97,43 @@ QuickUtils.rest.connect()
             });
 ```
 
+### Array of Objects
 
-Load your images async
+```java
+// the entity
+public class Tweet {
+    @SerializedName("title")
+    public String title;
+}
+
+// the request
+ QuickUtils.rest.connect()
+                .createRequest()
+                .get()
+                .pathUrl("https://path/to/the/tweets")
+                .fromJsonArray()
+                .mappingInto(new TypeToken<List<Tweet>>() {
+                })
+                .execute("another tag", new RequestCallback<List<Tweet>>() {
+                    @Override
+                    public void onRequestSuccess(List<Tweet> tweets) {
+
+                        if (tweets != null) {
+                            for (Tweet tweet : tweets)
+                                QuickUtils.log.i(tweet.title);
+                        }
+                    }
+
+                    @Override
+                    public void onRequestError(RequestError error) {
+                        QuickUtils.log.i("error " + error.getErrorCode());
+                    }
+                });
+    }
+```
+
+
+Async Image Loader
 ---------------------
 Image downloading and caching
 ```java
