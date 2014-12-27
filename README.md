@@ -27,11 +27,96 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        QuickUtils.init(context);
+        QuickUtils.init(this);
     }
 }
 
 ```
+
+REST
+------------------
+Simple REST requests and automatic parse
+
+### One Object
+
+```java
+// the entity
+public class Weather {
+    @SerializedName("description")
+    public String description;
+    @SerializedName("lon")
+    public long longitude;
+    @SerializedName("lat")
+    public long latitude;
+}
+
+// the request
+QuickUtils.rest.connect()
+            .createRequest()
+            .get()
+            .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
+            .fromJsonObject()
+            .mappingInto(Weather.class)
+            .execute("some tag", new RequestCallback<Weather>() {
+                @Override
+                public void onRequestSuccess(Weather weather) {
+                    QuickUtils.log.i(weather.description);
+                }
+                @Override
+                public void onRequestError(RequestError error) {
+                    QuickUtils.log.i("error " + error.getErrorCode());
+                }
+            });
+```
+
+### Array of Objects
+
+```java
+// the entity
+public class Tweet {
+    @SerializedName("title")
+    public String title;
+}
+
+// the request
+ QuickUtils.rest.connect()
+                .createRequest()
+                .get()
+                .pathUrl("https://path/to/the/tweets")
+                .fromJsonArray()
+                .mappingInto(new TypeToken<List<Tweet>>() {
+                })
+                .execute("another tag", new RequestCallback<List<Tweet>>() {
+                    @Override
+                    public void onRequestSuccess(List<Tweet> tweets) {
+
+                        if (tweets != null) {
+                            for (Tweet tweet : tweets)
+                                QuickUtils.log.i(tweet.title);
+                        }
+                    }
+
+                    @Override
+                    public void onRequestError(RequestError error) {
+                        QuickUtils.log.i("error " + error.getErrorCode());
+                    }
+                });
+    }
+```
+
+
+Async Image Loader
+---------------------
+Image downloading and caching
+```java
+// Simple
+QuickUtils.imageCache.load(IMAGE_URL, imageView);
+
+// or more complete
+QuickUtils.imageCache.load(IMAGE_URL, imageView, R.drawable.dummy, R.drawable.error);
+```
+
+## Using the util methods
 
 All you need to do is to specify the category and the method you want to use.
 
@@ -59,55 +144,6 @@ QuickUtils.prefs.getInt(key, defaultValue);
 // Remove saved data
 QuickUtils.prefs.remove(key);
 //  Etc. (hundreds more methods)
-```
-
-REST
-------------------
-Simple REST requests and automatic parse
-
-```java
-// the entity
-public class Weather {
-
-    @SerializedName("description")
-    public String description;
-    
-    @SerializedName("lon")
-    public long longitude;
-    
-    @SerializedName("lat")
-    public long latitude;
-}
-
-// the request
-QuickUtils.rest.connect()
-            .createRequest()
-            .get()
-            .pathUrl("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
-            .fromJsonObject()
-            .mappingInto(Weather.class)
-            .execute(REQUEST_TAG, new RequestCallback<Weather>() {
-                @Override
-                public void onRequestSuccess(Weather weather) {
-                    QuickUtils.log.i(weather.description);
-                }
-                @Override
-                public void onRequestError(RequestError error) {
-                    QuickUtils.log.i("error " + error.getErrorCode());
-                }
-            });
-```
-
-
-Load your images async
----------------------
-Image downloading and caching
-```java
-// Simple
-QuickUtils.imageCache.load(IMAGE_URL, imageView);
-
-// or complex
-QuickUtils.imageCache.load(Utils.IMAGE_URL, imageView, R.drawable.dummy, R.drawable.error);
 ```
 
 
