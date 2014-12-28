@@ -47,13 +47,11 @@ public class Weather {
 }
 
 // the request
-QuickUtils.rest
-            .connect()
+QuickUtils.rest.connect()
             .GET()
-            .url("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
-            .fromJsonObject()
-            .mappingInto(Weather.class)
-            .execute(new RequestCallback<Weather>() {
+            .load("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
+            .as(new TypeToken<Weather>() {})
+            .withCallback(new RequestCallback<Weather>() {
                 @Override
                 public void onRequestSuccess(Weather weather) {
                     QuickUtils.log.i(weather.description);
@@ -75,13 +73,11 @@ public class Tweet {
 }
 
 // the request
- QuickUtils.rest
-            .connect()
+ QuickUtils.rest.connect()
             .GET()
-            .url("https://path/to/the/tweets")
-            .fromJsonArray()
-            .mappingInto(new TypeToken<List<Tweet>>() {})
-            .execute(callback);
+            .load("https://path/to/the/tweets")
+            .as(new TypeToken<List<Tweet>>() {})
+            .withCallback(callback);
     
 ```
 
@@ -101,10 +97,9 @@ Body requestBody = new Body.Builder()
 
 QuickUtils.rest.connect()
             .POST(requestHeader, requestBody)
-            .url(url)
-            .fromJsonArray()
-            .mappingInto(new TypeToken<List<PostEntity>>() {})
-            .execute(callback);
+            .load(url)
+            .as(new TypeToken<List<PostEntity>>() {})
+            .withCallback(callback);
 ```
 
 
