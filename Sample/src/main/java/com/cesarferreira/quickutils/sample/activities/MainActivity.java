@@ -176,10 +176,9 @@ public class MainActivity extends Activity {
         QuickUtils.rest
                 .connect()
                 .GET()
-                .url("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
-                .fromJsonObject()
-                .mappingInto(WeatherEntity.class)
-                .execute(new RequestCallback<WeatherEntity>() {
+                .load("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
+                .as(new TypeToken<WeatherEntity>() {})
+                .withCallback(new RequestCallback<WeatherEntity>() {
                     @Override
                     public void onRequestSuccess(WeatherEntity weatherEntity) {
                         QuickUtils.log.i(weatherEntity.toString());
@@ -197,11 +196,10 @@ public class MainActivity extends Activity {
         QuickUtils.rest
                 .connect()
                 .GET()
-                .url("https://redcarpetws.herokuapp.com/posts/1")
-                .fromJsonArray()
-                .mappingInto(new TypeToken<List<PostEntity>>() {
+                .load("https://redcarpetws.herokuapp.com/posts/1")
+                .as(new TypeToken<List<PostEntity>>() {
                 })
-                .execute(new RequestCallback<List<PostEntity>>() {
+                .withCallback(new RequestCallback<List<PostEntity>>() {
                     @Override
                     public void onRequestSuccess(List<PostEntity> posts) {
                         if (posts != null) {
@@ -231,13 +229,13 @@ public class MainActivity extends Activity {
                 .add(DEVICE_PUSH_TOKEN, "")
                 .build();
 
-        QuickUtils.rest.connect()
+        QuickUtils.rest
+                .connect()
                 .POST(requestHeader, requestBody)
-                .url("https://redcarpetws.herokuapp.com/posts/1")
-                .fromJsonArray()
-                .mappingInto(new TypeToken<List<PostEntity>>() {
+                .load("https://redcarpetws.herokuapp.com/posts/1")
+                .as(new TypeToken<List<PostEntity>>() {
                 })
-                .execute(new RequestCallback<List<PostEntity>>() {
+                .withCallback(new RequestCallback<List<PostEntity>>() {
                     @Override
                     public void onRequestSuccess(List<PostEntity> posts) {
 

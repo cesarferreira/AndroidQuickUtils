@@ -108,8 +108,7 @@ public final class NetworkCreator {
         String bodyJson = new Gson().toJson(bodyRequest);
         Type type = new TypeToken<HashMap<String, String>>() {
         }.getType();
-        HashMap<String, Object> body = new Gson().fromJson(bodyJson, type);
-        return body;
+        return new Gson().fromJson(bodyJson, type);
     }
 
 }

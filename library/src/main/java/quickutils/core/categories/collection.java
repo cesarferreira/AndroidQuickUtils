@@ -6,6 +6,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.List;
 
 /**
  * Created by cesarferreira on 28/06/14.
@@ -50,5 +51,21 @@ public class collection {
         }
 
         return result;
+    }
+
+    public static <T> boolean isACollection(T list) {
+        if (list == null) return false;
+
+        boolean bool = false;
+
+        try {
+            T t = (T) list.getClass();
+            T s = (T) ((List<?>) list).get(0);
+            bool = true;
+        } catch (ClassCastException e) {
+        }
+
+        return bool || list.getClass().isArray();
+
     }
 }

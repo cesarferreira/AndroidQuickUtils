@@ -13,7 +13,9 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import quickutils.core.QuickUtils;
@@ -113,7 +115,7 @@ public final class NetworkManager {
         networkHelper.addToRequestQueue(request, requestTag);
     }
 
-    public void execute(RequestCallback callback) {
+    public void withCallback(RequestCallback callback) {
 
         String requestTag = Rest.DEFAULT_TAG;
 
@@ -169,49 +171,37 @@ public final class NetworkManager {
         }
 
         @Override
-        public INetworkManagerBuilder url(String pathUrl) {
+        public INetworkManagerBuilder load(String pathUrl) {
             this.pathUrl = pathUrl;
             return this;
         }
 
-        @Override
-        public INetworkManagerBuilder fromJsonObject() {
-            this.resultType = RESULT.JSONOBJECT;
-            return this;
-        }
 
         @Override
-        public INetworkManagerBuilder fromJsonArray() {
-            this.resultType = RESULT.JSONARRAY;
-            return this;
-        }
-
-        @Override
-        public NetworkManager mappingInto(Class classTarget) {
+        public NetworkManager as(Class classTarget) {
             this.targetType = TypeToken.get(classTarget);
+
+            this.resultType = RESULT.JSONOBJECT;
+
             return new NetworkManager(this);
         }
 
         @Override
-        public NetworkManager mappingInto(TypeToken typeToken) {
+        public NetworkManager as(TypeToken typeToken) {
             this.targetType = typeToken;
+
+            this.resultType = typeToken.getRawType().equals(List.class) ? RESULT.JSONARRAY : RESULT.JSONOBJECT;
+
             return new NetworkManager(this);
         }
     }
 
     public static interface INetworkManagerBuilder {
-        /**
-         * @param pathUrl
-         * @return
-         */
-        public INetworkManagerBuilder url(String pathUrl);
 
-        public INetworkManagerBuilder fromJsonObject();
+        public INetworkManagerBuilder load(String pathUrl);
 
-        public INetworkManagerBuilder fromJsonArray();
+        public NetworkManager as(Class classTarget);
 
-        public NetworkManager mappingInto(Class classTarget);
-
-        public NetworkManager mappingInto(TypeToken typeToken);
+        public NetworkManager as(TypeToken typeToken);
     }
 }
