@@ -1,6 +1,7 @@
 package com.cesarferreira.quickutils.sample.activities;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
 import quickutils.core.QuickUtils;
+import quickutils.core.interfaces.OnEventListener;
 import quickutils.core.interfaces.RequestCallback;
 import quickutils.core.models.LocationModel;
 import quickutils.core.rest.Body;
@@ -166,9 +168,28 @@ public class MainActivity extends Activity {
         QuickUtils.log.i("country --> " + locationModel.country);
     }
 
-    public void blurActivityClick(View view) {
-        QuickUtils.system.navigateToActivity(this, BlurActivity.class);
+    public void blurThisView(View view) {
+        Bitmap mBitmap = QuickUtils.image.convertImageResourceToBitmap(R.drawable.image);
+        imageView.setImageBitmap(QuickUtils.image.blur(mBitmap, 19));
     }
+
+    public void blurRemoteImage(View view) {
+
+        QuickUtils.image.getBitmapByImageURL(Utils.IMAGE_URL, new OnEventListener<Bitmap>() {
+            @Override
+            public void onSuccess(Bitmap bitmap) {
+                imageView.setImageBitmap(QuickUtils.image.blur(bitmap, 19));
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                QuickUtils.system.toast("ERROR FETCHING IMAGE");
+            }
+        });
+
+
+    }
+
 
     public void restRequest(View view) {
 
@@ -177,7 +198,8 @@ public class MainActivity extends Activity {
                 .connect()
                 .GET()
                 .load("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
-                .as(new TypeToken<WeatherEntity>() {})
+                .as(new TypeToken<WeatherEntity>() {
+                })
                 .withCallback(new RequestCallback<WeatherEntity>() {
                     @Override
                     public void onRequestSuccess(WeatherEntity weatherEntity) {

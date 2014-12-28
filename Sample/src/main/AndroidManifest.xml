@@ -23,9 +23,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activities.BlurActivity"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
