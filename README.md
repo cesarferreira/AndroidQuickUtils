@@ -47,7 +47,8 @@ public class Weather {
 }
 
 // the request
-QuickUtils.rest.connect()
+QuickUtils.rest
+            .connect()
             .GET()
             .url("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
             .fromJsonObject()
@@ -74,13 +75,14 @@ public class Tweet {
 }
 
 // the request
- QuickUtils.rest.connect()
-                .GET()
-                .url("https://path/to/the/tweets")
-                .fromJsonArray()
-                .mappingInto(new TypeToken<List<Tweet>>() {})
-                .execute(callback);
-    }
+ QuickUtils.rest
+            .connect()
+            .GET()
+            .url("https://path/to/the/tweets")
+            .fromJsonArray()
+            .mappingInto(new TypeToken<List<Tweet>>() {})
+            .execute(callback);
+    
 ```
 
 ### Post with Header and Body params
