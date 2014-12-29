@@ -37,48 +37,23 @@ REST
 ------------------
 Simple REST requests and automatic parse
 
-### One Object
+### Gson Entity
 
 ```java
-// the entity
-public class Weather {
-    @SerializedName("description")
-    public String description;
-}
-
-// the request
-QuickUtils.rest.connect()
-            .GET()
-            .load("http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139")
-            .as(new TypeToken<Weather>() {})
-            .withCallback(new RequestCallback<Weather>() {
-                @Override
-                public void onRequestSuccess(Weather weather) {
-                    QuickUtils.log.i(weather.description);
-                }
-                @Override
-                public void onRequestError(RequestError error) {
-                    QuickUtils.log.i("error " + error.getErrorCode());
-                }
-            });
-```
-
-### Array of Objects
-
-```java
-// the entity
 public class Tweet {
     @SerializedName("title")
     public String title;
+    @SerializedName("amount_of_retweets")
+    public long retweetsTotal;
 }
-
-// the request
+```
+### The Request
+```java
  QuickUtils.rest.connect()
-            .GET()
+            .GET() // POST() // PUT()
             .load("https://path/to/the/tweets")
             .as(new TypeToken<List<Tweet>>() {})
             .withCallback(callback);
-    
 ```
 
 ### Post with Header and Body params
