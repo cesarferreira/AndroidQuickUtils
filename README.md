@@ -18,7 +18,7 @@ dependencies {
 
 ## Usage
 
-Init the library in your Application class for instance
+Init the library in your Application class
 
 ```java
 public class SampleApplication extends Application {
