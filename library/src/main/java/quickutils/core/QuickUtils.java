@@ -3,10 +3,11 @@ package quickutils.core;
 
 import android.content.Context;
 
+import quickutils.core.cache.GsonCache;
 import quickutils.core.categories.IntentLogger;
 import quickutils.core.exceptions.InitNotSetException;
-import quickutils.core.image.cache.ImageLoader;
-import quickutils.core.image.cache.ImageLoaderHandler;
+import quickutils.core.cache.image.ImageLoader;
+import quickutils.core.cache.image.ImageLoaderHandler;
 import quickutils.core.rest.Rest;
 
 public abstract class QuickUtils {
@@ -64,6 +65,13 @@ public abstract class QuickUtils {
 
         // init image cache
         QuickUtils.imageCache.initialize(context);
+
+        // init the objects cache
+        try {
+            cache.init(4096); // in bytes
+        } catch (Exception e) {
+           QuickUtils.log.e("Error initing cache");
+        }
     }
 
     /**
@@ -167,4 +175,10 @@ public abstract class QuickUtils {
 
     }
 
+    public static class cache extends GsonCache {
+        private cache() {
+
+        }
+
+    }
 }

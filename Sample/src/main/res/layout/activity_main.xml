@@ -54,6 +54,13 @@
             android:text="blur remote image"
             android:onClick="blurRemoteImage"
             android:id="@+id/button4" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cache"
+            android:onClick="cacheMagic"
+            android:id="@+id/button" />
     </LinearLayout>
 
 

@@ -45,19 +45,12 @@ public final class NetworkManager {
         this.headers = builder.headers;
     }
 
-    private String getUrlConnection(String pathUrl) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(pathUrl);
-
-        return builder.toString();
-    }
-
     private JSONObject createBodyRequest(HashMap<String, Object> bodyRequest) {
         return bodyRequest == null ? null : new JSONObject(bodyRequest);
     }
 
     private void fromJsonObject(final HashMap<String, String> headers, HashMap<String, Object> bodyRequest, String requestTag, final RequestCallback requestCallback) {
-        JsonObjectRequest request = new JsonObjectRequest(method, getUrlConnection(pathUrl), createBodyRequest(bodyRequest), new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(method, pathUrl, createBodyRequest(bodyRequest), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 Object t = new Gson().fromJson(jsonObject.toString(), classTarget.getType());
@@ -84,7 +77,7 @@ public final class NetworkManager {
     }
 
     private void fromJsonArray(final Map<String, String> headers, String requestTag, final RequestCallback requestCallback) {
-        JsonArrayRequest request = new JsonArrayRequest(getUrlConnection(pathUrl), new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(pathUrl, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray jsonArray) {
                 Object t = new Gson().fromJson(jsonArray.toString(), classTarget.getType());

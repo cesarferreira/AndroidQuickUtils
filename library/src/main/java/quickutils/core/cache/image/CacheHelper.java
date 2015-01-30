@@ -1,4 +1,4 @@
-package quickutils.core.image.cache;
+package quickutils.core.cache.image;
 
 import java.io.File;
 import java.io.FilenameFilter;

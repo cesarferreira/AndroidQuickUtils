@@ -251,11 +251,10 @@ public class system {
     /**
      * Get device unique ID
      *
-     * @param context application context
      * @return
      */
-    public static String getDeviceID(Context context) {
-        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+    public static String getDeviceID() {
+        return Settings.Secure.getString(QuickUtils.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
 
@@ -294,8 +293,6 @@ public class system {
         float size = sizeInDips * density;
         return (int) size;
     }
-
-
 
 
     /**
@@ -463,17 +460,10 @@ public class system {
                 if (debuggable)
                     break;
             }
-        } catch (NameNotFoundException e) {
-            //debuggable variable will remain false
-        } catch (CertificateException e) {
-            //debuggable variable will remain false
+        } catch (NameNotFoundException | CertificateException ignored) {
         }
         return debuggable;
     }
-
-
-
-    // todo analyse
 
     public static Boolean isEmulator() {
         return "google_sdk".equals(Build.PRODUCT);
@@ -541,7 +531,7 @@ public class system {
     }
 
     public static void hideSoftInput(View view) {
-        ((InputMethodManager)QuickUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+        ((InputMethodManager) QuickUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
                 view.getWindowToken(), 0);
     }
 
@@ -558,14 +548,12 @@ public class system {
     }
 
     public static String getNetworkOperatorName() {
-        TelephonyManager manager = (TelephonyManager)QuickUtils.getContext().getSystemService(
-                Context.TELEPHONY_SERVICE);
+        TelephonyManager manager = (TelephonyManager) QuickUtils.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return manager.getNetworkOperatorName();
     }
 
     public static String getSimOperatorName() {
-        TelephonyManager manager = (TelephonyManager)QuickUtils.getContext().getSystemService(
-                Context.TELEPHONY_SERVICE);
+        TelephonyManager manager = (TelephonyManager) QuickUtils.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return manager.getSimOperatorName();
     }
 
@@ -573,7 +561,7 @@ public class system {
      * @return The HEAP size in MegaBytes
      */
     public static Integer getHeapSize() {
-        return ((ActivityManager)QuickUtils.getContext().getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
+        return ((ActivityManager) QuickUtils.getContext().getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
     }
 
     /**
@@ -582,7 +570,7 @@ public class system {
     @SuppressWarnings("deprecation")
     public static Long getAvailableInternalDataSize() {
         StatFs stat = new StatFs(Environment.getDataDirectory().getPath());
-        long size = (long)stat.getAvailableBlocks() * (long)stat.getBlockSize();
+        long size = (long) stat.getAvailableBlocks() * (long) stat.getBlockSize();
         return size / sdcard.BYTES_TO_MB;
     }
 
@@ -592,7 +580,7 @@ public class system {
     @SuppressWarnings("deprecation")
     public static Long getTotalInternalDataSize() {
         StatFs stat = new StatFs(Environment.getDataDirectory().getPath());
-        long size = (long)stat.getBlockCount() * (long)stat.getBlockSize();
+        long size = (long) stat.getBlockCount() * (long) stat.getBlockSize();
         return size / sdcard.BYTES_TO_MB;
     }
 
@@ -656,7 +644,7 @@ public class system {
     }
 
     public static String getMacAddress() {
-        WifiManager wimanager = (WifiManager)QuickUtils.getContext().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wimanager = (WifiManager) QuickUtils.getContext().getSystemService(Context.WIFI_SERVICE);
         return wimanager.getConnectionInfo().getMacAddress();
     }
 
@@ -677,7 +665,6 @@ public class system {
      * method returns false.
      *
      * @param action The Intent action to check for availability.
-     *
      * @return True if an Intent with the specified action can be sent and responded to, false otherwise.
      */
     public static boolean isIntentAvailable(String action) {
@@ -689,7 +676,6 @@ public class system {
      * packages that can respond to the specified intent. If no suitable package is found, this method returns false.
      *
      * @param intent The Intent to check for availability.
-     *
      * @return True if the specified Intent can be sent and responded to, false otherwise.
      */
     public static boolean isIntentAvailable(Intent intent) {
@@ -722,4 +708,6 @@ public class system {
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, args);
         }
     }
+
+
 }

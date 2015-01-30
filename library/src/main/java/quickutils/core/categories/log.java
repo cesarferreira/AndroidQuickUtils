@@ -1,5 +1,8 @@
 package quickutils.core.categories;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
 import quickutils.core.QuickUtils;
 
 public class log {
@@ -139,8 +142,8 @@ public class log {
     /**
      * Private Logger function to handle Log calls
      *
-     * @param level     level of the log message
-     * @param message   log output
+     * @param level   level of the log message
+     * @param message log output
      */
     private static int logger(int level, String message) {
 
@@ -163,5 +166,27 @@ public class log {
         }
 
         return -1;
+    }
+
+    public static void staticFields(Class<?> clazz) throws IllegalAccessException {
+        for (Field f : clazz.getDeclaredFields()) {
+            if (Modifier.isStatic(f.getModifiers())) {
+                boolean wasAccessible = f.isAccessible();
+                f.setAccessible(true);
+                QuickUtils.log.i(f.getName() + ": " + f.get(null));
+                f.setAccessible(wasAccessible);
+            }
+        }
+    }
+
+    public static void privateFields(Class<?> clazz) throws IllegalAccessException {
+        for (Field f : clazz.getDeclaredFields()) {
+            if (Modifier.isPrivate(f.getModifiers())) {
+                boolean wasAccessible = f.isAccessible();
+                f.setAccessible(true);
+                QuickUtils.log.i(f.getName() + ": " + f.get(null));
+                f.setAccessible(wasAccessible);
+            }
+        }
     }
 }

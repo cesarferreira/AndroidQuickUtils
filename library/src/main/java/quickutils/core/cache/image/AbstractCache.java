@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package quickutils.core.image.cache;
+package quickutils.core.cache.image;
 
 import java.io.File;
 import java.io.FileNotFoundException;
