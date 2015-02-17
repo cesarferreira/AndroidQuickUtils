@@ -12,9 +12,9 @@ import quickutils.core.R;
  * @author pfavre
  */
 public enum EBlurAlgorithm {
-    RS_GAUSS_FAST(R.color.graphBgGreen), RS_BOX_5x5(R.color.graphBlue),
-	RS_GAUSS_5x5(R.color.graphBgWhite), RS_STACKBLUR(R.color.graphBgViolet),STACKBLUR(R.color.graphBgYellow),
-	GAUSS_FAST(R.color.graphBgRed), BOX_BLUR(R.color.graphBgTurquoise), NONE(R.color.graphBgBlack);
+    RS_GAUSS_FAST(R.color.graph_bg_green), RS_BOX_5x5(R.color.graph_blue),
+	RS_GAUSS_5x5(R.color.graph_bg_white), RS_STACKBLUR(R.color.graph_bg_violet),STACKBLUR(R.color.graph_bg_yellow),
+	GAUSS_FAST(R.color.graph_bg_red), BOX_BLUR(R.color.graph_bg_turquoise), NONE(R.color.graph_bg_black);
 
 	private final int colorResId;
 
