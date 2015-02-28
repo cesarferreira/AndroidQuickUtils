@@ -32,7 +32,8 @@ public class RequestError extends Exception {
     RequestError(NetworkResponse response) {
         this.errorCode = response.statusCode;
         this.headers = response.headers;
-        this.errorMessage = response.toString();
+        if(response.data != null)
+            this.errorMessage = new String(response.data);
     }
 
 
