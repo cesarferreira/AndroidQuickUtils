@@ -5,6 +5,7 @@ import android.content.Context;
 
 import quickutils.core.cache.GsonCache;
 import quickutils.core.categories.IntentLogger;
+import quickutils.core.categories.color;
 import quickutils.core.exceptions.InitNotSetException;
 import quickutils.core.cache.image.ImageLoader;
 import quickutils.core.cache.image.ImageLoaderHandler;
@@ -149,6 +150,9 @@ public abstract class QuickUtils {
     }
 
     public static class validation extends quickutils.core.categories.validation {
+    }
+
+    public static class color extends quickutils.core.categories.color {
     }
 
     public static class screen extends quickutils.core.categories.screen {

@@ -222,14 +222,13 @@ public class system {
     /**
      * Quick toast method
      *
-     * @param context  context in which will be displayed
      * @param message  The text to show. Can be formatted text.
      * @param duration How long to display the message. Either Toast.LENGTH_SHORT or
      *                 Toast.LENGTH_LONG
      */
-    public static void toast(Context context, String message, int duration) {
+    public static void toast(String message, int duration) {
 
-        Toast toast = Toast.makeText(context, message, duration);
+        Toast toast = Toast.makeText(QuickUtils.getContext(), message, duration);
         toast.show();
     }
 
