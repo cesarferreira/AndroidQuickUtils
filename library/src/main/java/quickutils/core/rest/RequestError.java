@@ -26,15 +26,16 @@ public class RequestError extends Exception {
     public final static int REQUEST_RESPONSE_RESET_PASSWORD_SUCCESS = 204;
 
     final int errorCode;
+    private String errorMessage;
     final Map<String, String> headers;
 
     RequestError(NetworkResponse response) {
         this.errorCode = response.statusCode;
         this.headers = response.headers;
-        this.errorMessage = response.toString();
+        if(response.data != null)
+            this.errorMessage = new String(response.data);
     }
 
-    private String errorMessage;
 
     RequestError(String response) {
         this.errorCode = REQUEST_RESPONSE_NOT_OK;
@@ -43,8 +44,13 @@ public class RequestError extends Exception {
         QuickUtils.log.e("ATTENTION: " + this.errorMessage);
     }
 
+
     public int getErrorCode() {
         return errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
     public Map<String, String> getHeaders() {
