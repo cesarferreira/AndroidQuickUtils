@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 
 import quickutils.core.QuickUtils;
 import quickutils.core.cache.interfaces.DeleteFromCacheCallback;
-import quickutils.core.cache.interfaces.LoadFromCacheCallback;
+import quickutils.core.cache.interfaces.ReadFromCacheCallback;
 import quickutils.core.cache.interfaces.SaveToCacheCallback;
 
 
@@ -35,7 +35,7 @@ public class GsonCache {
      * @param key the key string.
      * @return true if object with given key exists.
      */
-    public static boolean contains(String key) throws Exception {
+    public static boolean existsKey(String key) throws Exception {
         return cache.contains(key);
     }
 
@@ -77,7 +77,7 @@ public class GsonCache {
      * @param classOfT the Class type of the expected return object.
      * @return the object of the given type if it exists.
      */
-    public static <T> T load(String key, Class<T> classOfT) throws Exception {
+    public static <T> T read(String key, Class<T> classOfT) throws Exception {
 
         String json = cache.getString(key).getString();
         T value = new Gson().fromJson(json, classOfT);
@@ -87,18 +87,8 @@ public class GsonCache {
         return value;
     }
 
-    /**
-     * Get an object from Reservoir with the given key asynchronously.
-     *
-     * @param key      the key string.
-     * @param callback a callback of type {@link quickutils.core.cache.interfaces.LoadFromCacheCallback
-     *                 .ReservoirGetCallback} which is called upon completion.
-     */
-    public static <T> void loadAsync(String key, Class<T> classOfT, LoadFromCacheCallback<T> callback) {
-        new LoadTask<T>(key, classOfT, callback).execute();
-    }
 
-    public static <T> void loadAsync(String key, TypeToken typeToken, LoadFromCacheCallback<T> callback) {
+    public static <T> void readAsync(String key, TypeToken typeToken, ReadFromCacheCallback<T> callback) {
         new LoadTask<T>(key, typeToken.getRawType(), callback).execute();
     }
 
@@ -173,11 +163,11 @@ public class GsonCache {
     private static class LoadTask<T> extends AsyncTask<Void, Void, T> {
 
         private final String key;
-        private final LoadFromCacheCallback callback;
+        private final ReadFromCacheCallback callback;
         private final Class<T> classOfT;
         private Exception e;
 
-        private LoadTask(String key, Class<T> classOfT, LoadFromCacheCallback callback) {
+        private LoadTask(String key, Class<T> classOfT, ReadFromCacheCallback callback) {
             this.key = key;
             this.callback = callback;
             this.classOfT = classOfT;

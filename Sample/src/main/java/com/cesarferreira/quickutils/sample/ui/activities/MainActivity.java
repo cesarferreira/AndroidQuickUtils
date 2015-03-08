@@ -1,4 +1,4 @@
-package com.cesarferreira.quickutils.sample.activities;
+package com.cesarferreira.quickutils.sample.ui.activities;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -13,11 +13,11 @@ import com.cesarferreira.quickutils.sample.models.WeatherEntity;
 import com.cesarferreira.quickutils.sample.views.Utils;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import quickutils.core.QuickUtils;
-import quickutils.core.cache.interfaces.LoadFromCacheCallback;
+import quickutils.core.cache.interfaces.ReadFromCacheCallback;
+import quickutils.core.cache.interfaces.SaveToCacheCallback;
 import quickutils.core.interfaces.OnEventListener;
 import quickutils.core.interfaces.RequestCallback;
 import quickutils.core.models.LocationModel;
@@ -175,27 +175,8 @@ public class MainActivity extends Activity {
         QuickUtils.log.i("city --> " + locationModel.city);
         QuickUtils.log.i("country --> " + locationModel.country);
 
-        // method
-        PostEntity post = new PostEntity();
-        post.name = "cesar";
-
-        try {
-            printVariable(this, post.name);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
     }
 
-    private void printVariable(MainActivity mainActivity, String name) throws IllegalAccessException {
-        QuickUtils.log.i("--------------- listing variables: ---------------");
-        Field[] fields = this.getClass().getDeclaredFields();
-
-        //print field names paired with their values
-        for (Field field : fields) {
-            field.setAccessible(true);
-            QuickUtils.log.i(field.getName() + ": " + field.get(null));
-        }
-    }
 
     public void blurThisView(View view) {
         Bitmap mBitmap = QuickUtils.image.convertImageResourceToBitmap(R.drawable.image);
@@ -312,14 +293,29 @@ public class MainActivity extends Activity {
 
         // SAVE
         try {
-            QuickUtils.cache.save(key, post);
+            QuickUtils.cacheMagic.save(key, post);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        // SAVE ASYNC
+        QuickUtils.cacheMagic.saveAsync(key, post, new SaveToCacheCallback() {
+            @Override
+            public void onSuccess() {
+                // success!!
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                // oh noesssss
+            }
+        });
+
+
+
         // READ
-        QuickUtils.cache.loadAsync(key, new TypeToken<PostEntity>() {
-        }, new LoadFromCacheCallback<PostEntity>() {
+        QuickUtils.cacheMagic.readAsync(key, new TypeToken<PostEntity>() {
+        }, new ReadFromCacheCallback<PostEntity>() {
             @Override
             public void onSuccess(PostEntity postEntity) {
                 QuickUtils.log.i("Loaded: " + postEntity.name);
@@ -333,14 +329,20 @@ public class MainActivity extends Activity {
 
         // DELETE
         try {
-            QuickUtils.cache.delete(key);
+            QuickUtils.cacheMagic.delete(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            QuickUtils.cacheMagic.existsKey(key);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // WIPE ALL DATA
         try {
-            QuickUtils.cache.deleteAll();
+            QuickUtils.cacheMagic.deleteAll();
         } catch (Exception e) {
             e.printStackTrace();
         }

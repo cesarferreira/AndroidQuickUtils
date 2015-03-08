@@ -13,7 +13,7 @@
         android:theme="@android:style/Theme.Black.NoTitleBar">
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait">
             <intent-filter>
