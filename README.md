@@ -6,7 +6,14 @@ This repository offers a set of random useful classes to deal with repetitive ta
 
 ![Header](https://raw.github.com/cesarferreira/AndroidQuickUtils/master/images/header-crop.png)
 
-## Installation
+### Main features
+
+- [x] [REST](https://github.com/cesarferreira/AndroidQuickUtils#rest) - Simple REST requests and automatic parse
+- [x] [Cache Magic](https://github.com/cesarferreira/AndroidQuickUtils#cache-magic) - Easily serialize and cache your objects to disk using key/value pairs
+- [x] [Async Image Loader](https://github.com/cesarferreira/AndroidQuickUtils#async-image-loader) - Image downloading and caching
+
+
+# Installation
 
 Including in your project via Gradle:
 
@@ -171,11 +178,3 @@ Contributions welcome via Github pull requests.
 
 ## License
 QuickUtils is available under the MIT license. See the LICENSE file for more info.
-
-
-## Contributors <sup>([graph](https://github.com/cesarferreira/AndroidQuickUtils/graphs/contributors "link"))</sup>
-
-* [@cesarferreira](https://github.com/cesarferreira "link")
-* [@nunofeliciano](https://github.com/nunofeliciano "link")
-* [@luispereira](https://github.com/luispereira "link")
-* [@telmomarques](https://github.com/telmomarques "link")
