@@ -64,19 +64,61 @@ Header requestHeader = new Header.Builder()
                 .build();
 
 Body requestBody = new Body.Builder()
-            .add(DEVICE_TYPE_KEY, "")
-            .add(DEVICE_OS_KEY, "")
-            .add(DEVICE_UUID_KEY, "")
-            .add(DEVICE_PUSH_TOKEN, "")
+            .add("email", "john.doe@gmail.com")
             .build();
 
 QuickUtils.rest.connect()
             .POST(requestHeader, requestBody)
             .load(url)
-            .as(new TypeToken<List<PostEntity>>() {})
+            .as(new TypeToken<List<Person>>() {})
             .withCallback(callback);
 ```
 
+Cache magic!
+------------------
+Easily serialize and cache your objects to disk using key/value pairs.
+
+### Save
+
+sync
+```java
+QuickUtils.cacheMagic.save("somePerson", new Person("john doe"));
+```
+
+async
+```java
+QuickUtils.cacheMagic.save("somePerson", new Person("john doe"), new SaveToCacheCallback() {(...)});
+```
+
+### Read
+
+sync
+```java
+QuickUtils.cacheMagic.read("somePerson", null);
+```
+
+async
+```java
+QuickUtils.cacheMagic.readAsync("somePerson", new TypeToken<Person>() {}, new ReadFromCacheCallback<Person>() {(...)});
+```
+
+### Delete
+
+```java
+QuickUtils.cacheMagic.delete("somePerson"); // deleteAsync also works
+```
+
+Erases ALL the key/values that are stored
+```java
+QuickUtils.cacheMagic.deleteAll();
+```
+
+### Exists
+
+Check if a key/value exists
+```java
+boolean personExists = QuickUtils.cacheMagic.existsKey("somePerson");
+```
 
 Async Image Loader
 ---------------------
